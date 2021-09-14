@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChristmasLib
 {
-    public class Class1
+    public class Main
     {
     }
 }
