@@ -463,7 +463,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
     <Compile Include="Patches\Patch.cs" />
     <Compile Include="Patches\PatchDefine.cs" />
     <Compile Include="Patches\PatchUtils.cs" />

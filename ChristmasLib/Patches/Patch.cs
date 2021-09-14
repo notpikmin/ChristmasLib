@@ -36,7 +36,7 @@ namespace ChristmasLib.Patches
             Patch.PatchIDs[this.ID].Patch(this.TargetMethod, this.Prefix, this.Postfix, null);
         }
 
-        public static Dictionary<string, HarmonyLib.Harmony> PatchIDs = new Dictionary<string, HarmonyLib.Harmony >();
+        public static Dictionary<string, HarmonyLib.Harmony> PatchIDs = new Dictionary<string, HarmonyLib.Harmony>();
     }
 
 
