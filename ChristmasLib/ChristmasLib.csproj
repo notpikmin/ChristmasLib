@@ -466,6 +466,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\Module.cs" />
+    <Compile Include="Modules\ModuleHandler.cs" />
     <Compile Include="Patches\Patch.cs" />
     <Compile Include="Patches\PatchDefine.cs" />
     <Compile Include="Patches\PatchUtils.cs" />
@@ -473,5 +475,6 @@
     <Compile Include="Utils\MovementUtils.cs" />
     <Compile Include="Wrappers.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
