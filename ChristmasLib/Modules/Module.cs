@@ -14,7 +14,12 @@ namespace ChristmasLib.Modules
             return ModuleName;
         }
 
-        public virtual void Start()
+        public virtual void OnEnable()
+        {
+
+        }
+
+        public virtual void OnDisable()
         {
 
         }
@@ -25,10 +30,6 @@ namespace ChristmasLib.Modules
         }
 
         public virtual void UiInit()
-        {
-
-        }
-        public virtual void OnApplicationQuit()
         {
 
         }
