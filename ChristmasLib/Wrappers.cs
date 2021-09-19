@@ -134,7 +134,10 @@ namespace ChristmasLib
             return GetPlayer(GetPlayerManager(), VRCPlayerApi.GetPlayerByGameObject(gameObject).playerId);
         }
 
-
+        public static int GetLocalPlayerId()
+        {
+            return Networking.LocalPlayer.playerId;
+        }
 
     }
 }

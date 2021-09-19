@@ -8,9 +8,10 @@ using VRC.SDKBase;
 
 namespace ChristmasLib.Utils
 {
-    public static class PhotonUtils
+    public static class EventUtils
     {
         private static VRC_EventHandler eventHandler = null;
+
         public static VRC_EventHandler getEventHandler()
         {
             if (eventHandler == null)
@@ -24,6 +25,7 @@ namespace ChristmasLib.Utils
             }
         }
 
+        //param aids
         public static VRC_EventHandler.VrcEvent MakeEvent(string ParamString, GameObject ParamObject, Il2CppSystem.Object[] Array, VRC_EventHandler.VrcEventType ParamEventType = VRC_EventHandler.VrcEventType.SendRPC ,string ParamName = "",float ParamFloat = 0f, int ParamInt = 0, bool TakeOwnershipOfTarget = false, bool ParamBool=false, VRC_EventHandler.VrcBooleanOp ParamBoolOp = VRC_EventHandler.VrcBooleanOp.Unused)
         {
 
@@ -44,7 +46,7 @@ namespace ChristmasLib.Utils
             };
             return vrcEvent;
         }
-
+        //Simplified Method
         public static VRC_EventHandler.VrcEvent MakeEvent(string ParamString, GameObject ParamObject, Il2CppSystem.Object[] Array)
         {
 
@@ -64,6 +66,41 @@ namespace ChristmasLib.Utils
                 ParameterObjects = null
             };
             return vrcEvent;
+        }
+
+
+        public static void TriggerEvent(VRC_EventHandler.VrcEvent Event,VRC_EventHandler.VrcBroadcastType BroadcastType = VRC_EventHandler.VrcBroadcastType.Always)
+        {
+            if (eventHandler != null)
+            {
+                eventHandler.TriggerEvent(Event, BroadcastType, Wrappers.GetLocalPlayerId(),0f);
+            }
+            else
+            {
+                eventHandler = getEventHandler();
+                TriggerEvent(Event, BroadcastType);
+            }
+        }
+
+        public static Il2CppSystem.Object[] StringListToObject(List<string> str)
+        {
+            Il2CppSystem.Object[] array = new Il2CppSystem.Object[str.Count];
+            int c = 0;
+            foreach(string s in str)
+            {
+                //I dont know if this is needed but I've seen it done in most places.
+                Il2CppSystem.String il2S = default(Il2CppSystem.String);
+                il2S = s;
+                //array[c] = s; maybe
+                array[c] = il2S;
+                c++;
+            }
+            return array;
+        }
+
+        public static void SendRPC(GameObject gameObject, string methodName, Il2CppSystem.Object[] array, RPC.Destination target = RPC.Destination.All)
+        {
+            VRC.SDKBase.Networking.RPC(target, gameObject, methodName, array);
         }
     }
 }
