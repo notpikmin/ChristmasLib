@@ -24,6 +24,6 @@ namespace ChristmasLib.Patches
         public static MethodInfo InternalTrigger = typeof(VRC_EventHandler).GetMethod("InternalTriggerEvent");
 
         public static MethodInfo EnetEnqueue = typeof(EnetPeer).GetMethod("EnqueueOperation");
-
+            
     }
 }
