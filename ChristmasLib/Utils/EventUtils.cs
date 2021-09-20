@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChristmasLib.Wrappers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,7 +74,7 @@ namespace ChristmasLib.Utils
         {
             if (eventHandler != null)
             {
-                eventHandler.TriggerEvent(Event, BroadcastType, Wrappers.GetLocalPlayerId(),0f);
+                eventHandler.TriggerEvent(Event, BroadcastType, PlayerWrappers.GetLocalPlayerId(),0f);
             }
             else
             {

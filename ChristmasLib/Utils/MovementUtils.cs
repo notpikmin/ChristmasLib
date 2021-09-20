@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChristmasLib.Wrappers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace ChristmasLib.Utils
         #region Teleport
         public static void Teleport(Vector3 pos)
         {
-            VRCPlayer p = Wrappers.GetCurrentPlayer();
+            VRCPlayer p = PlayerWrappers.GetCurrentPlayer();
             if (p != null)
             {
                 p.transform.position = pos;
@@ -31,14 +32,14 @@ namespace ChristmasLib.Utils
 
         public static void Teleport(string name)
         {
-            Teleport(Wrappers.GetPlayerManager().GetPlayerByName(name));
+            Teleport(PlayerWrappers.GetPlayerManager().GetPlayerByName(name));
         }
         #endregion
 
         #region Rotate
         public static void Rotate(Quaternion r)
         {
-            VRCPlayer p = Wrappers.GetCurrentPlayer();
+            VRCPlayer p = PlayerWrappers.GetCurrentPlayer();
             p.transform.rotation = r;
         }
         
