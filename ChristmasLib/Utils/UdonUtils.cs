@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,26 +29,69 @@ namespace ChristmasLib.Utils
             return events;
         }
 
-        //fills the static UdonDict should be called on scene load so we can have a Dictionary of every Udon GameObject and its events
-        public static void FillDict()
+        public static List<string> GetGlobalEvents(UdonBehaviour ub)
         {
-            //Don't believe this is needed
-            if (UdonDict != null)
+            List<string> events = new List<string>();
+
+            foreach (Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> e in ub._eventTable)
             {
-                UdonDict.Clear();
-            }
-            UdonBehaviour[] UdonBehavs = GetUdonBehaviours();
-            Dictionary<GameObject,List<string>> EventGameObjects = new Dictionary<GameObject,List<string>>();
-            foreach(UdonBehaviour u in UdonBehavs)
-            {
-                List<string> events = GetEventNames(u);
-                EventGameObjects.Add(u.gameObject, events);
+                if (e.key.StartsWith("_"))
+                {
+                    events.Add(e.key);
+                }
             }
 
-            UdonDict = EventGameObjects;
+            return events;
         }
 
-        public static Dictionary<GameObject,List<string>> UdonDict;
+    //should work
+        public static IEnumerator TriggerAll(Dictionary<UdonBehaviour, List<string>> Udons, float delay = 0.1f)
+        {
+            foreach(UdonBehaviour u in Udons.Keys)
+            {
+
+                List<string> et = new List<string>();
+                Udons.TryGetValue(u,out et);
+
+                foreach (string e in et) 
+                {
+                    yield return null;
+
+                    u.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, e);
+                }
+                yield return new WaitForSeconds(delay);
+
+            }
+
+            yield return null;
+        }
+
+        //fill an Dictionary with every udon GameObject with its events should be called on scene load so we can have a Dictionary of every Udon GameObject and its events
+        public static Dictionary<UdonBehaviour, List<string>> FillDict(bool GlobalTriggerOnly = false)
+        {
+
+            UdonBehaviour[] UdonBehavs = GetUdonBehaviours();
+            Dictionary<UdonBehaviour, List<string>> EventGameObjects = new Dictionary<UdonBehaviour, List<string>>();
+            foreach(UdonBehaviour u in UdonBehavs)
+            {
+                List<string> events;
+                if (GlobalTriggerOnly)
+                {
+                    events = GetGlobalEvents(u);
+
+                }
+                else
+                {
+                    events = GetEventNames(u);
+
+                }
+                EventGameObjects.Add(u, events);
+
+            }
+
+            return EventGameObjects;
+        }
+
         
 
 

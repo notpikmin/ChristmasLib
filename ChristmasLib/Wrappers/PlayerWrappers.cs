@@ -7,6 +7,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.SDKBase;
+using VRC.UI;
 
 namespace ChristmasLib.Wrappers
 {
@@ -83,6 +84,36 @@ namespace ChristmasLib.Wrappers
         public static APIUser GetAPIUser(this Player player) { return player.prop_APIUser_0; }
         public static VRCPlayer GetVRCPlayer(this Player player) { return player.prop_VRCPlayer_0; }
         public static VRCPlayerApi GetVRCPlayerApi(this Player player) { return player.prop_VRCPlayerApi_0; }
+
+        public static bool IsQuest(this Player player)
+        {
+            return player.GetAPIUser().IsOnMobile;
+        }
+
+        public static PageUserInfo GetPageUserInfo(this Player player)
+        {
+            PageUserInfo component = GameObject.Find("Screens").transform.Find("UserInfo").GetComponent<PageUserInfo>();
+            component.field_Public_APIUser_0 = new APIUser
+            {
+                id = player.GetAPIUser().id
+            };
+            return component;
+        }
+
+        public static void ToggleMute(this Player player)
+        {
+            PageUserInfo pageUserInfo = player.GetPageUserInfo();
+            if (!player.IsLocalPlayer())
+            {
+                pageUserInfo.ToggleMute();
+            }
+            
+        }
+
+        public static bool IsLocalPlayer(this Player player)
+        {
+            return player.GetAPIUser().id == APIUser.CurrentUser.id;
+        }
         #endregion
 
         #region Select
