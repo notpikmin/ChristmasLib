@@ -14,9 +14,10 @@ namespace ChristmasLib.Utils
         public static UdonBehaviour[] GetUdonBehaviours()
         {
             return UnityEngine.Object.FindObjectsOfType<UdonBehaviour>();
+            
         }
 
-
+        
         public static List<string> GetEventNames(UdonBehaviour ub)
         {
             List<string> events = new List<string>();
@@ -63,7 +64,7 @@ namespace ChristmasLib.Utils
 
             }
 
-            yield return null;
+                yield return null;
         }
 
         //fill an Dictionary with every udon GameObject with its events should be called on scene load so we can have a Dictionary of every Udon GameObject and its events

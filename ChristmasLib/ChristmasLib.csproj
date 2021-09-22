@@ -466,6 +466,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\ModuleHandler.cs" />
     <Compile Include="Patches\Patch.cs" />

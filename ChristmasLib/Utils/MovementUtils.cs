@@ -1,4 +1,5 @@
-﻿using ChristmasLib.Wrappers;
+﻿using ChristmasLib.Extensions;
+using ChristmasLib.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
