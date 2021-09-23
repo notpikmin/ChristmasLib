@@ -177,6 +177,9 @@
     <Reference Include="MelonLoader">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Photon-DotNet">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
     </Reference>
@@ -474,6 +477,7 @@
     <Compile Include="Patches\PatchUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ComponentUtils.cs" />
+    <Compile Include="Utils\ConfigUtils.cs" />
     <Compile Include="Utils\ConsoleUtils.cs" />
     <Compile Include="Utils\MovementUtils.cs" />
     <Compile Include="Utils\EventUtils.cs" />
@@ -484,6 +488,8 @@
     <Compile Include="Wrappers\UiWrappers.cs" />
     <Compile Include="Wrappers\WorldWrappers.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
