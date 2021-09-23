@@ -20,10 +20,14 @@ namespace ChristmasLib.Wrappers
 
         public static bool IsInVr() { return !VRCTrackingManager.Method_Public_Static_Boolean_9(); }
 
+        public static VRCPlayerApi GetLocalPlayerApi()
+        {
+            return Networking.LocalPlayer;
+        }
 
         public static int GetLocalPlayerId()
         {
-            return Networking.LocalPlayer.playerId;
+            return GetLocalPlayerApi().playerId;
         }
 
 
