@@ -476,6 +476,7 @@
     <Compile Include="Utils\ComponentUtils.cs" />
     <Compile Include="Utils\MovementUtils.cs" />
     <Compile Include="Utils\EventUtils.cs" />
+    <Compile Include="Utils\PickupUtils.cs" />
     <Compile Include="Utils\SerializationUtils.cs" />
     <Compile Include="Utils\UdonUtils.cs" />
     <Compile Include="Wrappers\PlayerWrappers.cs" />
