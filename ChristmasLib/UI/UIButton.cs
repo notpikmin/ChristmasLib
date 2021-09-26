@@ -37,7 +37,6 @@ namespace ChristmasLib.UI
             ButtonObject.name = "Button" + btn.Text;
 
             RectTransform btnran = ButtonObject.AddComponent<RectTransform>();
-            btnran.anchoredPosition = btn.x;                                                                                                                                                                                
 
             Button Button = ButtonObject.AddComponent<Button>();
             Button.onClick.AddListener(btn.OnClick);
