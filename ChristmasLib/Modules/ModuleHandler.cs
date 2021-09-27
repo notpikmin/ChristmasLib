@@ -8,9 +8,9 @@ namespace ChristmasLib.Modules
 {
     public static class ModuleHandler
     {
-        public static List<Module> EnabledMods = new List<Module>();
+        public static List<ChristmasMod> EnabledMods = new List<ChristmasMod>();
 
-        public static bool addMod(Module mod)
+        public static bool addMod(ChristmasMod mod)
         {
             if (checkIfMod(mod))
             {
@@ -21,7 +21,7 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public static bool removeMod(Module mod)
+        public static bool removeMod(ChristmasMod mod)
         {
             if (checkIfMod(mod))
             {
@@ -32,7 +32,7 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public static bool checkIfMod(Module mod)
+        public static bool checkIfMod(ChristmasMod mod)
         {
            return EnabledMods.Contains(mod);
            
@@ -40,13 +40,27 @@ namespace ChristmasLib.Modules
 
         public static void clearMods()
         {
+            foreach(ChristmasMod m in EnabledMods)
+            {
+                m.OnDisable();
+            }
             EnabledMods.Clear();
         }
+
+        public static void updateAll()
+        {
+            foreach(ChristmasMod m in EnabledMods)
+            {
+                m.Update();
+            }
+        }
+
+
 
         public static List<string> getEnabledNames()
         {
             List<string> names = new List<string>();
-            foreach (Module m in EnabledMods)
+            foreach (ChristmasMod m in EnabledMods)
             {
                 names.Add(m.GetName());
             }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace ChristmasLib
 {
@@ -21,8 +22,10 @@ namespace ChristmasLib
         public virtual void OnUIInit() { }
         public virtual void OnStart() { }
 
+      
 
-        private  IEnumerator CheckForUi()
+
+        private IEnumerator CheckForUi()
         {
             while (VRCUiManager.prop_VRCUiManager_0 == null)
             {
