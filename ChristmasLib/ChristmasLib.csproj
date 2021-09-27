@@ -481,7 +481,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChristmasMod.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="Modules\Module.cs" />
     <Compile Include="Modules\ModuleHandler.cs" />
     <Compile Include="Patches\Patch.cs" />
