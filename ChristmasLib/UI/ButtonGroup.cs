@@ -15,7 +15,8 @@ namespace ChristmasLib.UI
         public float panelHeight, x,y,ButtonGap,ButtonBorder;
         public string Name;
         public Color BGColor;
-        ButtonGroup(string name, List<UIButton> buttons, float bWidth,float bHeight, float buttonGap,float buttonBorder,Color BGColor, float xp = 0, float yp = 0)
+        public GameObject gameobj;
+        public ButtonGroup(string name, List<UIButton> buttons, float bWidth,float bHeight, float buttonGap,float buttonBorder,Color BGColor, float xp = 0, float yp = 0)
         {
             this.Buttons = buttons;
             this.panelHeight = (bHeight * buttons.Count) + (buttonGap * buttons.Count);
@@ -24,12 +25,11 @@ namespace ChristmasLib.UI
             this.ButtonGap = buttonGap;
             this.ButtonBorder = buttonBorder;
             this.Name = name;
-
-            initButtonGroup(this);
+            this.gameobj = initButtonGroup(this);
 
         }
 
-        private void initButtonGroup(ButtonGroup b)
+        private GameObject initButtonGroup(ButtonGroup b)
         {
             GameObject BtnGrpObj = new GameObject();
             BtnGrpObj.name = b.Name;
@@ -49,9 +49,12 @@ namespace ChristmasLib.UI
             {
                 GameObject btn = UIButton.createButton(uiB);
                 btn.transform.parent = BtnGrpObj.transform;
+                RectTransform btnt = btn.AddComponent<RectTransform>();
+                btnt.anchoredPosition = new Vector2(uiB.x, uiB.y);
+
             }
 
-
+            return BtnGrpObj;
         }
 
 

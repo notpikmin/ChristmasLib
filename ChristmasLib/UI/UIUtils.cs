@@ -10,7 +10,7 @@ namespace ChristmasLib.UI
     public static class UIUtils
     {
         public static GameObject CanvasObject;
-        public static void UIStart(string id)
+        public static GameObject UIStart(string id)
         {
             CanvasObject = new GameObject();
             CanvasObject.name = id;   
@@ -18,10 +18,7 @@ namespace ChristmasLib.UI
 
             Canvas canvas = CanvasObject.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-
-
-
-
+            return CanvasObject;
         }
 
 

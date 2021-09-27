@@ -14,11 +14,11 @@ namespace ChristmasLib.UI
 
         public string Text;
         public float Width, Height,x,y;
-        public UnityAction OnClick;
+        public Action OnClick;
         public Color BGColor,TextColor;
         public GameObject gameObject;
 
-        UIButton(string text, float width, float height, UnityAction onClick, Color bgColor, Color textcolor, float xp = 0,float yp =0)
+       public UIButton(string text, float width, float height,Action onClick, Color bgColor, Color textcolor, float xp = 0,float yp =0)
         {
             this.Text = text;
             this.Width = width;
@@ -39,7 +39,7 @@ namespace ChristmasLib.UI
             RectTransform btnran = ButtonObject.AddComponent<RectTransform>();
 
             Button Button = ButtonObject.AddComponent<Button>();
-            Button.onClick.AddListener(btn.OnClick);
+            Button.onClick.AddListener(btn.OnClick );
 
             Image BtnBG = ButtonObject.AddComponent<Image>();
             BtnBG.sprite = null;
