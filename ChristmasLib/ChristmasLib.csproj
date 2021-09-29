@@ -501,8 +501,10 @@
     <Compile Include="Utils\MovementUtils.cs" />
     <Compile Include="Utils\EventUtils.cs" />
     <Compile Include="Utils\PickupUtils.cs" />
+    <Compile Include="Utils\SDK2\SDK2Utils.cs" />
     <Compile Include="Utils\SerializationUtils.cs" />
-    <Compile Include="Utils\UdonUtils.cs" />
+    <Compile Include="Utils\Udon\UdonUtils.cs" />
+    <Compile Include="Utils\WorldUtils.cs" />
     <Compile Include="Wrappers\PlayerWrappers.cs" />
     <Compile Include="Wrappers\UiWrappers.cs" />
     <Compile Include="Wrappers\WorldWrappers.cs" />

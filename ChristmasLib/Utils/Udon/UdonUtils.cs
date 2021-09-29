@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRC.Udon;
 using UnityEngine;
-namespace ChristmasLib.Utils
+namespace ChristmasLib.Utils.Udon
 {
     public static class UdonUtils
     {
