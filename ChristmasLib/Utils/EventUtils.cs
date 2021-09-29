@@ -94,13 +94,27 @@ namespace ChristmasLib.Utils
                 il2S = s;
                 //array[c] = s; maybe
                 array[c] = il2S;
+                //seems retarded    
                 c++;
             }
             return array;
         }
+        //no rotate
+        public static GameObject Instantiate(string obj, Vector3 pos)
+        {
+            return VRC.SDKBase.Networking.Instantiate(VRC.SDKBase.VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", pos, Quaternion.identity);
+
+        }
+        //rotate :D
+        public static GameObject Instantiate(string obj,Vector3 pos,Quaternion rot)
+        {
+            return VRC.SDKBase.Networking.Instantiate(VRC.SDKBase.VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", pos,rot);
+
+        }
 
         public static void SendRPC(GameObject gameObject, string methodName, Il2CppSystem.Object[] array, RPC.Destination target = RPC.Destination.All)
         {
+
             VRC.SDKBase.Networking.RPC(target, gameObject, methodName, array);
         }
     }
