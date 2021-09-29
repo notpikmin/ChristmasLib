@@ -24,6 +24,30 @@ namespace ChristmasLib.Patches
         public static MethodInfo InternalTrigger = typeof(VRC_EventHandler).GetMethod("InternalTriggerEvent");
 
         public static MethodInfo EnetEnqueue = typeof(EnetPeer).GetMethod("EnqueueOperation");
-            
+
+
+
+
+        public static MethodInfo SwitchAvatarMethod
+        {
+            get
+            {
+                if (switchavamethod == null)
+                {
+                    MethodInfo[] methods = typeof(VRCPlayer).GetMethods(BindingFlags.Instance | BindingFlags.Public);
+                    foreach (MethodInfo methodInfo in methods)
+                    {
+                        if (methodInfo.Name.Contains("Private") && methodInfo.ReturnType == typeof(void) && methodInfo.GetParameters().Length == 1 && methodInfo.GetParameters()[0].ParameterType == typeof(bool) && methodInfo.GetParameters()[0].HasDefaultValue)
+                        {
+                            switchavamethod = methodInfo;
+                            return switchavamethod;
+                        }
+                    }
+                }
+                return switchavamethod;
+            }
+        }
+
+        internal static MethodInfo switchavamethod;
     }
 }
