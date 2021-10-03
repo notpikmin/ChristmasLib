@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChristmasLib.Modules
 {
-   public class ChristmasMod
+   public class ChristmasModule
     {
         private static string ModuleName = "Base Module";
         public virtual string GetName()
