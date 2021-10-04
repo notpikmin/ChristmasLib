@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
-
+using VRC.SDKBase;
+using ChristmasLib.Utils;
 namespace ChristmasLib.Utils
 {
     public static class MovementUtils
@@ -43,7 +44,7 @@ namespace ChristmasLib.Utils
             VRCPlayer p = PlayerWrappers.GetCurrentPlayer();
             p.transform.rotation = r;
         }
-        
+
         public static void RotateTowards(Transform Target, Transform obj)
         {
             Vector3 targetDirection = Target.position - obj.position;
@@ -63,9 +64,33 @@ namespace ChristmasLib.Utils
 
         #endregion
 
+        #region Physics
+
+        public static void ResetGravity()
+        {
+            Physics.gravity = WorldUtils.GetSceneDescriptor().gravity;
+        }
+
+
+        public static void SetGravity(float grav)
+        {
+            Physics.gravity = new Vector3(0,grav,0);
+        }
+
+        public static void SetGravity(Vector3 grav)
+        {
+            Physics.gravity = grav;
+        }
+
+
+        #endregion
 
         #region PlayerMods
 
+        public static void SetJump(float imp = 2.2f)
+        {
+            Wrappers.PlayerWrappers.GetCurrentPlayer().prop_VRCPlayerApi_0.SetJumpImpulse(imp);
+        }
 
         #endregion
 

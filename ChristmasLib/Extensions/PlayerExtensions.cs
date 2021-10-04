@@ -81,6 +81,7 @@ namespace ChristmasLib.Extensions
         #endregion
 
         #region Player
+
         public static APIUser GetAPIUser(this Player player) { return player.prop_APIUser_0; }
         public static VRCPlayer GetVRCPlayer(this Player player) { return player.prop_VRCPlayer_0; }
         public static VRCPlayerApi GetVRCPlayerApi(this Player player) { return player.prop_VRCPlayerApi_0; }

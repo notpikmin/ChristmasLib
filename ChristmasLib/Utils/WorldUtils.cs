@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VRC.SDKBase;
+
 namespace ChristmasLib.Utils
 {
     public static class WorldUtils
@@ -26,6 +28,12 @@ namespace ChristmasLib.Utils
             }
             return WorldType.None;
         }
+
+        public static VRC_SceneDescriptor GetSceneDescriptor()
+        {
+            return VRC_SceneDescriptor.Instance;
+        }
+
 
 
         //instantiate stuff might move somewhere else

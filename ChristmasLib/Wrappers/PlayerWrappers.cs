@@ -30,7 +30,6 @@ namespace ChristmasLib.Wrappers
             return GetLocalPlayerApi().playerId;
         }
 
-
         public static GameObject GetPlayerCamera() { return GameObject.Find("Camera (eye)"); }
 
     }
