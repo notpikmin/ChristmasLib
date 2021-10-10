@@ -176,6 +176,9 @@
     <Reference Include="Il2CppSystem.Xml.Linq">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="ImGui.NET, Version=1.78.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImGui.NET.1.78.0\lib\netstandard2.0\ImGui.NET.dll</HintPath>
+    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
@@ -186,16 +189,16 @@
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -492,9 +495,7 @@
     <Compile Include="Patches\PatchDefine.cs" />
     <Compile Include="Patches\PatchUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\UIButton.cs" />
-    <Compile Include="UI\ButtonGroup.cs" />
-    <Compile Include="UI\UIUtils.cs" />
+    <Compile Include="UI\ChristmasUI.cs" />
     <Compile Include="Utils\ComponentUtils.cs" />
     <Compile Include="Utils\ConfigUtils.cs" />
     <Compile Include="Utils\ConsoleUtils.cs" />
