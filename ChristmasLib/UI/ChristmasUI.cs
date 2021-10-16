@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ImGuiNET;
+//using ImGuiNET;
 
 namespace ChristmasLib.UI
 {
     public  class ChristmasUI
     {
-        public bool UIOpen = false;
-
+        /*
+        public bool UIOpen = true;
+        public bool UISetup = false;
         public  void Setup()
         {
             ImGui.CreateContext();
             ImGuiIOPtr io = ImGui.GetIO();
             ImGui.StyleColorsDark();
-
+            UISetup = true;
         }
         
         public void UILoop()
         {
-            if (UIOpen)
+            if (UIOpen && UISetup)
             {
                 
                
@@ -37,5 +38,8 @@ namespace ChristmasLib.UI
 
             }
         }
+        */
     }
+
+
 }

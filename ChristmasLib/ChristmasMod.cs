@@ -19,30 +19,8 @@ namespace ChristmasLib
 
         public virtual void OnFixedUpdate() { }
 
-        public virtual void OnUIInit() { }
-        public virtual void OnStart() { }
-
-      
-
-
-        private IEnumerator CheckForUi()
+        public virtual void OnApplicationStart() 
         {
-            while (VRCUiManager.prop_VRCUiManager_0 == null)
-            {
-                yield return null;
-
-            }
-            while (QuickMenu.prop_QuickMenu_0 == null)
-            {
-                yield return null;
-            }
-            yield return null;
-            OnUIInit();
-        }
-        public override void OnApplicationStart() 
-        {
-            OnStart();
-            MelonCoroutines.Start(CheckForUi());
 
         }
 

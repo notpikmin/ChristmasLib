@@ -12,8 +12,11 @@ using VRCSDK2;
 
 namespace ChristmasLib.Patches
 {
+  
     public static class PatchDefine
     {
+
+
 
         public static MethodInfo LoadBalanceRaiseEvent = typeof(LoadBalancingClient).GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0");
         public static MethodInfo LoadBalanceEvent = typeof(LoadBalancingClient).GetMethod("OnEvent");
@@ -24,9 +27,6 @@ namespace ChristmasLib.Patches
         public static MethodInfo InternalTrigger = typeof(VRC_EventHandler).GetMethod("InternalTriggerEvent");
 
         public static MethodInfo EnetEnqueue = typeof(EnetPeer).GetMethod("EnqueueOperation");
-            
-
-
 
         public static MethodInfo SwitchAvatarMethod
         {

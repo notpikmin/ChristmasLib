@@ -9,15 +9,23 @@ using System.Threading.Tasks;
 
 namespace ChristmasLib
 {
-    public class Main :ChristmasMod
+    public class Main : MelonPlugin
     {
-        public override void OnStart()
+
+        //UI.ChristmasUI ui = new UI.ChristmasUI();
+       
+        public override void OnApplicationEarlyStart()
         {
-            
+            //  ui.Setup();
+            Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
+
         }
-        public override void OnUIInit()
+
+        public override void OnPreInitialization()
         {
-            
+
+            Utils.ConsoleUtils.Write("OnPreInitialization");
+
         }
 
 
