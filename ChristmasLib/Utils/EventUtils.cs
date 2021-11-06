@@ -83,8 +83,11 @@ namespace ChristmasLib.Utils
             }
         }
 
+
+
         public static Il2CppSystem.Object[] StringListToObject(List<string> str)
         {
+            
             Il2CppSystem.Object[] array = new Il2CppSystem.Object[str.Count];
             int c = 0;
             foreach(string s in str)

@@ -13,10 +13,9 @@ namespace ChristmasLib.Utils
         public static byte[] ToByteArray(Il2CppSystem.Object o)
         {
             if(o == null){return null;}
-
+         
             BinaryFormatter bFormatter = new BinaryFormatter();
             MemoryStream memStream = new MemoryStream();
-
             bFormatter.Serialize(memStream, o);
             return memStream.ToArray();
         }
