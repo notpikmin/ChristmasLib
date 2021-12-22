@@ -96,7 +96,7 @@ namespace ChristmasLib.Extensions
         public static PageUserInfo GetPageUserInfo(this Player player)
         {
             PageUserInfo component = GameObject.Find("Screens").transform.Find("UserInfo").GetComponent<PageUserInfo>();
-            component.field_Public_APIUser_0 = new APIUser
+            component.field_Private_APIUser_0 = new APIUser
             {
                 id = player.GetAPIUser().id
             };
@@ -126,7 +126,6 @@ namespace ChristmasLib.Extensions
 
         
         #endregion
-
 
         #region Select
         public static Player GetSelectedPlayer(this QuickMenu instance)

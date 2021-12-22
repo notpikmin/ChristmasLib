@@ -46,7 +46,7 @@ namespace ChristmasLib.Utils
         {
             ObjectInstantiator objI = GetObjectInstantiator();
             List<string> objs = new List<string>();
-            foreach(string s in objI.field_Private_Dictionary_2_String_ObjectNPrivateStGaSiUnique_0.Keys)
+            foreach(string s in objI.field_Private_Dictionary_2_String_PrefabInfo_0.Keys)
             {
                 objs.Add(s);
             }
