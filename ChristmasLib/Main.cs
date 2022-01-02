@@ -17,14 +17,14 @@ namespace ChristmasLib
         public override void OnApplicationEarlyStart()
         {
             //  ui.Setup();
-            Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
+           // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
 
         }
 
         public override void OnPreInitialization()
         {
 
-            Utils.ConsoleUtils.Write("OnPreInitialization");
+         //   Utils.ConsoleUtils.Write("OnPreInitialization");
 
         }
 

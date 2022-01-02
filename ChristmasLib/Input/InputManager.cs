@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChristmasLib.Modules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ChristmasLib.Input
 {
-   public class InputManager:ChristmasMod
+   public class InputManager
     {
-        public static List<Bind> Binds = new List<Bind>();
-        public override void OnUpdate()
+        public  List<Bind> Binds = new List<Bind>();
+        public  void Check()
         {
             if (Binds != null)
             {

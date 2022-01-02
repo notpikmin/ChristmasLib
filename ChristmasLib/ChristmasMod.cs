@@ -19,10 +19,7 @@ namespace ChristmasLib
 
         public virtual void OnFixedUpdate() { }
 
-        public virtual void OnApplicationStart() 
-        {
-
-        }
+     
 
     }
 }

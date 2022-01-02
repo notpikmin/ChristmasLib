@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChristmasLib.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.SDKBase;
+using VRC.UI;
 
 namespace ChristmasLib
 {
@@ -34,6 +36,30 @@ namespace ChristmasLib
 
         public static void AlertV2(string title, string content, string buttonname, Action action, string button2, Action action2) => VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_String_Action_Action_1_VRCUiPopup_0(title, content, buttonname, action, button2, action2, null);
 
+        #endregion
+
+        #region newUI
+
+        public static VRCUiManager GetVRCUiPageManager() { return VRCUiManager.prop_VRCUiManager_0; }
+
+        public static UIManagerImpl GetUIManagerImpl() { return UIManagerImpl.prop_UIManagerImpl_0; }
+
+
+
+        public static MenuController GetMenuController()
+        {
+            return GetUIManagerImpl().field_Public_MenuController_0;
+        }
+
+        public static VRCPlayer GetSelectedVRCPlayer()
+        {
+            return GetMenuController().activePlayer;
+        }
+
+        public static VRC.Player GetSelectedPlayer()
+        {
+            return GetSelectedVRCPlayer().GetVRC_Player();
+        }
         #endregion
 
     }

@@ -7,39 +7,20 @@ using System.Threading.Tasks;
 
 namespace ChristmasLib.UI
 {
-    public  class ChristmasUI
+    public static class ChristmasUI
     {
-        /*
-        public bool UIOpen = true;
-        public bool UISetup = false;
-        public  void Setup()
-        {
-            ImGui.CreateContext();
-            ImGuiIOPtr io = ImGui.GetIO();
-            ImGui.StyleColorsDark();
-            UISetup = true;
-        }
-        
-        public void UILoop()
-        {
-            if (UIOpen && UISetup)
-            {
-                
-               
-                ImGui.NewFrame();
+        public static string MenuDashboardPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard";
+        public static string MenuCameraPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera";
+        public static string DashboardHeaderPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions";
+        public static string DashboardButtonGroupPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions";
+        public static string DashboardButtonPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_GoHome";
 
-                
 
-                ImGui.Begin("FUCK");
-                ImGui.Button("FUCCKAKCS");
-                ImGui.End();
-
-                ImGui.Render();
-
-            }
-        }
-        */
     }
 
+    public class QMButton
+    {
+
+    }
 
 }

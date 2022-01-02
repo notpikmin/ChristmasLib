@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ChristmasLib.Modules
 {
-    public static class ModuleHandler
+    public class ModuleHandler
     {
-        public static List<ChristmasModule> EnabledMods = new List<ChristmasModule>();
+        public  List<ChristmasModule> EnabledMods = new List<ChristmasModule>();
 
-        public static bool addMod(ChristmasModule mod)
+        public  bool addMod(ChristmasModule mod)
         {
             if (checkIfMod(mod))
             {
@@ -21,7 +21,7 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public static bool removeMod(ChristmasModule mod)
+        public  bool removeMod(ChristmasModule mod)
         {
             if (checkIfMod(mod))
             {
@@ -32,13 +32,13 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public static bool checkIfMod(ChristmasModule mod)
+        public  bool checkIfMod(ChristmasModule mod)
         {
            return EnabledMods.Contains(mod);
            
         }
 
-        public static void clearMods()
+        public  void clearMods()
         {
             foreach(ChristmasModule m in EnabledMods)
             {
@@ -47,7 +47,7 @@ namespace ChristmasLib.Modules
             EnabledMods.Clear();
         }
 
-        public static void updateAll()
+        public  void updateAll()
         {
             foreach(ChristmasModule m in EnabledMods)
             {
@@ -57,7 +57,7 @@ namespace ChristmasLib.Modules
 
 
 
-        public static List<string> getEnabledNames()
+        public  List<string> getEnabledNames()
         {
             List<string> names = new List<string>();
             foreach (ChristmasModule m in EnabledMods)
