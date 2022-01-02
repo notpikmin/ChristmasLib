@@ -6,15 +6,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChristmasLib.Utils;
+using UnityEngine;
+
 namespace ChristmasLib.Utils
 {
     public static class ConfigUtils
     {
 
-
-        public static T Load<T>(string path, T FileObject)
+        public static KeyCode ParseKeyCode(string key)
         {
-            Init(path, FileObject);
+            return (KeyCode)System.Enum.Parse(typeof(KeyCode), key);
+        }
+
+
+        public static T Load<T>(string FileName, T FileObject)
+        {
+            string path = ConfigPath + FileName;
+
+            Init(FileName, FileObject);
             T file = default(T);
             try
             {
@@ -30,8 +39,13 @@ namespace ChristmasLib.Utils
             return file;
         }
 
-        public static void Init(string path, Object o)
+        private static string ConfigPath = "Christmas/";
+
+        public static void Init(string FileName, System.Object o)
         {
+
+            Directory.CreateDirectory(ConfigPath);
+            string path = ConfigPath + FileName;
             if (!File.Exists(path))
             {
                 string config =   JsonConvert.SerializeObject(o, Formatting.Indented);
