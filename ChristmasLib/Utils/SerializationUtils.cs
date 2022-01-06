@@ -19,7 +19,7 @@ namespace ChristmasLib.Utils
             bFormatter.Serialize(memStream, o);
             return memStream.ToArray();
         }
-
+    
         public static byte[] ToByteArray(object o)
         {
             if (o == null) { return null; }

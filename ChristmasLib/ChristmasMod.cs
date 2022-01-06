@@ -19,7 +19,5 @@ namespace ChristmasLib
 
         public virtual void OnFixedUpdate() { }
 
-     
-
     }
 }
