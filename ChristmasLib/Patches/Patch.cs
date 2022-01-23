@@ -30,8 +30,8 @@ namespace ChristmasLib.Patches
             this.Postfix = After;
             if (!Patch.PatchIDs.ContainsKey(this.ID))
             {
-                HarmonyLib.Harmony value =new HarmonyLib.Harmony(this.ID);
-                Patch.PatchIDs.Add(this.ID, value);
+                HarmonyLib.Harmony instance = new HarmonyLib.Harmony(this.ID);
+                Patch.PatchIDs.Add(this.ID, instance);
             }
             Patch.PatchIDs[this.ID].Patch(this.TargetMethod, this.Prefix, this.Postfix, null);
         }
