@@ -15,15 +15,11 @@ namespace ChristmasLib.Utils
 
         public static VRC_EventHandler getEventHandler()
         {
-            if (eventHandler == null)
-            {
+          
                 eventHandler = UnityEngine.Object.FindObjectOfType<VRC_EventHandler>();
                 return eventHandler;
-            }
-            else
-            {
-                return eventHandler;
-            }
+           
+           
         }
 
         //param aids
@@ -72,15 +68,12 @@ namespace ChristmasLib.Utils
 
         public static void TriggerEvent(VRC_EventHandler.VrcEvent Event,VRC_EventHandler.VrcBroadcastType BroadcastType = VRC_EventHandler.VrcBroadcastType.Always)
         {
-            if (eventHandler != null)
-            {
-                eventHandler.TriggerEvent(Event, BroadcastType, PlayerWrappers.GetLocalPlayerId(),0f);
-            }
-            else
+            if (eventHandler == null)
             {
                 eventHandler = getEventHandler();
-                TriggerEvent(Event, BroadcastType);
             }
+                eventHandler.TriggerEvent(Event, BroadcastType);
+            
         }
 
 
