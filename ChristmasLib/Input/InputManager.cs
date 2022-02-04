@@ -19,7 +19,6 @@ namespace ChristmasLib.Input
                     if (UnityEngine.Input.GetKeyDown(b.Key)) { b.KeyDown(); }
                     if (UnityEngine.Input.GetKeyUp(b.Key)) { b.KeyUp(); }
                     if (UnityEngine.Input.GetKey(b.Key)) { b.KeyHeld(); }
-
                 }
             }
         }

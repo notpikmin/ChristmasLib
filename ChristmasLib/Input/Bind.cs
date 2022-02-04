@@ -11,7 +11,7 @@ namespace ChristmasLib.Input
     {
 
         public KeyCode Key;
-        public Action KeyDown, KeyUp,KeyHeld;
+        public Action KeyDown,KeyUp,KeyHeld;
 
         public Bind(KeyCode key, Action keyDown =null,Action keyUp=null,Action keyHeld=null)
         {
@@ -31,7 +31,6 @@ namespace ChristmasLib.Input
             this.KeyDown= keyDown;
             this.KeyUp = keyUp;
             this.KeyHeld = keyHeld;
-
         }
 
     }
