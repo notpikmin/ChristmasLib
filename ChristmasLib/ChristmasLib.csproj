@@ -484,6 +484,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asset\AssetHandler.cs" />
+    <Compile Include="Asset\DownloadHandler.cs" />
     <Compile Include="ChristmasMod.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Input\Bind.cs" />

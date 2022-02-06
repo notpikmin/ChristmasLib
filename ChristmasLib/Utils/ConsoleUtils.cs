@@ -18,7 +18,6 @@ namespace ChristmasLib.Utils
             Console.Write(" [" + mod + "]: ");
             Console.ResetColor();
             Console.Write(Input + "\n");
-            //Console.WriteLine(time + " [" + mod +"]: "+ Input);
         }
 
         public static void Error(string Input, string mod = "Christmas")
@@ -30,7 +29,6 @@ namespace ChristmasLib.Utils
             Console.Write(" [" + mod + "]: ");
             Console.ResetColor();
             Console.Write(Input + "\n");
-            //Console.WriteLine(time + " [" + mod +"]: "+ Input);
         }
     }
 }
