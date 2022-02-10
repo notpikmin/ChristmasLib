@@ -10,14 +10,14 @@ namespace ChristmasLib.Utils
 {
    public static class PickupUtils
     {
-        public static List<VRC_Pickup> getAllPickups()
+        public static List<VRC_Pickup> GetAllPickups()
         {
             return Resources.FindObjectsOfTypeAll<VRC_Pickup>().ToList();
         }
 
-        public static List<Rigidbody> getAllPickupsRigidBodies()
+        public static List<Rigidbody> GetAllPickupsRigidBodies()
         {
-            List<VRC_Pickup> pickups = getAllPickups();
+            List<VRC_Pickup> pickups = GetAllPickups();
             List<Rigidbody> rigid = new List<Rigidbody>();
             foreach(VRC_Pickup p in pickups)
             {

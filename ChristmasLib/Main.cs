@@ -34,7 +34,7 @@ namespace ChristmasLib
 
         public override void OnApplicationLateStart()
         {
-          //  MelonCoroutines.Start(ChristmasUI.UICheck());
+           MelonCoroutines.Start(ChristmasUI.UICheck());
         }
         
         

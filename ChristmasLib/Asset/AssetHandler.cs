@@ -10,6 +10,20 @@ namespace ChristmasLib.Asset
 
         public static AssetBundle ChristmasPresent = null;
 
+        
+        public static Sprite LoadSprite(string path, string assetName)
+        {
+            if (ChristmasPresent == null) 
+            {
+                LoadAssetBundle(path);
+            }
+            
+           
+            Sprite abr = ChristmasPresent.LoadAsset<Sprite>(assetName);
+            UnityEngine.Object.DontDestroyOnLoad(abr);
+            return abr;
+        }
+
         public static Texture2D LoadTexture(string path, string assetName)
         {
             if (ChristmasPresent == null) 

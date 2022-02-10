@@ -8,6 +8,8 @@ using ChristmasLib.Asset;
 using ChristmasLib.Utils;
 using MelonLoader;
 using UnityEngine;
+using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 
 namespace ChristmasLib.UI
@@ -24,29 +26,30 @@ namespace ChristmasLib.UI
 
         private static string AssetBundleUrl = "https://files.catbox.moe/1kzhi3.bundle";
         private static string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
-        public static Texture2D Icon;
-        public static Sprite IconSprite;
+        public static Sprite Icon;
+
+      
 
         public static IEnumerator UICheck()
         {
-            while (VRCUiManager.prop_VRCUiManager_0 == null)
+            while (GameObject.Find(ChristmasUI.CameraPageButton) == null)
             {
                 yield return null;
             }
-
             InitUI();
-        } 
-        
+        }
+
         public static void InitUI()
         {
             DownloadHandler.DownloadSync(AssetBundleUrl, BundlePath); 
             AssetHandler.LoadAssetBundle(BundlePath);
-             Icon = AssetHandler.LoadTexture(BundlePath,"PageIcon");
-             UnityEngine.Object.DontDestroyOnLoad(Icon);
-             ConsoleUtils.Write(Icon.width.ToString());
-             //IconSprite = Sprite.Create(Icon, new Rect(0.0f, 0.0f, Icon.width, Icon.height), new Vector2(0.5f, 0.5f), 100.0f);
+            Icon = AssetHandler.LoadSprite(BundlePath,"PageIcon");
+            UnityEngine.Object.DontDestroyOnLoad(Icon);
+
+            PageButton christmasPageButton = new PageButton("ChristmasPage", "Christmas", Icon);
         }
         
+       
     }
 
     public class BaseButton
@@ -66,6 +69,10 @@ namespace ChristmasLib.UI
             Name = name;
             Tooltip = tooltip;
             Icon = icon;
+            GameObject cameraButton = GameObject.Find(ChristmasUI.CameraPageButton);
+            GameObject button = Object.Instantiate(cameraButton, cameraButton.transform.parent, true);
+            button.transform.FindChild("Icon").GetComponent<Image>().overrideSprite = icon;
+            ThisButton = button;
         }
     }
 
