@@ -1,11 +1,9 @@
 ﻿using ChristmasLib.Utils;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Net;
 using UnityEngine.Networking;
+using UnityEngine.Playables;
 
 namespace ChristmasLib.Asset
 {
@@ -23,10 +21,28 @@ namespace ChristmasLib.Asset
             }
             else
             {
-                System.IO.File.WriteAllBytes(downloadPath, www.downloadHandler.data);
+                string parent = Path.GetDirectoryName(downloadPath);
+                ConsoleUtils.Write("Downloading: " + url + " To: " + downloadPath);
+                if(!Directory.Exists(parent))
+                {
+                   Directory.CreateDirectory(parent);
+                }   
+                File.WriteAllBytes(downloadPath, www.downloadHandler.data);
             }
         }
 
-
+        public static void DownloadSync(string url, string downloadPath)
+        {
+            string parent = Path.GetDirectoryName(downloadPath);
+            ConsoleUtils.Write("Downloading: " + url + " To: " + downloadPath);
+            if(!Directory.Exists(parent))
+            {
+                Directory.CreateDirectory(parent);
+            }   
+            
+            WebClient client = new WebClient();
+            client.Headers.Add("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0)");
+            client.DownloadFile(url, downloadPath);
+        }
     }
 }

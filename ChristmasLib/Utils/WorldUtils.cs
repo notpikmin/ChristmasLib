@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using VRC.SDKBase;
 
 namespace ChristmasLib.Utils
@@ -16,7 +12,7 @@ namespace ChristmasLib.Utils
             None
         }
 
-        public static WorldType getWorldType()
+        public static WorldType GetWorldType()
         {
             if (UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>() != null)
             {
@@ -46,7 +42,7 @@ namespace ChristmasLib.Utils
         {
             ObjectInstantiator objI = GetObjectInstantiator();
             List<string> objs = new List<string>();
-            foreach(string s in objI.field_Private_Dictionary_2_String_PrefabInfo_0.Keys)
+            foreach(string s in objI.field_Private_Dictionary_2_String_PrefabInfo_0.keys)
             {
                 objs.Add(s);
             }
