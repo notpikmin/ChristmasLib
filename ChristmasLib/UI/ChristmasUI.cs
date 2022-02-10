@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChristmasLib.Asset;
+using ChristmasLib.Utils;
 using MelonLoader;
 using UnityEngine;
 
@@ -20,11 +22,29 @@ namespace ChristmasLib.UI
 
         public static string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
 
-        private static string AssetBundleUrl = "https://cdn.discordapp.com/attachments/941141744970498051/941141772099276800/christmaslib.bundle";
+        private static string AssetBundleUrl = "https://files.catbox.moe/1kzhi3.bundle";
+        private static string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
+        public static Texture2D Icon;
+        public static Sprite IconSprite;
 
+        public static IEnumerator UICheck()
+        {
+            while (VRCUiManager.prop_VRCUiManager_0 == null)
+            {
+                yield return null;
+            }
+
+            InitUI();
+        } 
+        
         public static void InitUI()
         {
-            DownloadHandler.DownloadSync(AssetBundleUrl, @"Christmas\Resources\ChristmasLib.bundle");
+            DownloadHandler.DownloadSync(AssetBundleUrl, BundlePath); 
+            AssetHandler.LoadAssetBundle(BundlePath);
+             Icon = AssetHandler.LoadTexture(BundlePath,"PageIcon");
+             UnityEngine.Object.DontDestroyOnLoad(Icon);
+             ConsoleUtils.Write(Icon.width.ToString());
+             //IconSprite = Sprite.Create(Icon, new Rect(0.0f, 0.0f, Icon.width, Icon.height), new Vector2(0.5f, 0.5f), 100.0f);
         }
         
     }

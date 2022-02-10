@@ -12,7 +12,7 @@ namespace ChristmasLib.Utils
         {
             Console.ResetColor();
             string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(time);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(" [" + mod + "]: ");

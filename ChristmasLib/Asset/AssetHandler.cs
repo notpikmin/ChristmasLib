@@ -8,19 +8,19 @@ namespace ChristmasLib.Asset
     public static class AssetHandler
     {
 
-        public static Dictionary<string, AssetBundle> AssetBundles = new Dictionary<string, AssetBundle>();
+        public static AssetBundle ChristmasPresent = null;
 
-        public static UnityEngine.Object LoadAsset<T>(string path, string assetName)
+        public static Texture2D LoadTexture(string path, string assetName)
         {
-            AssetBundle ab;
-            if (!AssetBundles.TryGetValue(path,out ab))
+            if (ChristmasPresent == null) 
             {
                  LoadAssetBundle(path);
             }
-            AssetBundles.TryGetValue(path, out ab);
-            AssetBundleRequest abr = ab.LoadAssetAsync<T>(assetName);
             
-            return abr.asset;
+           
+            Texture2D abr = ChristmasPresent.LoadAsset<Texture2D>(assetName);
+            UnityEngine.Object.DontDestroyOnLoad(abr);
+            return abr;
         }
         
         public static void LoadAssetBundle(string path)
@@ -31,8 +31,7 @@ namespace ChristmasLib.Asset
 
                 AssetBundle ab = assetBundleCreateRequest.assetBundle;
 
-                AssetBundles.Add(path, ab);
-               
+                ChristmasPresent = ab;
             }
             else
             {

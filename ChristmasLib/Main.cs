@@ -1,4 +1,6 @@
-﻿using MelonLoader;
+﻿using ChristmasLib.UI;
+using ChristmasLib.Utils;
+using MelonLoader;
 
 
 
@@ -10,6 +12,8 @@ namespace ChristmasLib
     public class Main : MelonPlugin
     {
 
+
+     
        
         public override void OnApplicationEarlyStart()
         {
@@ -18,16 +22,22 @@ namespace ChristmasLib
 
             //incomplete melonloader loading image changer
             /// StartMenu.PatchLoad.Start();
-            UI.ChristmasUI.InitUI();
 
             
         }
 
         public override void OnApplicationStart()
         {
+            //UI.ChristmasUI.InitUI();
 
         }
 
+        public override void OnApplicationLateStart()
+        {
+          //  MelonCoroutines.Start(ChristmasUI.UICheck());
+        }
+        
+        
         public override void OnPreInitialization()
         {
 
@@ -41,5 +51,10 @@ namespace ChristmasLib
         }
 
 
+        public override void OnUpdate()
+        {
+            
+        }
+        
     }
 }
