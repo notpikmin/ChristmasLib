@@ -461,6 +461,15 @@
     <Reference Include="VRC.Udon.Wrapper">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Udon.Wrapper.dll</HintPath>
     </Reference>
+    <Reference Include="VRC.UI.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.UI.Elements, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
+    </Reference>
+    <Reference Include="VRC.UI.Shared, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="VRCCore-Editor">
       <HintPath>E:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
     </Reference>

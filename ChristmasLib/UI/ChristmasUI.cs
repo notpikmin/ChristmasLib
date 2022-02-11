@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using ChristmasLib.Asset;
-using ChristmasLib.Utils;
-using MelonLoader;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
@@ -16,22 +9,30 @@ namespace ChristmasLib.UI
 {
     public static class ChristmasUI
     {
-        public static string MenuDashboardPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard";
-        public static string MenuCameraPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera";
-        public static string DashboardHeaderPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions";
-        public static string DashboardButtonGroupPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions";
-        public static string DashboardButtonPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_GoHome";
+        public const string MenuDashboardPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard";
+        public const string DashboardHeaderPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions";
+        public const string DashboardButtonGroupPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions";
+        public const string DashboardButtonPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_GoHome";
 
-        public static string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
+        public const string MenuCameraPageButtonsParent = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera/Scrollrect/Viewport/VerticalLayoutGroup/Buttons";
+        public const string MenuCameraPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera";
 
-        private static string AssetBundleUrl = "https://files.catbox.moe/1kzhi3.bundle";
-        private static string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
-        public static Sprite Icon;
+        public const string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
+        
+        
+        private const string AssetBundleUrl = "https://files.catbox.moe/1kzhi3.bundle";
+        private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
+       
+        
+        private static Sprite _icon;
 
       
 
         public static IEnumerator UICheck()
         {
+            //Download asset bundle
+            DownloadHandler.DownloadSync(AssetBundleUrl, BundlePath); 
+            //Wait for QuickMenu to be instantiated to be found
             while (GameObject.Find(ChristmasUI.CameraPageButton) == null)
             {
                 yield return null;
@@ -39,41 +40,68 @@ namespace ChristmasLib.UI
             InitUI();
         }
 
-        public static void InitUI()
+        private static void InitUI()
         {
-            DownloadHandler.DownloadSync(AssetBundleUrl, BundlePath); 
             AssetHandler.LoadAssetBundle(BundlePath);
-            Icon = AssetHandler.LoadSprite(BundlePath,"PageIcon");
-            UnityEngine.Object.DontDestroyOnLoad(Icon);
+            _icon = AssetHandler.LoadSprite(BundlePath,"PageIcon");
+            UnityEngine.Object.DontDestroyOnLoad(_icon);
 
-            PageButton christmasPageButton = new PageButton("ChristmasPage", "Christmas", Icon);
+            PageButton christmasPageButton = new PageButton("ChristmasPage", "Christmas", _icon);
+            
         }
         
        
     }
-
-    public class BaseButton
-    {
-        protected GameObject ThisButton;
-        protected string Name;
-        protected string Tooltip;
-        protected Sprite Icon;
     
+
+    public class Page
+    {
+
+        public GameObject thisPage;
+        public Page(string name)
+        {
+            thisPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
+            Object.Destroy(thisPage.GetComponent<VRCUiPage>());
+            
+        }
+
+        public void RemoveButtons()
+        {
+            //  Transform buttonParent = GameObject.Find().transform;
+            
+        }
     }
     
-    
-    public class PageButton : BaseButton
+    public class PageButton 
     {
+        public GameObject ThisButton;
         public PageButton(string name, string tooltip, Sprite icon)
         {
-            Name = name;
-            Tooltip = tooltip;
-            Icon = icon;
+         
             GameObject cameraButton = GameObject.Find(ChristmasUI.CameraPageButton);
-            GameObject button = Object.Instantiate(cameraButton, cameraButton.transform.parent, true);
-            button.transform.FindChild("Icon").GetComponent<Image>().overrideSprite = icon;
-            ThisButton = button;
+            ThisButton = Object.Instantiate(cameraButton, cameraButton.transform.parent, true);;
+
+            
+            ThisButton.name = name;
+
+            SetIcon(icon);
+            SetTooltip(tooltip);
         }
+
+
+        public void SetIcon(Sprite icon)
+        {
+            ThisButton.transform.FindChild("Icon").GetComponent<Image>().overrideSprite = icon;
+        }
+        
+        public void SetTooltip(string text)
+        {
+            if (ThisButton != null)
+            {
+                ThisButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = text;
+            }
+        }
+        
     }
 
 }

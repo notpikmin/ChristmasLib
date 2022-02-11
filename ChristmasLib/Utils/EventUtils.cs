@@ -1,9 +1,4 @@
-﻿using ChristmasLib.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using VRC.SDKBase;
 
@@ -11,15 +6,14 @@ namespace ChristmasLib.Utils
 {
     public static class EventUtils
     {
-        private static VRC_EventHandler eventHandler = null;
+        private static VRC_EventHandler EventHandler = null;
 
-        public static VRC_EventHandler getEventHandler()
+        public static VRC_EventHandler GetEventHandler()
         {
           
-                eventHandler = UnityEngine.Object.FindObjectOfType<VRC_EventHandler>();
-                return eventHandler;
-           
-           
+                EventHandler = UnityEngine.Object.FindObjectOfType<VRC_EventHandler>();
+                return EventHandler;
+                
         }
 
         //param aids
@@ -68,11 +62,11 @@ namespace ChristmasLib.Utils
 
         public static void TriggerEvent(VRC_EventHandler.VrcEvent Event,VRC_EventHandler.VrcBroadcastType BroadcastType = VRC_EventHandler.VrcBroadcastType.Always)
         {
-            if (eventHandler == null)
+            if (EventHandler == null)
             {
-                eventHandler = getEventHandler();
+                EventHandler = GetEventHandler();
             }
-                eventHandler.TriggerEvent(Event, BroadcastType);
+            EventHandler.TriggerEvent(Event, BroadcastType);
             
         }
 
@@ -95,23 +89,29 @@ namespace ChristmasLib.Utils
             }
             return array;
         }
-        //no rotate
+        
+        
+        //no position overload
+        public static GameObject Instantiate(string obj)
+        {
+            return Instantiate(obj, new Vector3(0,0,0));
+        }
+
         public static GameObject Instantiate(string obj, Vector3 pos)
         {
-            return VRC.SDKBase.Networking.Instantiate(VRC.SDKBase.VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", pos, Quaternion.identity);
+            return Networking.Instantiate(VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", pos, Quaternion.identity);
 
         }
         //rotate :D
         public static GameObject Instantiate(string obj,Vector3 pos,Quaternion rot)
         {
-            return VRC.SDKBase.Networking.Instantiate(VRC.SDKBase.VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", pos,rot);
+            return Networking.Instantiate(VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", pos,rot);
 
         }
 
         public static void SendRPC(GameObject gameObject, string methodName, Il2CppSystem.Object[] array, RPC.Destination target = RPC.Destination.All)
         {
-
-            VRC.SDKBase.Networking.RPC(target, gameObject, methodName, array);
+            Networking.RPC(target, gameObject, methodName, array);
         }
     }
 }
