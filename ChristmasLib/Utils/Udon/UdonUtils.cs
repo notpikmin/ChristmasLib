@@ -51,10 +51,10 @@ namespace ChristmasLib.Utils.Udon
             foreach(UdonBehaviour u in Udons.Keys)
             {
 
-                List<string> et = new List<string>();
+                List<string> et;
                 Udons.TryGetValue(u,out et);
 
-                foreach (string e in et) 
+                foreach (string e in et)    
                 {
                     yield return null;
 

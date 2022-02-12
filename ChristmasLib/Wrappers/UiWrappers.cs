@@ -38,7 +38,7 @@ namespace ChristmasLib
 
         #endregion
 
-        #region newUI
+        #region NewUI
 
         public static VRCUiManager GetVRCUiPageManager() { return VRCUiManager.prop_VRCUiManager_0; }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using ChristmasLib.Asset;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ namespace ChristmasLib.UI
         public const string DashboardButtonGroupPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions";
         public const string DashboardButtonPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_GoHome";
 
-        public const string MenuCameraPageButtonsParent = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera/Scrollrect/Viewport/VerticalLayoutGroup/Buttons";
+        public const string MenuCameraPageButtonsParent = "Scrollrect/Viewport/VerticalLayoutGroup/Buttons";
         public const string MenuCameraPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera";
 
         public const string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
@@ -45,8 +46,8 @@ namespace ChristmasLib.UI
             AssetHandler.LoadAssetBundle(BundlePath);
             _icon = AssetHandler.LoadSprite(BundlePath,"PageIcon");
             UnityEngine.Object.DontDestroyOnLoad(_icon);
-
-            PageButton christmasPageButton = new PageButton("ChristmasPage", "Christmas", _icon);
+            Page christmasPage = new Page("ChristmasPage");
+            PageButton christmasPageButton = new PageButton("ChristmasPageButton", "Christmas", _icon);
             
         }
         
@@ -56,20 +57,28 @@ namespace ChristmasLib.UI
 
     public class Page
     {
-
         public GameObject thisPage;
         public Page(string name)
         {
+            
             thisPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
             Object.Destroy(thisPage.GetComponent<VRCUiPage>());
-            
+            VRCUiPage christmasUiPage = thisPage.AddComponent<VRCUiPage>();
+          //  RemoveButtons();    
         }
 
+        
+        /*not working
         public void RemoveButtons()
         {
             //  Transform buttonParent = GameObject.Find().transform;
-            
+            Transform parent = thisPage.transform.Find(ChristmasUI.MenuCameraPageButtonsParent);
+            foreach (Transform t in parent)
+            {
+                Object.Destroy(t);
+            }
         }
+        */
     }
     
     public class PageButton 
