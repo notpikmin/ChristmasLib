@@ -61,14 +61,18 @@ namespace ChristmasLib.UI
         public Page(string name)
         {
             
-            thisPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
+            GameObject foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
+            thisPage =  Object.Instantiate(foundPage, foundPage.transform.parent, true);
+            
+            thisPage.name = name;
+            
             Object.Destroy(thisPage.GetComponent<VRCUiPage>());
             VRCUiPage christmasUiPage = thisPage.AddComponent<VRCUiPage>();
-          //  RemoveButtons();    
+            RemoveButtons();    
         }
 
         
-        /*not working
+        //not working
         public void RemoveButtons()
         {
             //  Transform buttonParent = GameObject.Find().transform;
@@ -78,7 +82,7 @@ namespace ChristmasLib.UI
                 Object.Destroy(t);
             }
         }
-        */
+        
     }
     
     public class PageButton 
