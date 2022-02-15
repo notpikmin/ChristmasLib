@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using ChristmasLib.Asset;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,7 +67,7 @@ namespace ChristmasLib.UI
             
             Object.Destroy(thisPage.GetComponent<VRCUiPage>());
             VRCUiPage christmasUiPage = thisPage.AddComponent<VRCUiPage>();
-            RemoveButtons();    
+            RemoveButtons();
         }
 
         
@@ -76,11 +75,13 @@ namespace ChristmasLib.UI
         public void RemoveButtons()
         {
             //  Transform buttonParent = GameObject.Find().transform;
-            Transform parent = thisPage.transform.Find(ChristmasUI.MenuCameraPageButtonsParent);
-            foreach (Transform t in parent)
+            //Transform parent = thisPage.transform.Find(ChristmasUI.MenuCameraPageButtonsParent);
+            Button[] buttons = thisPage.GetComponentsInChildren<Button>(true);
+            foreach (Button b in buttons)
             {
-                Object.Destroy(t);
+               Object.Destroy(b.gameObject);
             }
+            
         }
         
     }

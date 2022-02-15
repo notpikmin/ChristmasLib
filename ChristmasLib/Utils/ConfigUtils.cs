@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ChristmasLib.Input;
 using ChristmasLib.Utils;
 using UnityEngine;
 
@@ -17,7 +18,20 @@ namespace ChristmasLib.Utils
         {
             return (KeyCode)System.Enum.Parse(typeof(KeyCode), key);
         }
-  
+        public static ChristmasKey ParseKey(string input)
+        {
+            string[] inputs = input.Split('|');
+
+            KeyCode keyCode = ParseKeyCode(inputs[0]);
+            bool ctrl = false;  
+            if (inputs.Length >= 2)
+            {
+                ctrl = inputs[1].ToLower().Contains("ctrl");
+            }
+
+            ChristmasKey cKey = new ChristmasKey(keyCode,ctrl);
+            return cKey;
+        }
 
 
         public static T Load<T>(string FileName, T FileObject)

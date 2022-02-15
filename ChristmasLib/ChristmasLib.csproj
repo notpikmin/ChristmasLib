@@ -498,6 +498,7 @@
     <Compile Include="ChristmasMod.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Input\Bind.cs" />
+    <Compile Include="Input\ChristmasKey.cs" />
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Modules\ChristmasModule.cs" />

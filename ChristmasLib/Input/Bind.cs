@@ -12,8 +12,8 @@ namespace ChristmasLib.Input
 
         public KeyCode Key;
         public Action KeyDown,KeyUp,KeyHeld;
-
-        public Bind(KeyCode key, Action keyDown =null,Action keyUp=null,Action keyHeld=null)
+        public bool UseCtrl;
+        public Bind(KeyCode key, Action keyDown =null,Action keyUp=null,Action keyHeld=null,bool useCtrl = false)
         {
             if (keyDown == null)
             {
@@ -31,6 +31,7 @@ namespace ChristmasLib.Input
             this.KeyDown= keyDown;
             this.KeyUp = keyUp;
             this.KeyHeld = keyHeld;
+            this.UseCtrl = useCtrl;
         }
 
     }
