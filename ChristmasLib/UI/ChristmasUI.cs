@@ -1,7 +1,11 @@
 ﻿using System.Collections;
+using System.Linq;
 using ChristmasLib.Asset;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VRC.UI.Elements;
+using VRC.UI.Elements.Controls;
 using Object = UnityEngine.Object;
 
 
@@ -20,11 +24,13 @@ namespace ChristmasLib.UI
         public const string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
         
         
-        private const string AssetBundleUrl = "https://files.catbox.moe/1kzhi3.bundle";
+        //private const string AssetBundleUrl = "https://files.catbox.moe/1kzhi3.bundle";
+        private const string AssetBundleUrl = "https://i.uguu.se/qQOwcGEk.bundle";
+        
         private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
        
         
-        private static Sprite _icon;
+        public static Sprite _icon;
 
       
 
@@ -45,19 +51,21 @@ namespace ChristmasLib.UI
             AssetHandler.LoadAssetBundle(BundlePath);
             _icon = AssetHandler.LoadSprite(BundlePath,"PageIcon");
             UnityEngine.Object.DontDestroyOnLoad(_icon);
-            Page christmasPage = new Page("ChristmasPage");
             PageButton christmasPageButton = new PageButton("ChristmasPageButton", "Christmas", _icon);
-            
+            Page christmasPage = new Page("ChristmasPage", christmasPageButton);
+
         }
+
         
        
     }
     
-
+    
     public class Page
     {
         public GameObject thisPage;
-        public Page(string name)
+        public UIPage christmasUiPage;
+        public Page(string name, PageButton button)
         {
             
             GameObject foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
@@ -66,10 +74,35 @@ namespace ChristmasLib.UI
             thisPage.name = name;
             
             Object.Destroy(thisPage.GetComponent<VRCUiPage>());
-            VRCUiPage christmasUiPage = thisPage.AddComponent<VRCUiPage>();
+            christmasUiPage = thisPage.AddComponent<UIPage>();
+            christmasUiPage.field_Public_String_0 = name;
+            button.MTab.field_Public_String_0 = name;
+            christmasUiPage.field_Private_MenuStateController_0 = button.GetMenuStateController();
+            christmasUiPage.field_Private_List_1_UIPage_0.Add(christmasUiPage);
+            christmasUiPage.field_Public_Boolean_0 = true;
             RemoveButtons();
+            AddToDictionary(button,name);
+            ChangePanelInfo("I Farted", ChristmasUI._icon);
+            SetHeader("Christmas Gang");
         }
 
+        public void SetHeader(string text)
+        {
+            GameObject header = thisPage.transform.FindChild("Header_Camera").gameObject;
+            if (header != null)
+            {
+                TextMeshProUGUI textMesh = header.GetComponentInChildren<TextMeshProUGUI>();
+                textMesh.text = text;
+            }
+        }
+
+        public void AddToDictionary(PageButton pageButton, string pageName)
+        {
+            MenuStateController menuStateController = pageButton.GetMenuStateController();
+            menuStateController.field_Private_Dictionary_2_String_UIPage_0.Add(pageName,christmasUiPage);
+            menuStateController.field_Public_ArrayOf_UIPage_0 = menuStateController.field_Public_ArrayOf_UIPage_0.Append(christmasUiPage).ToArray();
+
+        }
         
         //not working
         public void RemoveButtons()
@@ -81,7 +114,23 @@ namespace ChristmasLib.UI
             {
                Object.Destroy(b.gameObject);
             }
-            
+            Toggle[] toggles = thisPage.GetComponentsInChildren<Toggle>(true);
+            foreach (Toggle t in toggles)
+            {
+                Object.Destroy(t.gameObject);
+            }
+        }
+
+        public void ChangePanelInfo(string text, Sprite sprite =null)
+        {
+            GameObject panelInfo = thisPage.transform.FindChild("Panel_Info").gameObject;
+            TextMeshProUGUI textMesh = panelInfo.GetComponentInChildren<TextMeshProUGUI>();
+            textMesh.text = text;
+            if (sprite != null)
+            {
+                RawImage rawImage = panelInfo.GetComponentInChildren<RawImage>();
+                rawImage.m_Texture = sprite.texture;
+            }
         }
         
     }
@@ -89,6 +138,7 @@ namespace ChristmasLib.UI
     public class PageButton 
     {
         public GameObject ThisButton;
+        public MenuTab MTab;
         public PageButton(string name, string tooltip, Sprite icon)
         {
          
@@ -97,7 +147,7 @@ namespace ChristmasLib.UI
 
             
             ThisButton.name = name;
-
+            MTab = ThisButton.GetComponent<MenuTab>();
             SetIcon(icon);
             SetTooltip(tooltip);
         }
@@ -114,6 +164,12 @@ namespace ChristmasLib.UI
             {
                 ThisButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = text;
             }
+        }
+        
+        
+        public MenuStateController GetMenuStateController()
+        {
+           return MTab.field_Private_MenuStateController_0;
         }
         
     }
