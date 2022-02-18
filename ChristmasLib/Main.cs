@@ -1,4 +1,5 @@
-﻿using ChristmasLib.UI;
+﻿using ChristmasLib.Patches;
+using ChristmasLib.UI;
 using MelonLoader;
 
 
@@ -32,8 +33,10 @@ namespace ChristmasLib
         }
 
         public override void OnApplicationLateStart()
-        {
-           MelonCoroutines.Start(ChristmasUI.UICheck());
+        { 
+            PatchManager.InitPatches();
+            MelonCoroutines.Start(ChristmasUI.UICheck());
+           
         }
         
         

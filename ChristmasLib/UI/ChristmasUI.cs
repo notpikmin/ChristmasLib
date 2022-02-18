@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using ChristmasLib.Asset;
+using MelonLoader;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,16 +29,16 @@ namespace ChristmasLib.UI
         private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
         
         private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
-       
-        
 
-      
+        public static string Status = "Farting";
+
+        public static ChristmasUIPage MainPage;
 
         public static IEnumerator UICheck()
         {
             //Download asset bundle
-            DownloadHandler.DownloadSync(AssetBundleUrl, BundlePath); 
-            //Wait for QuickMenu to be instantiated to be found
+            DownloadHandler.DownloadFileSync(AssetBundleUrl, BundlePath); 
+            //Wait for QuickMenu to be instantiated
             while (GameObject.Find(ChristmasUI.CameraPageButton) == null)
             {
                 yield return null;
@@ -53,12 +54,15 @@ namespace ChristmasLib.UI
             Object.DontDestroyOnLoad(icon);
             GameObject cameraButton = GameObject.Find(ChristmasUI.CameraPageButton);
             PageButton christmasPageButton = new PageButton("ChristmasPageButton", "Christmas", icon,cameraButton.transform.parent,cameraButton);
-            ChristmasUIPage christmasChristmasUIPage = new ChristmasUIPage("ChristmasPage", christmasPageButton,infoIcon);
+            MainPage = new ChristmasUIPage("ChristmasPage", christmasPageButton,infoIcon);
             
         }
 
-        
-       
+
+        public static void UpdateStatus()
+        {
+            MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang"));
+        }
     }
     
     
@@ -82,7 +86,7 @@ namespace ChristmasLib.UI
             ChristmasUiPage.field_Private_List_1_UIPage_0.Add(ChristmasUiPage);
             ChristmasUiPage.field_Public_Boolean_0 = true;
             AddToDictionary(button,name);
-            ChangePanelInfo("I Farted", infoIcon);
+            ChangePanelInfo(ChristmasUI.Status, infoIcon);
             SetHeader(name);
             RemoveButtons();
 
