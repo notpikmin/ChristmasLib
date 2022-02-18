@@ -1,16 +1,10 @@
 ﻿using ChristmasLib.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
-using VRC.Core;
-using VRC.SDKBase;
 using VRC.UI;
 
-namespace ChristmasLib
+namespace ChristmasLib.Wrappers
 {
    public static class UiWrappers
     {
@@ -20,7 +14,7 @@ namespace ChristmasLib
 
         public static UserInteractMenu GetUserInteractMenu() { return Resources.FindObjectsOfTypeAll<UserInteractMenu>()[0]; }
 
-        public static VRCUiManager GetVRCUiManager() { return VRCUiManager.prop_VRCUiManager_0; }
+        public static VRCUiManager GetVrcUiManager() { return VRCUiManager.prop_VRCUiManager_0; }
         #endregion
 
         #region ESP
@@ -30,17 +24,17 @@ namespace ChristmasLib
         #endregion
 
         #region Popup
-        public static VRCUiPopupManager GetVRCUiPopupManager() { return VRCUiPopupManager.prop_VRCUiPopupManager_0; }
+        public static VRCUiPopupManager GetVrcUiPopupManager() { return VRCUiPopupManager.prop_VRCUiPopupManager_0; }
 
         public static void AlertPopup(this VRCUiPopupManager manager, string title, string text) => manager.Method_Public_Void_String_String_Single_0(title, text, 10f);
 
-        public static void AlertV2(string title, string content, string buttonname, Action action, string button2, Action action2) => VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_String_Action_Action_1_VRCUiPopup_0(title, content, buttonname, action, button2, action2, null);
+        public static void AlertV2(string title, string content, string buttonName, Action action, string button2, Action action2) => VRCUiPopupManager.field_Private_Static_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_String_Action_Action_1_VRCUiPopup_0(title, content, buttonName, action, button2, action2);
 
         #endregion
 
         #region NewUI
 
-        public static VRCUiManager GetVRCUiPageManager() { return VRCUiManager.prop_VRCUiManager_0; }
+        public static VRCUiManager GetVrcUiPageManager() { return VRCUiManager.prop_VRCUiManager_0; }
 
         public static UIManagerImpl GetUIManagerImpl() { return UIManagerImpl.prop_UIManagerImpl_0; }
 
@@ -51,14 +45,14 @@ namespace ChristmasLib
             return GetUIManagerImpl().field_Public_MenuController_0;
         }
 
-        public static VRCPlayer GetSelectedVRCPlayer()
+        public static VRCPlayer GetSelectedVrcPlayer()
         {
             return GetMenuController().activePlayer;
         }
 
-        public static VRC.Player GetSelectedPlayer()
+        public static Player GetSelectedPlayer()
         {
-            return GetSelectedVRCPlayer().GetVRC_Player();
+            return GetSelectedVrcPlayer().GetVRC_Player();
         }
         #endregion
 

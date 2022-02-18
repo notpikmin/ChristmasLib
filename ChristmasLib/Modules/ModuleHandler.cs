@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ChristmasLib.Modules
 {
@@ -10,9 +6,9 @@ namespace ChristmasLib.Modules
     {
         public  List<ChristmasModule> EnabledMods = new List<ChristmasModule>();
 
-        public  bool addMod(ChristmasModule mod)
+        public  bool AddMod(ChristmasModule mod)
         {
-            if (checkIfMod(mod))
+            if (CheckIfMod(mod))
             {
                 EnabledMods.Add(mod);
                 mod.OnEnable();
@@ -21,9 +17,9 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public  bool removeMod(ChristmasModule mod)
+        public  bool RemoveMod(ChristmasModule mod)
         {
-            if (checkIfMod(mod))
+            if (CheckIfMod(mod))
             {
                 mod.OnDisable();
                 EnabledMods.Remove(mod);
@@ -32,13 +28,13 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public  bool checkIfMod(ChristmasModule mod)
+        public  bool CheckIfMod(ChristmasModule mod)
         {
            return EnabledMods.Contains(mod);
            
         }
 
-        public  void clearMods()
+        public  void ClearMods()
         {
             foreach(ChristmasModule m in EnabledMods)
             {
@@ -47,7 +43,7 @@ namespace ChristmasLib.Modules
             EnabledMods.Clear();
         }
 
-        public  void updateAll()
+        public  void UpdateAll()
         {
             foreach(ChristmasModule m in EnabledMods)
             {
@@ -57,7 +53,7 @@ namespace ChristmasLib.Modules
 
 
 
-        public  List<string> getEnabledNames()
+        public  List<string> GetEnabledNames()
         {
             List<string> names = new List<string>();
             foreach (ChristmasModule m in EnabledMods)

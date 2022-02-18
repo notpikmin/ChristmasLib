@@ -1,14 +1,7 @@
 ﻿using ChristmasLib.Extensions;
 using ChristmasLib.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
-using VRC.SDKBase;
-using ChristmasLib.Utils;
 namespace ChristmasLib.Utils
 {
     public static class MovementUtils
@@ -29,7 +22,7 @@ namespace ChristmasLib.Utils
 
         public static void Teleport(Player p)
         {
-            Teleport(p.GetVRCPlayer());
+            Teleport(p.GetVrcPlayer());
         }
 
         public static void Teleport(string name)
@@ -45,9 +38,9 @@ namespace ChristmasLib.Utils
             p.transform.rotation = r;
         }
 
-        public static void RotateTowards(Transform Target, Transform obj)
+        public static void RotateTowards(Transform target, Transform obj)
         {
-            Vector3 targetDirection = Target.position - obj.position;
+            Vector3 targetDirection = target.position - obj.position;
 
             float singleStep = 2.0f * Time.deltaTime;
 
@@ -57,9 +50,9 @@ namespace ChristmasLib.Utils
             obj.rotation = Quaternion.LookRotation(newDirection);
         }
 
-        public static void RotateTowards(GameObject Target, GameObject obj)
+        public static void RotateTowards(GameObject target, GameObject obj)
         {
-            RotateTowards(Target.transform, obj.transform);
+            RotateTowards(target.transform, obj.transform);
         }
 
         #endregion
@@ -89,7 +82,7 @@ namespace ChristmasLib.Utils
 
         public static void SetJump(float imp = 2.2f)
         {
-            Wrappers.PlayerWrappers.GetCurrentPlayer().prop_VRCPlayerApi_0.SetJumpImpulse(imp);
+            PlayerWrappers.GetCurrentPlayer().prop_VRCPlayerApi_0.SetJumpImpulse(imp);
         }
 
         #endregion

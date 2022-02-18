@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VRC.Udon;
 using UnityEngine;
 namespace ChristmasLib.Utils.Udon
@@ -13,7 +9,7 @@ namespace ChristmasLib.Utils.Udon
 
         public static UdonBehaviour[] GetUdonBehaviours()
         {
-            return UnityEngine.Object.FindObjectsOfType<UdonBehaviour>();
+            return Object.FindObjectsOfType<UdonBehaviour>();
             
         }
 
@@ -46,13 +42,13 @@ namespace ChristmasLib.Utils.Udon
         }
 
     //should work
-        public static IEnumerator TriggerAll(Dictionary<UdonBehaviour, List<string>> Udons, float delay = 0.1f)
+        public static IEnumerator TriggerAll(Dictionary<UdonBehaviour, List<string>> udons, float delay = 0.1f)
         {
-            foreach(UdonBehaviour u in Udons.Keys)
+            foreach(UdonBehaviour u in udons.Keys)
             {
 
                 List<string> et;
-                Udons.TryGetValue(u,out et);
+                udons.TryGetValue(u,out et);
 
                 foreach (string e in et)    
                 {
@@ -68,15 +64,15 @@ namespace ChristmasLib.Utils.Udon
         }
 
         //fill an Dictionary with every udon GameObject with its events should be called on scene load so we can have a Dictionary of every Udon GameObject and its events
-        public static Dictionary<UdonBehaviour, List<string>> FillDict(bool GlobalTriggerOnly = false)
+        public static Dictionary<UdonBehaviour, List<string>> FillDict(bool globalTriggerOnly = false)
         {
 
-            UdonBehaviour[] UdonBehavs = GetUdonBehaviours();
-            Dictionary<UdonBehaviour, List<string>> EventGameObjects = new Dictionary<UdonBehaviour, List<string>>();
-            foreach(UdonBehaviour u in UdonBehavs)
+            UdonBehaviour[] udonBehavs = GetUdonBehaviours();
+            Dictionary<UdonBehaviour, List<string>> eventGameObjects = new Dictionary<UdonBehaviour, List<string>>();
+            foreach(UdonBehaviour u in udonBehavs)
             {
                 List<string> events;
-                if (GlobalTriggerOnly)
+                if (globalTriggerOnly)
                 {
                     events = GetGlobalEvents(u);
 
@@ -86,11 +82,11 @@ namespace ChristmasLib.Utils.Udon
                     events = GetEventNames(u);
 
                 }
-                EventGameObjects.Add(u, events);
+                eventGameObjects.Add(u, events);
 
             }
 
-            return EventGameObjects;
+            return eventGameObjects;
         }
 
         

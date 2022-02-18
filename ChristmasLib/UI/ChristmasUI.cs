@@ -24,13 +24,12 @@ namespace ChristmasLib.UI
         public const string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
         
         
-        //private const string AssetBundleUrl = "https://files.catbox.moe/1kzhi3.bundle";
-        private const string AssetBundleUrl = "https://i.uguu.se/qQOwcGEk.bundle";
+        //private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
+        private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
         
         private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
        
         
-        public static Sprite _icon;
 
       
 
@@ -49,11 +48,13 @@ namespace ChristmasLib.UI
         private static void InitUI()
         {
             AssetHandler.LoadAssetBundle(BundlePath);
-            _icon = AssetHandler.LoadSprite(BundlePath,"PageIcon");
-            UnityEngine.Object.DontDestroyOnLoad(_icon);
-            PageButton christmasPageButton = new PageButton("ChristmasPageButton", "Christmas", _icon);
-            Page christmasPage = new Page("ChristmasPage", christmasPageButton);
-
+            Sprite icon = AssetHandler.LoadSprite(BundlePath,"BabaIcon");
+            Sprite infoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
+            Object.DontDestroyOnLoad(icon);
+            GameObject cameraButton = GameObject.Find(ChristmasUI.CameraPageButton);
+            PageButton christmasPageButton = new PageButton("ChristmasPageButton", "Christmas", icon,cameraButton.transform.parent,cameraButton);
+            ChristmasUIPage christmasChristmasUIPage = new ChristmasUIPage("ChristmasPage", christmasPageButton,infoIcon);
+            
         }
 
         
@@ -61,34 +62,35 @@ namespace ChristmasLib.UI
     }
     
     
-    public class Page
+    public class ChristmasUIPage
     {
-        public GameObject thisPage;
-        public UIPage christmasUiPage;
-        public Page(string name, PageButton button)
+        public GameObject ThisPage;
+        public UIPage ChristmasUiPage;
+        public ChristmasUIPage(string name, PageButton button,Sprite infoIcon)
         {
             
             GameObject foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
-            thisPage =  Object.Instantiate(foundPage, foundPage.transform.parent, true);
+            ThisPage =  Object.Instantiate(foundPage, foundPage.transform.parent, true);
             
-            thisPage.name = name;
+            ThisPage.name = name;
             
-            Object.Destroy(thisPage.GetComponent<VRCUiPage>());
-            christmasUiPage = thisPage.AddComponent<UIPage>();
-            christmasUiPage.field_Public_String_0 = name;
+            Object.Destroy(ThisPage.GetComponent<VRCUiPage>());
+            ChristmasUiPage = ThisPage.AddComponent<UIPage>();
+            ChristmasUiPage.field_Public_String_0 = name;
             button.MTab.field_Public_String_0 = name;
-            christmasUiPage.field_Private_MenuStateController_0 = button.GetMenuStateController();
-            christmasUiPage.field_Private_List_1_UIPage_0.Add(christmasUiPage);
-            christmasUiPage.field_Public_Boolean_0 = true;
-            RemoveButtons();
+            ChristmasUiPage.field_Private_MenuStateController_0 = button.GetMenuStateController();
+            ChristmasUiPage.field_Private_List_1_UIPage_0.Add(ChristmasUiPage);
+            ChristmasUiPage.field_Public_Boolean_0 = true;
             AddToDictionary(button,name);
-            ChangePanelInfo("I Farted", ChristmasUI._icon);
-            SetHeader("Christmas Gang");
+            ChangePanelInfo("I Farted", infoIcon);
+            SetHeader(name);
+            RemoveButtons();
+
         }
 
         public void SetHeader(string text)
         {
-            GameObject header = thisPage.transform.FindChild("Header_Camera").gameObject;
+            GameObject header = ThisPage.transform.FindChild("Header_Camera").gameObject;
             if (header != null)
             {
                 TextMeshProUGUI textMesh = header.GetComponentInChildren<TextMeshProUGUI>();
@@ -99,8 +101,8 @@ namespace ChristmasLib.UI
         public void AddToDictionary(PageButton pageButton, string pageName)
         {
             MenuStateController menuStateController = pageButton.GetMenuStateController();
-            menuStateController.field_Private_Dictionary_2_String_UIPage_0.Add(pageName,christmasUiPage);
-            menuStateController.field_Public_ArrayOf_UIPage_0 = menuStateController.field_Public_ArrayOf_UIPage_0.Append(christmasUiPage).ToArray();
+            menuStateController.field_Private_Dictionary_2_String_UIPage_0.Add(pageName,ChristmasUiPage);
+            menuStateController.field_Public_ArrayOf_UIPage_0 = menuStateController.field_Public_ArrayOf_UIPage_0.Append(ChristmasUiPage).ToArray();
 
         }
         
@@ -109,21 +111,25 @@ namespace ChristmasLib.UI
         {
             //  Transform buttonParent = GameObject.Find().transform;
             //Transform parent = thisPage.transform.Find(ChristmasUI.MenuCameraPageButtonsParent);
-            Button[] buttons = thisPage.GetComponentsInChildren<Button>(true);
+            Button[] buttons = ThisPage.GetComponentsInChildren<Button>(true);
             foreach (Button b in buttons)
             {
                Object.Destroy(b.gameObject);
+               //b.gameObject.SetActive(false);
+
             }
-            Toggle[] toggles = thisPage.GetComponentsInChildren<Toggle>(true);
+            Toggle[] toggles = ThisPage.GetComponentsInChildren<Toggle>(true);
             foreach (Toggle t in toggles)
             {
                 Object.Destroy(t.gameObject);
+                //t.gameObject.SetActive(false);
+
             }
         }
 
         public void ChangePanelInfo(string text, Sprite sprite =null)
         {
-            GameObject panelInfo = thisPage.transform.FindChild("Panel_Info").gameObject;
+            GameObject panelInfo = ThisPage.transform.FindChild("Panel_Info").gameObject;
             TextMeshProUGUI textMesh = panelInfo.GetComponentInChildren<TextMeshProUGUI>();
             textMesh.text = text;
             if (sprite != null)
@@ -139,11 +145,11 @@ namespace ChristmasLib.UI
     {
         public GameObject ThisButton;
         public MenuTab MTab;
-        public PageButton(string name, string tooltip, Sprite icon)
+        public PageButton(string name, string tooltip, Sprite icon, Transform parent, GameObject buttonToClone)
         {
-         
-            GameObject cameraButton = GameObject.Find(ChristmasUI.CameraPageButton);
-            ThisButton = Object.Instantiate(cameraButton, cameraButton.transform.parent, true);;
+
+
+            ThisButton = Object.Instantiate(buttonToClone, parent, true);
 
             
             ThisButton.name = name;

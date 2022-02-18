@@ -6,9 +6,10 @@ namespace ChristmasLib.Utils
     {
         public static void DisableAllOf(Il2CppSystem.Type type)
         {
-           var comps = UnityEngine.Object.FindObjectsOfType(type);
-            foreach(MonoBehaviour m in comps)
+           var comps = Object.FindObjectsOfType(type);
+            foreach(var o in comps)
             {
+                var m = (MonoBehaviour) o;
                 m.enabled = false;
             }
         }

@@ -1,5 +1,4 @@
 ﻿using ChristmasLib.Utils;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace ChristmasLib.Asset
     public static class AssetHandler
     {
 
-        public static AssetBundle ChristmasPresent = null;
+        public static AssetBundle ChristmasPresent;
 
         
         public static Sprite LoadSprite(string path, string assetName)
@@ -20,7 +19,7 @@ namespace ChristmasLib.Asset
             
            
             Sprite abr = ChristmasPresent.LoadAsset<Sprite>(assetName);
-            UnityEngine.Object.DontDestroyOnLoad(abr);
+            Object.DontDestroyOnLoad(abr);
             return abr;
         }
 
@@ -33,7 +32,7 @@ namespace ChristmasLib.Asset
             
            
             Texture2D abr = ChristmasPresent.LoadAsset<Texture2D>(assetName);
-            UnityEngine.Object.DontDestroyOnLoad(abr);
+            Object.DontDestroyOnLoad(abr);
             return abr;
         }
         

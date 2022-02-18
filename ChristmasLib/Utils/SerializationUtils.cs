@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
-using Il2CppSystem;
 namespace ChristmasLib.Utils
 {
     public static class SerializationUtils
@@ -36,18 +30,18 @@ namespace ChristmasLib.Utils
             BinaryFormatter binFormatter = new BinaryFormatter();
             using (MemoryStream memStream = new MemoryStream(data))
             {
-                T final = (T)((object)binFormatter.Deserialize(memStream));
+                T final = (T)(binFormatter.Deserialize(memStream));
                 return final;
             }
         }
 
         public static T IL2CPPFromByteArray<T>(byte[] data)
         {
-            if (data == null) { return default(T); }
+            if (data == null) { return default; }
 
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             MemoryStream memoryStream = new MemoryStream(data);
-            return (T)((object)binaryFormatter.Deserialize(memoryStream));
+            return (T)(binaryFormatter.Deserialize(memoryStream));
         }
 
         public static T IL2CPPToMono<T>(Il2CppSystem.Object o)

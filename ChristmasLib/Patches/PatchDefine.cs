@@ -1,13 +1,8 @@
 ﻿using ExitGames.Client.Photon;
-using HarmonyLib;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using VRCSDK2;
 using VRCSDK2.Validation.Performance;
 
@@ -40,7 +35,7 @@ namespace ChristmasLib.Patches
         ).ToArray();
 
         //May break in future
-        public static MethodInfo[] calculatePerformance = typeof(AvatarPerformance).GetMethods().Where(m =>
+        public static MethodInfo[] CalculatePerformance = typeof(AvatarPerformance).GetMethods().Where(m =>
         m.Name.Contains("_AvatarPerformanceStats_") &&
         m.Name.StartsWith("Method")
        ).ToArray();
@@ -51,22 +46,22 @@ namespace ChristmasLib.Patches
         {
             get
             {
-                if (switchavamethod == null)
+                if (Switchavamethod == null)
                 {
                     MethodInfo[] methods = typeof(VRCPlayer).GetMethods(BindingFlags.Instance | BindingFlags.Public);
                     foreach (MethodInfo methodInfo in methods)
                     {
                         if (methodInfo.Name.Contains("Private") && methodInfo.ReturnType == typeof(void) && methodInfo.GetParameters().Length == 1 && methodInfo.GetParameters()[0].ParameterType == typeof(bool) && methodInfo.GetParameters()[0].HasDefaultValue)
                         {
-                            switchavamethod = methodInfo;
-                            return switchavamethod;
+                            Switchavamethod = methodInfo;
+                            return Switchavamethod;
                         }
                     }
                 }
-                return switchavamethod;
+                return Switchavamethod;
             }
         }
 
-        internal static MethodInfo switchavamethod;
+        internal static MethodInfo Switchavamethod;
     }
 }

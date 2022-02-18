@@ -1,10 +1,9 @@
 ﻿using ChristmasLib.UI;
-using ChristmasLib.Utils;
 using MelonLoader;
 
 
 
-[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.2", "Pikmin", "http://www.goorlandostore.com")]
+[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.2", "Pikk", "http://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
 
 namespace ChristmasLib
@@ -20,8 +19,8 @@ namespace ChristmasLib
             
             // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
 
-            //incomplete melonloader loading image changer
-            /// StartMenu.PatchLoad.Start();
+            //incomplete Melonloader loading image changer
+            //StartMenu.PatchLoad.Start();
 
             
         }

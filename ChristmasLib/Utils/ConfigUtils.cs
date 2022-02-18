@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ChristmasLib.Input;
-using ChristmasLib.Utils;
 using UnityEngine;
 
 namespace ChristmasLib.Utils
@@ -16,7 +11,7 @@ namespace ChristmasLib.Utils
 
         public static KeyCode ParseKeyCode(string key)
         {
-            return (KeyCode)System.Enum.Parse(typeof(KeyCode), key);
+            return (KeyCode)Enum.Parse(typeof(KeyCode), key);
         }
         public static ChristmasKey ParseKey(string input)
         {
@@ -34,12 +29,12 @@ namespace ChristmasLib.Utils
         }
 
 
-        public static T Load<T>(string FileName, T FileObject)
+        public static T Load<T>(string fileName, T fileObject)
         {
-            string path = ConfigPath + FileName;
+            string path = _configPath + fileName;
 
-            Init(FileName, FileObject);
-            T file = default(T);
+            Init(fileName, fileObject);
+            T file;
             try
             {
                 string fstring = File.ReadAllText(path);
@@ -54,13 +49,13 @@ namespace ChristmasLib.Utils
             return file;
         }
 
-        private static string ConfigPath = "Christmas/";
+        private static string _configPath = "Christmas/";
 
-        public static void Init(string FileName, System.Object o)
+        public static void Init(string fileName, System.Object o)
         {
 
-            Directory.CreateDirectory(ConfigPath);
-            string path = ConfigPath + FileName;
+            Directory.CreateDirectory(_configPath);
+            string path = _configPath + fileName;
             if (!File.Exists(path))
             {
                 string config =   JsonConvert.SerializeObject(o, Formatting.Indented);

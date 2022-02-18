@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using UnityEngine;
 using VRCSDK2;
 
@@ -11,17 +6,17 @@ namespace ChristmasLib.Utils.SDK2
 {
     public static class SDK2VideoUtils
     {
-        public static SyncVideoPlayer[] getSyncVideoPlayers()
+        public static SyncVideoPlayer[] GetSyncVideoPlayers()
         {
-            return UnityEngine.Object.FindObjectsOfType<SyncVideoPlayer>();
+            return Object.FindObjectsOfType<SyncVideoPlayer>();
         }
 
-        public static VRC_SyncVideoPlayer[] getClassicVideoPlayers()
+        public static VRC_SyncVideoPlayer[] GetClassicVideoPlayers()
         {
-            return UnityEngine.Object.FindObjectsOfType<VRC_SyncVideoPlayer>();
+            return Object.FindObjectsOfType<VRC_SyncVideoPlayer>();
         }
         
-        public static IEnumerator addVideo(string url, VRC_SyncVideoPlayer vp)
+        public static IEnumerator AddVideo(string url, VRC_SyncVideoPlayer vp)
         {
             vp.Clear();
             vp.AddURL(url);
@@ -29,10 +24,10 @@ namespace ChristmasLib.Utils.SDK2
             vp.Next();
         }
 
-        public static IEnumerator addVideo  (string url, SyncVideoPlayer vp)
+        public static IEnumerator AddVideo  (string url, SyncVideoPlayer vp)
         {
-            addVideo(url, vp.field_Private_VRC_SyncVideoPlayer_0);
-            yield return null;
+            yield return AddVideo(url, vp.field_Private_VRC_SyncVideoPlayer_0);
+            
         }
 
 

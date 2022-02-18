@@ -1,10 +1,6 @@
 ﻿using ChristmasLib.Wrappers;
 using Il2CppSystem.Collections;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
 using VRC.Core;
@@ -18,13 +14,13 @@ namespace ChristmasLib.Extensions
         #region PlayerManager
         public static Player[] GetAllPlayers(this PlayerManager instance) { return instance.prop_ArrayOf_Player_0; }
 
-        public static Player GetPlayer(this PlayerManager instance, string UserID)
+        public static Player GetPlayer(this PlayerManager instance, string userID)
         {
-            var Players = instance.GetAllPlayers();
-            for (int i = 0; i < Players.Length; i++)
+            var players = instance.GetAllPlayers();
+            for (int i = 0; i < players.Length; i++)
             {
-                var player = Players[i];
-                if (player.GetAPIUser().id == UserID)
+                var player = players[i];
+                if (player.GetAPIUser().id == userID)
                 {
                     return player;
                 }
@@ -32,13 +28,13 @@ namespace ChristmasLib.Extensions
             return null;
         }
 
-        public static Player GetPlayerByName(this PlayerManager instance, string Name)
+        public static Player GetPlayerByName(this PlayerManager instance, string name)
         {
-            var Players = instance.GetAllPlayers();
-            for (int i = 0; i < Players.Length; i++)
+            var players = instance.GetAllPlayers();
+            for (int i = 0; i < players.Length; i++)
             {
-                var player = Players[i];
-                if (player.GetAPIUser().displayName.ToLower().Contains(Name.ToLower()))
+                var player = players[i];
+                if (player.GetAPIUser().displayName.ToLower().Contains(name.ToLower()))
                 {
                     return player;
                 }
@@ -46,13 +42,13 @@ namespace ChristmasLib.Extensions
             return null;
         }
 
-        public static Player GetPlayer(this PlayerManager instance, int Index)
+        public static Player GetPlayer(this PlayerManager instance, int index)
         {
-            var Players = instance.GetAllPlayers();
-            for (int i = 0; i < Players.Length; i++)
+            var players = instance.GetAllPlayers();
+            for (int i = 0; i < players.Length; i++)
             {
-                var player = Players[i];
-                if (player.GetVRCPlayerApi().playerId == Index)
+                var player = players[i];
+                if (player.GetVrcPlayerApi().playerId == index)
                 {
                     return player;
                 }
@@ -62,11 +58,11 @@ namespace ChristmasLib.Extensions
 
         public static Player GetPlayer(this PlayerManager instance, VRCPlayerApi api)
         {
-            var Players = instance.GetAllPlayers();
-            for (int i = 0; i < Players.Length; i++)
+            var players = instance.GetAllPlayers();
+            for (int i = 0; i < players.Length; i++)
             {
-                var player = Players[i];
-                if (player.GetVRCPlayerApi().playerId == api.playerId)
+                var player = players[i];
+                if (player.GetVrcPlayerApi().playerId == api.playerId)
                 {
                     return player;
                 }
@@ -83,8 +79,8 @@ namespace ChristmasLib.Extensions
         #region Player
 
         public static APIUser GetAPIUser(this Player player) { return player.prop_APIUser_0; }
-        public static VRCPlayer GetVRCPlayer(this Player player) { return player.prop_VRCPlayer_0; }
-        public static VRCPlayerApi GetVRCPlayerApi(this Player player) { return player.prop_VRCPlayerApi_0; }
+        public static VRCPlayer GetVrcPlayer(this Player player) { return player.prop_VRCPlayer_0; }
+        public static VRCPlayerApi GetVrcPlayerApi(this Player player) { return player.prop_VRCPlayerApi_0; }
 
         public static PlayerNet GetPlayerNet(this Player player) { return player.prop_PlayerNet_0; }
 
@@ -130,14 +126,14 @@ namespace ChristmasLib.Extensions
         #region Select
         public static Player GetSelectedPlayer(this QuickMenu instance)
         {
-            var APIUser = instance.prop_APIUser_0;
+            var apiUser = instance.prop_APIUser_0;
             var playerManager = PlayerWrappers.GetPlayerManager();
-            return playerManager.GetPlayer(APIUser.id);
+            return playerManager.GetPlayer(apiUser.id);
         }
 
-        public static Player GetPlayerByRayCast(this RaycastHit RayCast)
+        public static Player GetPlayerByRayCast(this RaycastHit rayCast)
         {
-            var gameObject = RayCast.transform.gameObject;
+            var gameObject = rayCast.transform.gameObject;
             return GetPlayer(PlayerWrappers.GetPlayerManager(), VRCPlayerApi.GetPlayerByGameObject(gameObject).playerId);
         }
         #endregion
