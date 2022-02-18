@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Linq;
 using System.Reflection;
+using VRC.UI.Elements;
 using VRCSDK2;
 using VRCSDK2.Validation.Performance;
 
@@ -63,5 +64,8 @@ namespace ChristmasLib.Patches
         }
 
         internal static MethodInfo Switchavamethod;
+        
+        public static MethodInfo MenuOpen = typeof(MenuStateController).GetMethod("Method_Private_Void_0");
+        
     }
 }
