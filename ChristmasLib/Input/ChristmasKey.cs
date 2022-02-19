@@ -9,8 +9,8 @@ namespace ChristmasLib.Input
         
         public ChristmasKey(KeyCode key, bool useCtrl)
         {
-            this.Key = key;
-            this.UseCtrl = useCtrl;
+            Key = key;
+            UseCtrl = useCtrl;
         }
 
         

@@ -8,22 +8,19 @@ using UnityEngine.UI;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using Object = UnityEngine.Object;
-
+using System;
 
 namespace ChristmasLib.UI
 {
     public static class ChristmasUI
     {
-        public const string MenuDashboardPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard";
-        public const string DashboardHeaderPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions";
-        public const string DashboardButtonGroupPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions";
-        public const string DashboardButtonPath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_GoHome";
 
-        public const string MenuCameraPageButtonsParent = "Scrollrect/Viewport/VerticalLayoutGroup/Buttons";
         public const string MenuCameraPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera";
 
         public const string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
-        
+
+        public const string EmojiQmButton =
+            "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Emojis";
         
         //private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
         private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
@@ -33,7 +30,10 @@ namespace ChristmasLib.UI
         public static string Status = "Farting";
 
         public static ChristmasUIPage MainPage;
+        public static ChristmasUIPage MovementPage;
 
+        public static MenuStateController MenuState;
+        
         public static IEnumerator UICheck()
         {
             //Download asset bundle
@@ -51,18 +51,41 @@ namespace ChristmasLib.UI
             AssetHandler.LoadAssetBundle(BundlePath);
             Sprite icon = AssetHandler.LoadSprite(BundlePath,"BabaIcon");
             Sprite infoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
-            Object.DontDestroyOnLoad(icon);
             GameObject cameraButton = GameObject.Find(ChristmasUI.CameraPageButton);
-            PageButton christmasPageButton = new PageButton("ChristmasPageButton", "Christmas", icon,cameraButton.transform.parent,cameraButton);
-            MainPage = new ChristmasUIPage("ChristmasPage", christmasPageButton,infoIcon);
+            TabButton christmasTabButton = new TabButton("ChristmasPageButton", "Christmas","ChristmasPage", icon,cameraButton.transform.parent,cameraButton);
+            MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton,infoIcon,"ChristmasGang");
+            GameObject emojiButton = GameObject.Find(EmojiQmButton);
+            QMButton christmasMovementButton = new QMButton("ChristmasMovementButton", "Christmas","Movement" ,icon,MainPage.ButtonTransform,emojiButton,()=>SetPage("ChristmasMovementPage"));
+            MovementPage = new ChristmasUIPage("ChristmasMovementPage", christmasTabButton,infoIcon,"Movement");
+
             
         }
 
-
+        
         public static void UpdateStatus()
         {
             MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang"));
         }
+
+
+        public static MenuStateController GetMenuState()
+        {
+            if (MenuState == null)
+            {
+                MenuState = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)")
+                    .GetComponent<MenuStateController>();
+            }
+
+            return MenuState;
+
+        }
+
+        public static void SetPage(string pageName)
+        {
+            GetMenuState().Method_Public_Void_String_UIContext_Boolean_0(pageName,null,false);
+        }
+        
+        
     }
     
     
@@ -70,7 +93,8 @@ namespace ChristmasLib.UI
     {
         public GameObject ThisPage;
         public UIPage ChristmasUiPage;
-        public ChristmasUIPage(string name, PageButton button,Sprite infoIcon)
+        public Transform ButtonTransform;
+        public ChristmasUIPage(string name, BaseButton button,Sprite infoIcon,string header)
         {
             
             GameObject foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
@@ -81,17 +105,22 @@ namespace ChristmasLib.UI
             Object.Destroy(ThisPage.GetComponent<VRCUiPage>());
             ChristmasUiPage = ThisPage.AddComponent<UIPage>();
             ChristmasUiPage.field_Public_String_0 = name;
-            button.MTab.field_Public_String_0 = name;
-            ChristmasUiPage.field_Private_MenuStateController_0 = button.GetMenuStateController();
+            ChristmasUiPage.field_Private_MenuStateController_0 = ChristmasUI.GetMenuState();
             ChristmasUiPage.field_Private_List_1_UIPage_0.Add(ChristmasUiPage);
             ChristmasUiPage.field_Public_Boolean_0 = true;
             AddToDictionary(button,name);
             ChangePanelInfo(ChristmasUI.Status, infoIcon);
-            SetHeader(name);
+            SetHeader(header);
             RemoveButtons();
+//need a better way of doing this
+            ButtonTransform = GameObject
+                .Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/ChristmasPage")
+                .GetComponentInChildren<GridLayoutGroup>(true).transform;
 
         }
 
+ 
+        
         public void SetHeader(string text)
         {
             GameObject header = ThisPage.transform.FindChild("Header_Camera").gameObject;
@@ -102,9 +131,9 @@ namespace ChristmasLib.UI
             }
         }
 
-        public void AddToDictionary(PageButton pageButton, string pageName)
+        public void AddToDictionary(BaseButton tabButton, string pageName)
         {
-            MenuStateController menuStateController = pageButton.GetMenuStateController();
+            MenuStateController menuStateController = ChristmasUI.GetMenuState();
             menuStateController.field_Private_Dictionary_2_String_UIPage_0.Add(pageName,ChristmasUiPage);
             menuStateController.field_Public_ArrayOf_UIPage_0 = menuStateController.field_Public_ArrayOf_UIPage_0.Append(ChristmasUiPage).ToArray();
 
@@ -144,25 +173,11 @@ namespace ChristmasLib.UI
         }
         
     }
-    
-    public class PageButton 
+
+    public class BaseButton
     {
         public GameObject ThisButton;
-        public MenuTab MTab;
-        public PageButton(string name, string tooltip, Sprite icon, Transform parent, GameObject buttonToClone)
-        {
-
-
-            ThisButton = Object.Instantiate(buttonToClone, parent, true);
-
-            
-            ThisButton.name = name;
-            MTab = ThisButton.GetComponent<MenuTab>();
-            SetIcon(icon);
-            SetTooltip(tooltip);
-        }
-
-
+        
         public void SetIcon(Sprite icon)
         {
             ThisButton.transform.FindChild("Icon").GetComponent<Image>().overrideSprite = icon;
@@ -175,13 +190,60 @@ namespace ChristmasLib.UI
                 ThisButton.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = text;
             }
         }
-        
-        
-        public MenuStateController GetMenuStateController()
+
+        public void SetOnclick(Action onClick)
         {
-           return MTab.field_Private_MenuStateController_0;
+            ThisButton.GetComponent<Button>().onClick.AddListener(onClick);
         }
         
+    }
+
+    public class QMButton : BaseButton
+    {
+        public QMButton(string name, string tooltip,string text, Sprite icon, Transform parent, GameObject buttonToClone,Action onClick = null)
+        {
+            ThisButton = Object.Instantiate(buttonToClone, parent, true);
+            
+            ThisButton.name = name;
+            //MTab = ThisButton.GetComponent<MenuTab>();
+            SetIcon(icon);
+            SetTooltip(tooltip);
+            SetOnclick(onClick);
+            SetText(text);
+        }
+
+        public void SetText(string text)
+        {
+            TextMeshProUGUI textMesh = ThisButton.GetComponentInChildren<TextMeshProUGUI>();
+            textMesh.text = text;
+        }
+    }
+    
+    public class TabButton :BaseButton
+    {
+        public MenuTab MTab;
+
+        public TabButton(string name, string tooltip,string pageName, Sprite icon, Transform parent, GameObject buttonToClone)
+
+        {
+
+
+            ThisButton = Object.Instantiate(buttonToClone, parent, true);
+
+
+            ThisButton.name = name;
+            MTab = ThisButton.GetComponent<MenuTab>();
+            MTab.field_Public_String_0 = pageName;
+
+            SetIcon(icon);
+            SetTooltip(tooltip);
+        }
+        
+          public MenuStateController GetMenuStateController()
+          {
+             return MTab.field_Private_MenuStateController_0;
+          }
+          
     }
 
 }

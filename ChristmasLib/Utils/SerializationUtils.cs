@@ -30,7 +30,7 @@ namespace ChristmasLib.Utils
             BinaryFormatter binFormatter = new BinaryFormatter();
             using (MemoryStream memStream = new MemoryStream(data))
             {
-                T final = (T)(binFormatter.Deserialize(memStream));
+                T final = (T)binFormatter.Deserialize(memStream);
                 return final;
             }
         }
@@ -41,7 +41,7 @@ namespace ChristmasLib.Utils
 
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             MemoryStream memoryStream = new MemoryStream(data);
-            return (T)(binaryFormatter.Deserialize(memoryStream));
+            return (T)binaryFormatter.Deserialize(memoryStream);
         }
 
         public static T IL2CPPToMono<T>(Il2CppSystem.Object o)

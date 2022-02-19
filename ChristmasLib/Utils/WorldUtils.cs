@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using VRC.SDKBase;
 
 namespace ChristmasLib.Utils
@@ -19,11 +18,7 @@ namespace ChristmasLib.Utils
             {
                 return WorldType.Udon;
             }
-            if (UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>() != null)
-            {
-                return WorldType.SDK2;
-            }
-            return WorldType.None;
+            return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>() != null ? WorldType.SDK2 : WorldType.None;
         }
 
         public static VRC_SceneDescriptor GetSceneDescriptor()

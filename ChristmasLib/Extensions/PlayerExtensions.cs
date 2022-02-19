@@ -17,9 +17,8 @@ namespace ChristmasLib.Extensions
         public static Player GetPlayer(this PlayerManager instance, string userID)
         {
             var players = instance.GetAllPlayers();
-            for (int i = 0; i < players.Length; i++)
+            foreach (var player in players)
             {
-                var player = players[i];
                 if (player.GetAPIUser().id == userID)
                 {
                     return player;
@@ -31,9 +30,8 @@ namespace ChristmasLib.Extensions
         public static Player GetPlayerByName(this PlayerManager instance, string name)
         {
             var players = instance.GetAllPlayers();
-            for (int i = 0; i < players.Length; i++)
+            foreach (var player in players)
             {
-                var player = players[i];
                 if (player.GetAPIUser().displayName.ToLower().Contains(name.ToLower()))
                 {
                     return player;
@@ -59,9 +57,8 @@ namespace ChristmasLib.Extensions
         public static Player GetPlayer(this PlayerManager instance, VRCPlayerApi api)
         {
             var players = instance.GetAllPlayers();
-            for (int i = 0; i < players.Length; i++)
+            foreach (var player in players)
             {
-                var player = players[i];
                 if (player.GetVrcPlayerApi().playerId == api.playerId)
                 {
                     return player;

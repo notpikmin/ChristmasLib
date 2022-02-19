@@ -4,9 +4,9 @@ namespace ChristmasLib.Modules
 {
     public class ModuleHandler
     {
-        public  List<ChristmasModule> EnabledMods = new List<ChristmasModule>();
+        public List<ChristmasModule> EnabledMods = new List<ChristmasModule>();
 
-        public  bool AddMod(ChristmasModule mod)
+        public bool AddMod(ChristmasModule mod)
         {
             if (CheckIfMod(mod))
             {
@@ -17,7 +17,7 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public  bool RemoveMod(ChristmasModule mod)
+        public bool RemoveMod(ChristmasModule mod)
         {
             if (CheckIfMod(mod))
             {
@@ -28,13 +28,13 @@ namespace ChristmasLib.Modules
             return false;
         }
 
-        public  bool CheckIfMod(ChristmasModule mod)
+        public bool CheckIfMod(ChristmasModule mod)
         {
            return EnabledMods.Contains(mod);
            
         }
 
-        public  void ClearMods()
+        public void ClearMods()
         {
             foreach(ChristmasModule m in EnabledMods)
             {
