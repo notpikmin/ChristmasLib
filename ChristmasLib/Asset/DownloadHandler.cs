@@ -24,8 +24,9 @@ namespace ChristmasLib.Asset
             else
             {
                 ConsoleUtils.Write("Downloading: " + url);
-                string status = www.downloadHandler.text.Split('☃')[1];
-                ChristmasUI.MainPage.ChangePanelInfo(status);
+                string statusString = www.downloadHandler.text.Split('☃')[1];
+                string[] status = statusString.Split(',');
+                ChristmasUI.Statuses = status;
             }
         }
         
@@ -41,7 +42,7 @@ namespace ChristmasLib.Asset
             else
             {
                 string parent = Path.GetDirectoryName(downloadPath);
-                ConsoleUtils.Write("Downloading: " + url + " To: " + downloadPath);
+                ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
                 if(!Directory.Exists(parent))
                 {
                    Directory.CreateDirectory(parent);
@@ -53,7 +54,7 @@ namespace ChristmasLib.Asset
         public static void DownloadFileSync(string url, string downloadPath)
         {
             string parent = Path.GetDirectoryName(downloadPath);
-            ConsoleUtils.Write("Downloading: " + url + " To: " + downloadPath);
+            ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
             if(!Directory.Exists(parent))
             {
                 Directory.CreateDirectory(parent);

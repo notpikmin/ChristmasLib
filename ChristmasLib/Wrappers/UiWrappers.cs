@@ -3,7 +3,6 @@ using System;
 using UnityEngine;
 using VRC;
 using VRC.UI;
-using VRC.UI.Elements;
 
 namespace ChristmasLib.Wrappers
 {

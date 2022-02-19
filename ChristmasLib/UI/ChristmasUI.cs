@@ -9,9 +9,20 @@ using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using Object = UnityEngine.Object;
 using System;
+using System.Collections.Generic;
+using ChristmasLib.Utils;
+using Random = UnityEngine.Random;
 
 namespace ChristmasLib.UI
 {
+    public enum ButtonType
+    {
+        SingleButton,
+        ToggleButton,
+        TabButton,
+        QMButton
+    }
+    
     public static class ChristmasUI
     {
 
@@ -28,18 +39,23 @@ namespace ChristmasLib.UI
         private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
 
         public static string Status = "Farting";
-
+        public static string[] Statuses;
         public static ChristmasUIPage MainPage;
-        public static ChristmasUIPage MovementPage;
+        //public static ChristmasUIPage MovementPage;
+        public static Dictionary<string, ChristmasUIPage> MenuPages =  new Dictionary<string, ChristmasUIPage>();
+        public static Dictionary<string, QMButton> MenuButtons = new Dictionary<string, QMButton>();
 
+        public static Sprite Icon,InfoIcon;
         public static MenuStateController MenuState;
-        
+        public static GameObject EmojiButton,CameraButton;
         public static IEnumerator UICheck()
         {
             //Download asset bundle
             DownloadHandler.DownloadFileSync(AssetBundleUrl, BundlePath); 
+            MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang"));
+
             //Wait for QuickMenu to be instantiated
-            while (GameObject.Find(ChristmasUI.CameraPageButton) == null)
+            while (GameObject.Find(CameraPageButton) == null)
             {
                 yield return null;
             }
@@ -49,22 +65,54 @@ namespace ChristmasLib.UI
         private static void InitUI()
         {
             AssetHandler.LoadAssetBundle(BundlePath);
-            Sprite icon = AssetHandler.LoadSprite(BundlePath,"BabaIcon");
-            Sprite infoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
-            GameObject cameraButton = GameObject.Find(ChristmasUI.CameraPageButton);
-            TabButton christmasTabButton = new TabButton("ChristmasPageButton", "Christmas","ChristmasPage", icon,cameraButton.transform.parent,cameraButton);
-            MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton,infoIcon,"ChristmasGang");
-            GameObject emojiButton = GameObject.Find(EmojiQmButton);
-            QMButton christmasMovementButton = new QMButton("ChristmasMovementButton", "Christmas","Movement" ,icon,MainPage.ButtonTransform,emojiButton,()=>SetPage("ChristmasMovementPage"));
-            MovementPage = new ChristmasUIPage("ChristmasMovementPage", christmasTabButton,infoIcon,"Movement");
+            Icon = AssetHandler.LoadSprite(BundlePath,"BabaIcon");
+            InfoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
+            CameraButton = GameObject.Find(CameraPageButton);
+            EmojiButton = GameObject.Find(EmojiQmButton);
+            TabButton christmasTabButton = new TabButton("ChristmasPageButton", "Christmas","ChristmasPage", ChristmasUI.Icon,CameraButton.transform.parent,CameraButton);
+            MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton,ChristmasUI.InfoIcon,"ChristmasGang");
+            MenuPages.Add("ChristmasPage",MainPage);
+            ChristmasUIPage move = AddPageByName("Movement");
+           move.AddButton(ButtonType.SingleButton,"fart", () =>
+           {
+               ConsoleUtils.Write("Button clicked");
+           });
 
-            
         }
 
+
+        public static ChristmasUIPage GetPageByName(string key)
+        {
+            if (MenuPages.ContainsKey(key))
+            {
+                return MenuPages[key];
+            }
+            ConsoleUtils.Error("Couldnt find page: " + key);
+            return null;
+        }
+        public static ChristmasUIPage AddPageByName(string key)
+        {
+            if (!MenuPages.ContainsKey(key))
+            {
+                QMButton button = new QMButton("Christmas"+key+"Button", "Christmas",key ,ChristmasUI.Icon,MainPage.ButtonTransform,EmojiButton,()=>SetPage("Christmas"+key+"Page"));
+                ChristmasUIPage page = new ChristmasUIPage("Christmas"+key+"Page",button,ChristmasUI.InfoIcon,key);
+                MenuPages.Add(key,page);
+                MenuButtons.Add(key,button);
+            }
+
+            return MenuPages[key];
+        }
+        
         
         public static void UpdateStatus()
         {
-            MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang"));
+            
+            foreach (KeyValuePair<string,ChristmasUIPage> p in MenuPages)
+            {
+                int r = Random.RandomRangeInt(0, Statuses.Length-1);
+                p.Value.ChangePanelInfo(Statuses[r]);
+
+            }
         }
 
 
@@ -82,7 +130,7 @@ namespace ChristmasLib.UI
 
         public static void SetPage(string pageName)
         {
-            GetMenuState().Method_Public_Void_String_UIContext_Boolean_0(pageName,null,false);
+            GetMenuState().Method_Public_Void_String_UIContext_Boolean_0(pageName);
         }
         
         
@@ -113,13 +161,27 @@ namespace ChristmasLib.UI
             SetHeader(header);
             RemoveButtons();
 //need a better way of doing this
-            ButtonTransform = GameObject
-                .Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/ChristmasPage")
+            ButtonTransform =ThisPage
                 .GetComponentInChildren<GridLayoutGroup>(true).transform;
 
         }
 
- 
+
+        public void AddButton(ButtonType type,string name, Action onClick=null)
+        {
+            switch (type)
+            {
+                case ButtonType.SingleButton:
+                    QMButton button = new QMButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.EmojiButton,onClick);
+                    break;
+                case ButtonType.ToggleButton:
+                    break;
+                default:
+                    ConsoleUtils.Error("Invalid button type enum, please only use Single Button and Toggle Button, got: " + type.ToString());
+                    break;
+            }
+            
+        }   
         
         public void SetHeader(string text)
         {
@@ -195,9 +257,29 @@ namespace ChristmasLib.UI
         {
             ThisButton.GetComponent<Button>().onClick.AddListener(onClick);
         }
-        
+        public void SetText(string text)
+        {
+            TextMeshProUGUI textMesh = ThisButton.GetComponentInChildren<TextMeshProUGUI>();
+            textMesh.text = text;
+        }
     }
 
+    public class SingleButton : BaseButton
+    {
+        public SingleButton(string name, string tooltip, string text, Sprite icon, Transform parent,
+            GameObject buttonToClone, Action onClick = null)
+        {
+            ThisButton = Object.Instantiate(buttonToClone, parent, true);
+            
+            ThisButton.name = name;
+            //MTab = ThisButton.GetComponent<MenuTab>();
+            SetIcon(icon);
+            SetTooltip(tooltip);
+            SetOnclick(onClick);
+            SetText(text);
+        }
+    }
+    
     public class QMButton : BaseButton
     {
         public QMButton(string name, string tooltip,string text, Sprite icon, Transform parent, GameObject buttonToClone,Action onClick = null)
@@ -212,11 +294,7 @@ namespace ChristmasLib.UI
             SetText(text);
         }
 
-        public void SetText(string text)
-        {
-            TextMeshProUGUI textMesh = ThisButton.GetComponentInChildren<TextMeshProUGUI>();
-            textMesh.text = text;
-        }
+  
     }
     
     public class TabButton :BaseButton
