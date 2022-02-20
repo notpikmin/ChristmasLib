@@ -15,6 +15,18 @@ namespace ChristmasLib.Utils
             Console.ResetColor();
             Console.Write(input + "\n");
         }
+        
+        public static void Warning(string input, string mod = "Christmas")
+        {
+            Console.ResetColor();
+            string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(time);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(" [" + mod + "]: ");
+            Console.ResetColor();
+            Console.Write(input + "\n");
+        }
 
         public static void Error(string input, string mod = "Christmas")
         {
@@ -26,5 +38,11 @@ namespace ChristmasLib.Utils
             Console.ResetColor();
             Console.Write(input + "\n");
         }
+        
+        public static void Clear()
+        {
+            Console.Clear();    
+        }
+        
     }
 }

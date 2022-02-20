@@ -34,7 +34,7 @@ namespace ChristmasLib.UI
             "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Emojis";
         
         //private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
-        private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
+        private const string AssetBundleUrl = "https://files.catbox.moe/7nhh2n";
         
         private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
 
@@ -316,12 +316,7 @@ namespace ChristmasLib.UI
             SetIcon(icon);
             SetTooltip(tooltip);
         }
-        
-          public MenuStateController GetMenuStateController()
-          {
-             return MTab.field_Private_MenuStateController_0;
-          }
-          
+
     }
 
 }
