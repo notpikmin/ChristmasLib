@@ -21,7 +21,7 @@ namespace ChristmasLib
             // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
 
             //incomplete Melonloader loading image changer
-            StartMenu.PatchLoad.Start();
+            StartMenu.StartScreen.Start();
 
             
         }
