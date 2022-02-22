@@ -87,7 +87,7 @@ namespace ChristmasLib.UI
             {
                 return MenuPages[key];
             }
-            ConsoleUtils.Error("Couldnt find page: " + key);
+            ConsoleUtils.Error("Couldn't find page: " + key);
             return null;
         }
         public static ChristmasUIPage AddPageByName(string key)
@@ -172,7 +172,7 @@ namespace ChristmasLib.UI
             switch (type)
             {
                 case ButtonType.SingleButton:
-                    QMButton button = new QMButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.EmojiButton,onClick);
+                    SingleButton button = new SingleButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.EmojiButton,onClick);
                     break;
                 case ButtonType.ToggleButton:
                     break;
@@ -236,6 +236,8 @@ namespace ChristmasLib.UI
         
     }
 
+    
+    
     public class BaseButton
     {
         public GameObject ThisButton;
@@ -280,6 +282,21 @@ namespace ChristmasLib.UI
         }
     }
     
+    public class ToggleBtton : BaseButton
+    {
+        public ToggleBtton(string name, string tooltip, string text, Sprite icon, Transform parent,
+            GameObject buttonToClone, Action onClick = null)
+        {
+            ThisButton = Object.Instantiate(buttonToClone, parent, true);
+            
+            ThisButton.name = name;
+            //MTab = ThisButton.GetComponent<MenuTab>();
+            SetIcon(icon);
+            SetTooltip(tooltip);
+            SetOnclick(onClick);
+            SetText(text);
+        }
+    }
     public class QMButton : BaseButton
     {
         public QMButton(string name, string tooltip,string text, Sprite icon, Transform parent, GameObject buttonToClone,Action onClick = null)

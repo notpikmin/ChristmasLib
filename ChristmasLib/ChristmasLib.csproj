@@ -516,6 +516,7 @@
     <Compile Include="Utils\ComponentUtils.cs" />
     <Compile Include="Utils\ConfigUtils.cs" />
     <Compile Include="Utils\ConsoleUtils.cs" />
+    <Compile Include="Utils\GarbageUtils.cs" />
     <Compile Include="Utils\MovementUtils.cs" />
     <Compile Include="Utils\EventUtils.cs" />
     <Compile Include="Utils\PickupUtils.cs" />
