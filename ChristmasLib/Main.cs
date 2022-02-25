@@ -1,4 +1,4 @@
-﻿using ChristmasLib.Patches;
+﻿using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using MelonLoader;
 

@@ -1,9 +1,10 @@
+using ChristmasLib.Patches;
 using ChristmasLib.UI;
 using VRC.UI.Elements;
 
-namespace ChristmasLib.Patches
+namespace ChristmasLib.Internal
 {
-    public static class PatchManager
+    internal static class PatchManager
     {
         public static void InitPatches()
         {

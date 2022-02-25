@@ -8,7 +8,11 @@ namespace ChristmasLib.Utils
 {
     public static class ConfigUtils
     {
-
+        
+        public static T Parse<T>(string item)
+        {
+            return (T)Enum.Parse(typeof(T), item);
+        }
         public static KeyCode ParseKeyCode(string key)
         {
             return (KeyCode)Enum.Parse(typeof(KeyCode), key);
