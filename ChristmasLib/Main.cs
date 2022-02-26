@@ -11,9 +11,7 @@ namespace ChristmasLib
 {
     public class Main : MelonPlugin
     {
-
-
-     
+        
        
         public override void OnApplicationEarlyStart()
         {

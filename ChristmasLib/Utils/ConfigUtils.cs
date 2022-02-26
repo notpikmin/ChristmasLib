@@ -13,6 +13,12 @@ namespace ChristmasLib.Utils
         {
             return (T)Enum.Parse(typeof(T), item);
         }
+        
+        public static bool ParseBool(string item)
+        {
+            return bool.Parse(item);
+        }
+        
         public static KeyCode ParseKeyCode(string key)
         {
             return (KeyCode)Enum.Parse(typeof(KeyCode), key);
@@ -57,7 +63,7 @@ namespace ChristmasLib.Utils
 
         public static void Init(string fileName, System.Object o)
         {
-
+            
             Directory.CreateDirectory(_configPath);
             string path = _configPath + fileName;
             if (!File.Exists(path))

@@ -1,3 +1,4 @@
+using System;
 using ChristmasLib.Utils;
 
 namespace ChristmasLib.Internal
@@ -23,11 +24,10 @@ namespace ChristmasLib.Internal
             var config = new Config();
             
             config = ConfigUtils.Load(ConfigName, config);
-
-            Debug = ConfigUtils.Parse<bool>(config.Debug);
-            CustomStartScreen = ConfigUtils.Parse<bool>(config.CustomStartScreen);
-            LogDownloads = ConfigUtils.Parse<bool>(config.LogDownloads);
-            ChristmasUI = ConfigUtils.Parse<bool>(config.ChristmasUI);
+            Debug = ConfigUtils.ParseBool(config.Debug);
+            CustomStartScreen = ConfigUtils.ParseBool(config.CustomStartScreen);
+            LogDownloads = ConfigUtils.ParseBool(config.LogDownloads);
+            ChristmasUI = ConfigUtils.ParseBool(config.ChristmasUI);
         }
                 
     }
