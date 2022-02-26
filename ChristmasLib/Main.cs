@@ -4,7 +4,7 @@ using MelonLoader;
 
 
 
-[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.2", "Pikk", "http://www.goorlandostore.com")]
+[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.2", "Pikk", "https://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
 
 namespace ChristmasLib
@@ -17,13 +17,15 @@ namespace ChristmasLib
        
         public override void OnApplicationEarlyStart()
         {
-            
+            PluginSettings.InitSettings();
             // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
 
             //incomplete Melonloader loading image changer
-            StartMenu.StartScreen.Start();
+            if (PluginSettings.CustomStartScreen)
+            {
+                StartMenu.StartScreen.Start();
+            }
 
-            
         }
 
         public override void OnApplicationStart()
@@ -35,8 +37,10 @@ namespace ChristmasLib
         public override void OnApplicationLateStart()
         { 
             PatchManager.InitPatches();
-            MelonCoroutines.Start(ChristmasUI.UICheck());
-           
+            if (PluginSettings.ChristmasUI)
+            {
+                MelonCoroutines.Start(ChristmasUI.UICheck());
+            }
         }
         
         

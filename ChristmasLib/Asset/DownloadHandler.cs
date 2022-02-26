@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Net;
+using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using UnityEngine.Networking;
 
@@ -10,9 +11,6 @@ namespace ChristmasLib.Asset
 {
     public static class DownloadHandler
     {
-
-
-        
         public static IEnumerator DownloadStatus(string url)
         {
             UnityWebRequest www = UnityWebRequest.Get(url);
@@ -24,7 +22,11 @@ namespace ChristmasLib.Asset
             }
             else
             {
-                ConsoleUtils.Write("Downloading: " + url);
+                if (PluginSettings.LogDownloads)
+                {
+                    ConsoleUtils.Write("Downloading: " + url);
+                }
+
                 string statusString = www.downloadHandler.text.Split('☃')[1];
                 string[] status = statusString.Split(',');
                 ChristmasUI.Statuses = status;
@@ -43,7 +45,11 @@ namespace ChristmasLib.Asset
             else
             {
                 string parent = Path.GetDirectoryName(downloadPath);
-                ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
+                if (PluginSettings.LogDownloads)
+                {
+                    ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
+                }
+
                 if(!Directory.Exists(parent))
                 {
                    Directory.CreateDirectory(parent);
@@ -55,7 +61,11 @@ namespace ChristmasLib.Asset
         public static void DownloadFileSync(string url, string downloadPath)
         {
             string parent = Path.GetDirectoryName(downloadPath);
-            ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
+            if (PluginSettings.LogDownloads)
+            {
+                ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
+            }
+
             if(!Directory.Exists(parent))
             {
                 Directory.CreateDirectory(parent);
