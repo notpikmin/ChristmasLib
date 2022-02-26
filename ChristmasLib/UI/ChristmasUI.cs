@@ -153,14 +153,13 @@ namespace ChristmasLib.UI
             Object.Destroy(ThisPage.GetComponent<VRCUiPage>());
             ChristmasUiPage = ThisPage.AddComponent<UIPage>();
             ChristmasUiPage.field_Public_String_0 = name;
-            ChristmasUiPage.field_Private_MenuStateController_0 = ChristmasUI.GetMenuState();
+            ChristmasUiPage.field_Protected_MenuStateController_0 = ChristmasUI.GetMenuState();
             ChristmasUiPage.field_Private_List_1_UIPage_0.Add(ChristmasUiPage);
             ChristmasUiPage.field_Public_Boolean_0 = true;
             AddToDictionary(button,name);
             ChangePanelInfo(ChristmasUI.Status, infoIcon);
             SetHeader(header);
             RemoveButtons();
-//need a better way of doing this
             ButtonTransform =ThisPage
                 .GetComponentInChildren<GridLayoutGroup>(true).transform;
 
