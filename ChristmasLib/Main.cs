@@ -1,5 +1,6 @@
 ﻿using ChristmasLib.Internal;
 using ChristmasLib.UI;
+using ChristmasLib.Utils;
 using MelonLoader;
 
 
@@ -17,7 +18,7 @@ namespace ChristmasLib
         {
             PluginSettings.InitSettings();
             // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
-
+            ConfigUtils.FileSystemWatcher();
             //incomplete Melonloader loading image changer
             if (PluginSettings.CustomStartScreen)
             {

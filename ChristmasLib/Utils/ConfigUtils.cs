@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ChristmasLib.Utils
 {
-    public static class ConfigUtils
+    public class ConfigUtils
     {
         
         public static T Parse<T>(string item)
@@ -72,6 +72,42 @@ namespace ChristmasLib.Utils
                 File.WriteAllText(path, config);
             }
           
+        }
+
+
+        public static void FileSystemWatcher()
+        {
+             var watcher = new FileSystemWatcher(_configPath);
+             watcher.NotifyFilter = NotifyFilters.Attributes
+                                    | NotifyFilters.CreationTime
+                                    | NotifyFilters.DirectoryName
+                                    | NotifyFilters.FileName
+                                    | NotifyFilters.LastAccess
+                                    | NotifyFilters.LastWrite
+                                    | NotifyFilters.Security
+                                    | NotifyFilters.Size;
+
+             watcher.Changed += OnChanged;
+             watcher.Error += OnError;
+
+             watcher.Filter = "*.json";
+             watcher.IncludeSubdirectories = false;
+             watcher.EnableRaisingEvents = true;
+
+        }
+        
+        private static void OnChanged(object sender, FileSystemEventArgs e)
+        {
+            if (e.ChangeType != WatcherChangeTypes.Changed)
+            {
+                return;
+            }
+            ConsoleUtils.Debug($"Changed: {e.FullPath}");
+        }
+
+        private static void OnError(object sender, ErrorEventArgs e)
+        {
+            ConsoleUtils.Error(e.GetException().Message);
         }
 
     }
