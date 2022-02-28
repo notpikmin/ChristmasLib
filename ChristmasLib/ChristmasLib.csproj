@@ -499,6 +499,8 @@
     <Compile Include="Asset\AssetHandler.cs" />
     <Compile Include="Asset\DownloadHandler.cs" />
     <Compile Include="ChristmasMod.cs" />
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\ConfigUtils.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Input\Bind.cs" />
     <Compile Include="Input\ChristmasKey.cs" />
@@ -515,7 +517,6 @@
     <Compile Include="StartMenu\StartScreen.cs" />
     <Compile Include="UI\ChristmasUI.cs" />
     <Compile Include="Utils\ComponentUtils.cs" />
-    <Compile Include="Utils\ConfigUtils.cs" />
     <Compile Include="Utils\ConsoleUtils.cs" />
     <Compile Include="Utils\GarbageUtils.cs" />
     <Compile Include="Utils\MovementUtils.cs" />

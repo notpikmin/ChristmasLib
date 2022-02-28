@@ -1,45 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
 using System.IO;
-using ChristmasLib.Input;
-using UnityEngine;
+using ChristmasLib.Utils;
+using Newtonsoft.Json;
 
-namespace ChristmasLib.Utils
+namespace ChristmasLib.Config
 {
-    public class ConfigUtils
+    public class ChristmasConfig
     {
         
-        public static T Parse<T>(string item)
-        {
-            return (T)Enum.Parse(typeof(T), item);
-        }
-        
-        public static bool ParseBool(string item)
-        {
-            return bool.Parse(item);
-        }
-        
-        public static KeyCode ParseKeyCode(string key)
-        {
-            return (KeyCode)Enum.Parse(typeof(KeyCode), key);
-        }
-        public static ChristmasKey ParseKey(string input)
-        {
-            string[] inputs = input.Split('|');
-
-            KeyCode keyCode = ParseKeyCode(inputs[0]);
-            bool ctrl = false;  
-            if (inputs.Length >= 2)
-            {
-                ctrl = inputs[1].ToLower().Contains("ctrl");
-            }
-
-            ChristmasKey cKey = new ChristmasKey(keyCode,ctrl);
-            return cKey;
-        }
-
-
-        public static T Load<T>(string fileName, T fileObject)
+        public  T Load<T>(string fileName, T fileObject)
         {
             string path = _configPath + fileName;
 
@@ -61,7 +29,7 @@ namespace ChristmasLib.Utils
 
         private static string _configPath = "Christmas/";
 
-        public static void Init(string fileName, System.Object o)
+        public void Init(string fileName, System.Object o)
         {
             
             Directory.CreateDirectory(_configPath);
@@ -75,7 +43,7 @@ namespace ChristmasLib.Utils
         }
 
 
-        public static void FileSystemWatcher()
+        public  void FileSystemWatcher()
         {
              var watcher = new FileSystemWatcher(_configPath);
              watcher.NotifyFilter = NotifyFilters.Attributes
@@ -96,7 +64,7 @@ namespace ChristmasLib.Utils
 
         }
         
-        private static void OnChanged(object sender, FileSystemEventArgs e)
+        private  void OnChanged(object sender, FileSystemEventArgs e)
         {
             if (e.ChangeType != WatcherChangeTypes.Changed)
             {
@@ -105,7 +73,7 @@ namespace ChristmasLib.Utils
             ConsoleUtils.Debug($"Changed: {e.FullPath}");
         }
 
-        private static void OnError(object sender, ErrorEventArgs e)
+        private  void OnError(object sender, ErrorEventArgs e)
         {
             ConsoleUtils.Error(e.GetException().Message);
         }

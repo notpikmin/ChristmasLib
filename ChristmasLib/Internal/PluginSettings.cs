@@ -1,10 +1,11 @@
 using System;
+using ChristmasLib.Config;
 using ChristmasLib.Utils;
 
 namespace ChristmasLib.Internal
 {
     
-    public class Config
+    public class PluginConfig
     {
         public string Debug = "false";
         public string CustomStartScreen = "true";
@@ -21,13 +22,13 @@ namespace ChristmasLib.Internal
         public static bool Debug,CustomStartScreen,LogDownloads,ChristmasUI;
         public static void InitSettings(){
         
-            var config = new Config();
-            
-            config = ConfigUtils.Load(ConfigName, config);
-            Debug = ConfigUtils.ParseBool(config.Debug);
-            CustomStartScreen = ConfigUtils.ParseBool(config.CustomStartScreen);
-            LogDownloads = ConfigUtils.ParseBool(config.LogDownloads);
-            ChristmasUI = ConfigUtils.ParseBool(config.ChristmasUI);
+            var plugincfg = new PluginConfig();
+            ChristmasConfig cfg = new ChristmasConfig();
+            plugincfg = cfg.Load(ConfigName, plugincfg);
+            Debug = ConfigUtils.ParseBool(plugincfg.Debug);
+            CustomStartScreen = ConfigUtils.ParseBool(plugincfg.CustomStartScreen);
+            LogDownloads = ConfigUtils.ParseBool(plugincfg.LogDownloads);
+            ChristmasUI = ConfigUtils.ParseBool(plugincfg.ChristmasUI);
         }
                 
     }

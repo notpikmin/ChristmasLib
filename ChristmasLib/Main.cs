@@ -18,7 +18,6 @@ namespace ChristmasLib
         {
             PluginSettings.InitSettings();
             // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
-            ConfigUtils.FileSystemWatcher();
             //incomplete Melonloader loading image changer
             if (PluginSettings.CustomStartScreen)
             {
