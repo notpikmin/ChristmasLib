@@ -6,8 +6,13 @@ namespace ChristmasLib.Config
 {
     public class ChristmasConfig
     {
-        
-        public  T Load<T>(string fileName, T fileObject)
+        public string Name;
+        public ChristmasConfig(string name)
+        {
+            Name = name;
+        }
+
+        public T Load<T>(string fileName, T fileObject)
         {
             string path = _configPath + fileName;
 
@@ -43,7 +48,7 @@ namespace ChristmasLib.Config
         }
 
 
-        public  void FileSystemWatcher()
+        public void FileSystemWatcher()
         {
              var watcher = new FileSystemWatcher(_configPath);
              watcher.NotifyFilter = NotifyFilters.Attributes

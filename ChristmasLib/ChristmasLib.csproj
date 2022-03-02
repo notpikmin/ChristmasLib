@@ -499,7 +499,7 @@
     <Compile Include="Asset\AssetHandler.cs" />
     <Compile Include="Asset\DownloadHandler.cs" />
     <Compile Include="ChristmasMod.cs" />
-    <Compile Include="Config\Config.cs" />
+    <Compile Include="Config\ChristmasConfig.cs" />
     <Compile Include="Config\ConfigUtils.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Input\Bind.cs" />

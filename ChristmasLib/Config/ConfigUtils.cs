@@ -1,13 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using ChristmasLib.Input;
 using UnityEngine;
 
 namespace ChristmasLib.Config
 {
-    public class ConfigUtils
+    public static class ConfigUtils
     {
+
+        public static List<ChristmasConfig> Configs;
 
         public static T Parse<T>(string item)
         {

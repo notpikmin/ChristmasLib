@@ -1,6 +1,4 @@
-using System;
 using ChristmasLib.Config;
-using ChristmasLib.Utils;
 
 namespace ChristmasLib.Internal
 {
@@ -22,13 +20,13 @@ namespace ChristmasLib.Internal
         public static bool Debug,CustomStartScreen,LogDownloads,ChristmasUI;
         public static void InitSettings(){
         
-            var plugincfg = new PluginConfig();
-            ChristmasConfig cfg = new ChristmasConfig();
-            plugincfg = cfg.Load(ConfigName, plugincfg);
-            Debug = ConfigUtils.ParseBool(plugincfg.Debug);
-            CustomStartScreen = ConfigUtils.ParseBool(plugincfg.CustomStartScreen);
-            LogDownloads = ConfigUtils.ParseBool(plugincfg.LogDownloads);
-            ChristmasUI = ConfigUtils.ParseBool(plugincfg.ChristmasUI);
+            var pluginCfg = new PluginConfig();
+            ChristmasConfig cfg = new ChristmasConfig(ConfigName);
+            pluginCfg = cfg.Load(ConfigName, pluginCfg);
+            Debug = ConfigUtils.ParseBool(pluginCfg.Debug);
+            CustomStartScreen = ConfigUtils.ParseBool(pluginCfg.CustomStartScreen);
+            LogDownloads = ConfigUtils.ParseBool(pluginCfg.LogDownloads);
+            ChristmasUI = ConfigUtils.ParseBool(pluginCfg.ChristmasUI);
         }
                 
     }
