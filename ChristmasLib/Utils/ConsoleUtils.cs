@@ -45,7 +45,7 @@ namespace ChristmasLib.Utils
 
         public static void Debug(string input, string mod = "Christmas")
         {
-            if (PluginSettings.Debug)
+            if (PluginSettings.PluginCfg.Debug)
             {
                 Console.ResetColor();
                 string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";

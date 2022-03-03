@@ -18,7 +18,7 @@ namespace ChristmasLib
             PluginSettings.InitSettings();
             // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
             //incomplete Melonloader loading image changer
-            if (PluginSettings.CustomStartScreen)
+            if (PluginSettings.PluginCfg.CustomStartScreen)
             {
                 StartMenu.StartScreen.Start();
             }
@@ -34,7 +34,7 @@ namespace ChristmasLib
         public override void OnApplicationLateStart()
         { 
             PatchManager.InitPatches();
-            if (PluginSettings.ChristmasUI)
+            if (PluginSettings.PluginCfg.ChristmasUI)
             {
                 MelonCoroutines.Start(ChristmasUI.UICheck());
             }

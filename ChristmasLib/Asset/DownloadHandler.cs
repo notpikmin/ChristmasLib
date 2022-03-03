@@ -22,7 +22,7 @@ namespace ChristmasLib.Asset
             }
             else
             {
-                if (PluginSettings.LogDownloads)
+                if (PluginSettings.PluginCfg.LogDownloads)
                 {
                     ConsoleUtils.Write("Downloading: " + url);
                 }
@@ -45,7 +45,7 @@ namespace ChristmasLib.Asset
             else
             {
                 string parent = Path.GetDirectoryName(downloadPath);
-                if (PluginSettings.LogDownloads)
+                if (PluginSettings.PluginCfg.LogDownloads)
                 {
                     ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
                 }
@@ -61,7 +61,7 @@ namespace ChristmasLib.Asset
         public static void DownloadFileSync(string url, string downloadPath)
         {
             string parent = Path.GetDirectoryName(downloadPath);
-            if (PluginSettings.LogDownloads)
+            if (PluginSettings.PluginCfg.LogDownloads)
             {
                 ConsoleUtils.Write("Downloading: " + url + " to: " + downloadPath);
             }

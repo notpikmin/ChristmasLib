@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using ChristmasLib.Utils;
 using Newtonsoft.Json;
@@ -7,16 +8,32 @@ namespace ChristmasLib.Config
     public class ChristmasConfig
     {
         public string Name;
-        public ChristmasConfig(string name)
+        private static string _configPath = "Christmas/";
+        public Type ObjectType;
+        public Action OnUpdate;
+        
+        public ChristmasConfig(string name,object configObject,Action onUpdate=null)
         {
             Name = name;
+            if (onUpdate != null)
+            {
+                OnUpdate = onUpdate;
+            }
+            else
+            {
+                OnUpdate = () =>
+                {
+                    Load(configObject);
+                };
+            }
+            
         }
 
-        public T Load<T>(string fileName, T fileObject)
+        public T Load<T>( T fileObject)
         {
-            string path = _configPath + fileName;
-
-            Init(fileName, fileObject);
+            string path = _configPath + Name;
+            ObjectType = fileObject.GetType();
+;           Init(fileObject);
             T file;
             try
             {
@@ -32,56 +49,24 @@ namespace ChristmasLib.Config
             return file;
         }
 
-        private static string _configPath = "Christmas/";
 
-        public void Init(string fileName, System.Object o)
+        public void Init(System.Object o)
         {
-            
+            if (!ConfigUtils.Configs.Contains(this))
+            {
+                ConfigUtils.Configs.Add(this);
+            }
             Directory.CreateDirectory(_configPath);
-            string path = _configPath + fileName;
+            string path = _configPath + Name;
             if (!File.Exists(path))
             {
-                string config =   JsonConvert.SerializeObject(o, Formatting.Indented);
+                string config = JsonConvert.SerializeObject(o, Formatting.Indented);
                 File.WriteAllText(path, config);
             }
           
         }
 
 
-        public void FileSystemWatcher()
-        {
-             var watcher = new FileSystemWatcher(_configPath);
-             watcher.NotifyFilter = NotifyFilters.Attributes
-                                    | NotifyFilters.CreationTime
-                                    | NotifyFilters.DirectoryName
-                                    | NotifyFilters.FileName
-                                    | NotifyFilters.LastAccess
-                                    | NotifyFilters.LastWrite
-                                    | NotifyFilters.Security
-                                    | NotifyFilters.Size;
-
-             watcher.Changed += OnChanged;
-             watcher.Error += OnError;
-
-             watcher.Filter = "*.json";
-             watcher.IncludeSubdirectories = false;
-             watcher.EnableRaisingEvents = true;
-
-        }
-        
-        private  void OnChanged(object sender, FileSystemEventArgs e)
-        {
-            if (e.ChangeType != WatcherChangeTypes.Changed)
-            {
-                return;
-            }
-            ConsoleUtils.Debug($"Changed: {e.FullPath}");
-        }
-
-        private  void OnError(object sender, ErrorEventArgs e)
-        {
-            ConsoleUtils.Error(e.GetException().Message);
-        }
 
     }
 }
