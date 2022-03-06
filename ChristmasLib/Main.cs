@@ -1,10 +1,10 @@
-﻿using ChristmasLib.Internal;
+using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using MelonLoader;
 
 
 
-[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.2", "Pikk", "https://www.goorlandostore.com")]
+[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.3", "pikk and toboyo not tope though", "https://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
 
 namespace ChristmasLib
@@ -16,8 +16,8 @@ namespace ChristmasLib
         public override void OnApplicationEarlyStart()
         {
             PluginSettings.InitSettings();
-            // Utils.ConsoleUtils.Write("OnApplicationEarlyStart");
-            //incomplete Melonloader loading image changer
+            // sex
+            // i have so much sexxxxxxxxxxxxxxxxxxxxxxxxx
             if (PluginSettings.PluginCfg.CustomStartScreen)
             {
                 StartMenu.StartScreen.Start();
