@@ -174,9 +174,11 @@ namespace ChristmasLib.UI
                     SingleButton button = new SingleButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.EmojiButton,onClick);
                     break;
                 case ButtonType.ToggleButton:
+                    ConsoleUtils.Error("Toggle button isn't implemented yet, got: " + type);
+
                     break;
                 default:
-                    ConsoleUtils.Error("Invalid button type enum, please only use Single Button and Toggle Button, got: " + type.ToString());
+                    ConsoleUtils.Error("Invalid button type enum, please only use Single Button and Toggle Button, got: " + type);
                     break;
             }
             
