@@ -5,7 +5,7 @@ namespace ChristmasLib.Utils
 {
     public static class ConsoleUtils
     {
-        public static void Write(string input, string mod = "Christmas")
+        public static void Write<T>(T input, string mod = "Christmas")
         {
             Console.ResetColor();
             string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
@@ -17,7 +17,7 @@ namespace ChristmasLib.Utils
             Console.Write(input + "\n");
         }
         
-        public static void Warning(string input, string mod = "Christmas")
+        public static void Warning<T>(T input, string mod = "Christmas")
         {
             Console.ResetColor();
             string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
@@ -31,7 +31,7 @@ namespace ChristmasLib.Utils
 
         }
 
-        public static void Error(string input, string mod = "Christmas")
+        public static void Error<T>(T input, string mod = "Christmas")
         {
             Console.ResetColor();
             string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
@@ -43,7 +43,7 @@ namespace ChristmasLib.Utils
 
         }
 
-        public static void Debug(string input, string mod = "Christmas")
+        public static void Debug<T>(T input, string mod = "Christmas")
         {
             if (PluginSettings.PluginCfg.Debug)
             {

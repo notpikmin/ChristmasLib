@@ -2,8 +2,6 @@ using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using MelonLoader;
 
-
-
 [assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.3", "pikk and toboyo not tope though", "https://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
 
@@ -12,12 +10,10 @@ namespace ChristmasLib
     public class Main : MelonPlugin
     {
         
-       
         public override void OnApplicationEarlyStart()
         {
             PluginSettings.InitSettings();
-            // sex
-            // i have so much sexxxxxxxxxxxxxxxxxxxxxxxxx
+
             if (PluginSettings.PluginCfg.CustomStartScreen)
             {
                 StartMenu.StartScreen.Start();

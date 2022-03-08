@@ -10,7 +10,7 @@ namespace ChristmasLib.Config
     public static class ConfigUtils
     {
 
-        public static List<ChristmasConfig> Configs;
+        public static List<ChristmasConfig> Configs = new List<ChristmasConfig>();
 
         public static void UpdateConfigs()
         {

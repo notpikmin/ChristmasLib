@@ -323,10 +323,7 @@ namespace ChristmasLib.UI
 
         {
 
-
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
-
-
             ThisButton.name = name;
             MTab = ThisButton.GetComponent<MenuTab>();
             MTab.field_Public_String_0 = pageName;
