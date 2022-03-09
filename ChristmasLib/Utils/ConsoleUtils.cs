@@ -5,6 +5,7 @@ namespace ChristmasLib.Utils
 {
     public static class ConsoleUtils
     {
+        #region Logging
         public static void Write<T>(T input, string mod = "Christmas")
         {
             Console.ResetColor();
@@ -51,14 +52,17 @@ namespace ChristmasLib.Utils
                 string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write(time);
-                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(" [" + mod + "]: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
                 Console.Write(input + "\n");
                 Console.ResetColor();
 
             }
         }
-
+        #endregion
+        
         public static void Clear()
         {
             Console.Clear();    

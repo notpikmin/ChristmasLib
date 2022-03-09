@@ -5,8 +5,8 @@ namespace ChristmasLib.Input
 {
    public class InputManager
     {
-        public  List<Bind> Binds = new List<Bind>();
-        public     void Check()
+        public List<Bind> Binds = new List<Bind>();
+        public void Check()
         {
             if (Binds != null)
             {
@@ -32,6 +32,5 @@ namespace ChristmasLib.Input
                 }
             }
         }
-
     }
 }

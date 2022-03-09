@@ -22,8 +22,6 @@ namespace ChristmasLib.Utils
             }
             return rigid;
         }
-
-
-
+        
     }
 }

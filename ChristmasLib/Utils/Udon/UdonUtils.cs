@@ -7,6 +7,7 @@ namespace ChristmasLib.Utils.Udon
     public static class UdonUtils
     {
 
+        #region Getting
         public static UdonBehaviour[] GetUdonBehaviours()
         {
             return Object.FindObjectsOfType<UdonBehaviour>();
@@ -40,29 +41,7 @@ namespace ChristmasLib.Utils.Udon
 
             return events;
         }
-
-    //should work
-        public static IEnumerator TriggerAll(Dictionary<UdonBehaviour, List<string>> udons, float delay = 0.1f)
-        {
-            foreach(UdonBehaviour u in udons.Keys)
-            {
-
-                List<string> et;
-                udons.TryGetValue(u,out et);
-
-                foreach (string e in et)    
-                {
-                    yield return null;
-
-                    u.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, e);
-                }
-                yield return new WaitForSeconds(delay);
-
-            }
-
-            yield return null;
-        }
-
+        
         //fill an Dictionary with every udon GameObject with its events should be called on scene load so we can have a Dictionary of every Udon GameObject and its events
         public static Dictionary<UdonBehaviour, List<string>> FillDict(bool globalTriggerOnly = false)
         {
@@ -89,8 +68,36 @@ namespace ChristmasLib.Utils.Udon
             return eventGameObjects;
         }
 
+        #endregion
         
+        #region Trigger
+        //should work
+        public static IEnumerator TriggerAll(Dictionary<UdonBehaviour, List<string>> udons, float delay = 0.1f)
+        {
+            foreach (UdonBehaviour u in udons.Keys)
+            {
 
+                List<string> et;
+                udons.TryGetValue(u, out et);
+
+                if (et != null)
+                {
+                    foreach (string e in et)
+                    {
+                        yield return null;
+
+                        u.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, e);
+                    }
+
+                    yield return new WaitForSeconds(delay);
+
+                }
+            }
+
+            yield return null;
+        }
+
+      #endregion
 
     }
 }

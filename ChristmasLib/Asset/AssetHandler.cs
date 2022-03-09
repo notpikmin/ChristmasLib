@@ -9,7 +9,7 @@ namespace ChristmasLib.Asset
 
         public static AssetBundle ChristmasPresent;
 
-        
+        #region Texture
         public static Sprite LoadSprite(string path, string assetName)
         {
             if (ChristmasPresent == null) 
@@ -35,7 +35,9 @@ namespace ChristmasLib.Asset
             Object.DontDestroyOnLoad(abr);
             return abr;
         }
+        #endregion
         
+        #region AssetBundle
         public static void LoadAssetBundle(string path)
         {
             if (File.Exists(path))
@@ -51,6 +53,6 @@ namespace ChristmasLib.Asset
                 ConsoleUtils.Error("Couldnt find asset at: " + path);
             }
         }
-
+        #endregion
     }
 }

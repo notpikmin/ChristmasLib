@@ -26,6 +26,7 @@ namespace ChristmasLib.UI
     public static class ChristmasUI
     {
 
+        #region Parameters
         public const string MenuCameraPagePath = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Camera";
 
         public const string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
@@ -48,6 +49,10 @@ namespace ChristmasLib.UI
         public static Sprite Icon,InfoIcon;
         public static MenuStateController MenuState;
         public static GameObject EmojiButton,CameraButton;
+        
+        #endregion
+        
+        #region InitUI
         public static IEnumerator UICheck()
         {
             //Download asset bundle
@@ -61,7 +66,8 @@ namespace ChristmasLib.UI
             }
             InitUI();
         }
-
+        
+        
         private static void InitUI()
         {
             AssetHandler.LoadAssetBundle(BundlePath);
@@ -80,7 +86,20 @@ namespace ChristmasLib.UI
 
         }
 
+        #endregion
 
+        #region PageUtils
+        
+        public static void UpdateStatus()
+        {
+            
+            foreach (KeyValuePair<string,ChristmasUIPage> p in MenuPages)
+            {
+                int r = Random.RandomRangeInt(0, Statuses.Length-1);
+                p.Value.ChangePanelInfo(Statuses[r]);
+
+            }
+        }
         public static ChristmasUIPage GetPageByName(string key)
         {
             if (MenuPages.ContainsKey(key))
@@ -104,18 +123,7 @@ namespace ChristmasLib.UI
         }
         
         
-        public static void UpdateStatus()
-        {
-            
-            foreach (KeyValuePair<string,ChristmasUIPage> p in MenuPages)
-            {
-                int r = Random.RandomRangeInt(0, Statuses.Length-1);
-                p.Value.ChangePanelInfo(Statuses[r]);
-
-            }
-        }
-
-
+   
         public static MenuStateController GetMenuState()
         {
             if (MenuState == null)
@@ -133,10 +141,11 @@ namespace ChristmasLib.UI
             GetMenuState().Method_Public_Void_String_UIContext_Boolean_0(pageName);
         }
         
-        
+        #endregion
     }
     
-    
+    #region Pages
+
     public class ChristmasUIPage
     {
         public GameObject ThisPage;
@@ -236,8 +245,9 @@ namespace ChristmasLib.UI
         }
         
     }
+    #endregion
 
-    
+    #region Buttons
     
     public class BaseButton
     {
@@ -283,9 +293,9 @@ namespace ChristmasLib.UI
         }
     }
     
-    public class ToggleBtton : BaseButton
+    public class ToggleButton : BaseButton
     {
-        public ToggleBtton(string name, string tooltip, string text, Sprite icon, Transform parent,
+        public ToggleButton(string name, string tooltip, string text, Sprite icon, Transform parent,
             GameObject buttonToClone, Action onClick = null)
         {
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
@@ -322,7 +332,6 @@ namespace ChristmasLib.UI
         public TabButton(string name, string tooltip,string pageName, Sprite icon, Transform parent, GameObject buttonToClone)
 
         {
-
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
             ThisButton.name = name;
             MTab = ThisButton.GetComponent<MenuTab>();
@@ -333,5 +342,6 @@ namespace ChristmasLib.UI
         }
 
     }
+    #endregion
 
 }

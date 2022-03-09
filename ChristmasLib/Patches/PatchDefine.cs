@@ -13,20 +13,29 @@ namespace ChristmasLib.Patches
     public static class PatchDefine
     {
 
+        #region Photon
+        
         public static MethodInfo LoadBalanceRaiseEvent = typeof(LoadBalancingClient).GetMethod("Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0");
         public static MethodInfo LoadBalanceEvent = typeof(LoadBalancingClient).GetMethod("OnEvent");
 
         public static MethodInfo PhotonRaiseEvent = typeof(PhotonNetwork).GetMethod("Method_Public_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0");
         public static MethodInfo PhotonEvent = typeof(PhotonNetwork).GetMethod("Method_Private_Static_Void_EventData_PDM_0");
 
+        public static MethodInfo EnetEnqueue = typeof(EnetPeer).GetMethod("EnqueueOperation");
+
+        #endregion
+        
+        #region Event
         public static MethodInfo InternalTrigger = typeof(VRC_EventHandler).GetMethod("InternalTriggerEvent");
 
-        public static MethodInfo EnetEnqueue = typeof(EnetPeer).GetMethod("EnqueueOperation");
 
         public static MethodInfo EmojiEvent = typeof(VRC_EventDispatcherRFC).GetMethod("Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0");
 
         public static MethodInfo Emoji = typeof(VRCPlayer).GetMethod("SpawnEmojiRPC");
 
+        #endregion
+
+        #region JoinAndLeave
         //from Chromatic api 
         //JoinAndLeave[0] = join
         //JoinAndLeave[1] = leave
@@ -34,7 +43,10 @@ namespace ChristmasLib.Patches
          m.Name.Contains("Method_Public_Void_Player_") &&
          !m.Name.Contains("PDM")
         ).ToArray();
-
+        #endregion
+        
+        #region Avatar
+        
         //May break in future
         public static MethodInfo[] CalculatePerformance = typeof(AvatarPerformance).GetMethods().Where(m =>
         m.Name.Contains("_AvatarPerformanceStats_") &&
@@ -65,7 +77,12 @@ namespace ChristmasLib.Patches
 
         internal static MethodInfo Switchavamethod;
         
+        #endregion
+
+        #region Menu
+
         public static MethodInfo MenuOpen = typeof(MenuStateController).GetMethod("Method_Private_Void_0");
         
+        #endregion
     }
 }

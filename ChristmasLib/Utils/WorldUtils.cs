@@ -5,6 +5,8 @@ namespace ChristmasLib.Utils
 {
     public static class WorldUtils
     {
+        
+        #region WorldType
         public enum WorldType
         {
             Udon,
@@ -12,6 +14,20 @@ namespace ChristmasLib.Utils
             None
         }
 
+        //believe this is faster then below
+        public static WorldType GetWorldType()
+        {
+            VRC_SceneDescriptor sceneDescriptor = GetSceneDescriptor();
+
+            if (sceneDescriptor.gameObject.GetComponent<VRC.SDK3.Components.VRCSceneDescriptor>() != null)
+            {
+                return WorldType.Udon;
+            }
+            return sceneDescriptor.gameObject.GetComponent<VRCSDK2.VRC_SceneDescriptor>() != null ? WorldType.SDK2 : WorldType.None;
+
+        }
+        
+        /*
         public static WorldType GetWorldType()
         {
             if (UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>() != null)
@@ -20,13 +36,17 @@ namespace ChristmasLib.Utils
             }
             return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>() != null ? WorldType.SDK2 : WorldType.None;
         }
-
+        */
+        
+        //^ this could probably use this
         public static VRC_SceneDescriptor GetSceneDescriptor()
         {
             return VRC_SceneDescriptor.Instance;
         }
 
-
+        #endregion
+        
+        #region Instantiator
 
         //instantiate stuff might move somewhere else
         public static ObjectInstantiator GetObjectInstantiator()
@@ -45,5 +65,7 @@ namespace ChristmasLib.Utils
             return objs;
         }
 
+        #endregion
+        
     }
 }

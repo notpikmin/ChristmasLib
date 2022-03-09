@@ -26,6 +26,8 @@ namespace ChristmasLib.Config
             
         }
 
+        #region Loading
+
         public T Load<T>( T fileObject)
         {
             string path = _configPath + Name;
@@ -34,19 +36,19 @@ namespace ChristmasLib.Config
             T file;
             try
             {
-                string fstring = File.ReadAllText(path);
-                file = JsonConvert.DeserializeObject<T>(fstring);
+                string fileString = File.ReadAllText(path);
+                file = JsonConvert.DeserializeObject<T>(fileString);
             }
             catch
             {
                 ConsoleUtils.Error("Failed to load config");
-                file = default(T);
+                file = default;
             }
             
             return file;
         }
   
-        public void Init(System.Object o)
+        public void Init(Object o)
         {
             if (!ConfigUtils.Configs.Contains(this))
             {
@@ -72,18 +74,18 @@ namespace ChristmasLib.Config
             T file;
             try
             {
-                string fstring = File.ReadAllText(path);
-                file = JsonConvert.DeserializeObject<T>(fstring);
+                string fileString = File.ReadAllText(path);
+                file = JsonConvert.DeserializeObject<T>(fileString);
             }
             catch
             {
                 ConsoleUtils.Error("Failed to load config");
-                file = default(T);
+                file = default;
             }
             
             return file;
         }
-        public static void Init(System.Object o,string name)
+        public static void Init(Object o,string name)
         {
             
             Directory.CreateDirectory(_configPath);
@@ -96,6 +98,7 @@ namespace ChristmasLib.Config
           
         }
 
-
+        #endregion
+        
     }
 }

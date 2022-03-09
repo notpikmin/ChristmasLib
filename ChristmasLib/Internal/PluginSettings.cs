@@ -10,8 +10,6 @@ namespace ChristmasLib.Internal
         public bool LogDownloads = true;
         public bool ChristmasUI = true;
     }
-
-
     
     internal static class PluginSettings
     {

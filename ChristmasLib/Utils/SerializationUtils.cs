@@ -4,6 +4,8 @@ namespace ChristmasLib.Utils
 {
     public static class SerializationUtils
     {
+        
+        //Serialization utils no idea the original origin
         public static byte[] ToByteArray(Il2CppSystem.Object o)
         {
             if(o == null){return null;}

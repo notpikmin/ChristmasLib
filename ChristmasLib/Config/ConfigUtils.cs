@@ -11,7 +11,9 @@ namespace ChristmasLib.Config
     {
 
         public static List<ChristmasConfig> Configs = new List<ChristmasConfig>();
+        private static string _configPath = "Christmas/";
 
+        #region Updating
         public static void UpdateConfigs()
         {
             foreach (ChristmasConfig cfg in Configs)
@@ -20,45 +22,32 @@ namespace ChristmasLib.Config
                 cfg.OnUpdate();
             }
         } 
-        
-        private static string _configPath = "Christmas/";
+        #endregion
 
+        #region FileWatcher
         public static void FileSystemWatcher()
         {
              var watcher = new FileSystemWatcher(_configPath);
-             watcher.NotifyFilter = NotifyFilters.Attributes
-                                    | NotifyFilters.CreationTime
-                                    | NotifyFilters.DirectoryName
-                                    | NotifyFilters.FileName
-                                    | NotifyFilters.LastAccess
-                                    | NotifyFilters.LastWrite
-                                    | NotifyFilters.Security
-                                    | NotifyFilters.Size;
+             watcher.NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size;
+             watcher.Changed += (sender, e) =>
+             {
+                   if (e.ChangeType != WatcherChangeTypes.Changed) { return;}
+                   ConsoleUtils.Debug($"Changed: {e.FullPath}");
+                   UpdateConfigs();
+             };
+             watcher.Error += (sender, e) =>
+             {
+                 ConsoleUtils.Error(e.GetException().Message);
 
-             watcher.Changed += OnChanged;
-             watcher.Error += OnError;
-
+             };
              watcher.Filter = "*.json";
              watcher.IncludeSubdirectories = false;
              watcher.EnableRaisingEvents = true;
 
         }
+        #endregion
         
-        private static void OnChanged(object sender, FileSystemEventArgs e)
-        {
-            if (e.ChangeType != WatcherChangeTypes.Changed)
-            {
-                return;
-            }
-            ConsoleUtils.Debug($"Changed: {e.FullPath}");
-            UpdateConfigs();
-        }
-
-        private static void OnError(object sender, ErrorEventArgs e)
-        {
-            ConsoleUtils.Error(e.GetException().Message);
-        }
-        
+        #region Parsing
         public static T Parse<T>(string item)
         {
             return (T) Enum.Parse(typeof(T), item);
@@ -88,6 +77,6 @@ namespace ChristmasLib.Config
             ChristmasKey cKey = new ChristmasKey(keyCode, ctrl);
             return cKey;
         }
-
+        #endregion
     }
 }

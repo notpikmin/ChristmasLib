@@ -24,7 +24,7 @@ namespace ChristmasLib.Utils.SDK2
             vp.Next();
         }
 
-        public static IEnumerator AddVideo  (string url, SyncVideoPlayer vp)
+        public static IEnumerator AddVideo (string url, SyncVideoPlayer vp)
         {
             yield return AddVideo(url, vp.field_Private_VRC_SyncVideoPlayer_0);
             

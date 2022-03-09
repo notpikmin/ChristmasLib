@@ -6,6 +6,9 @@ namespace ChristmasLib.Utils
 {
     public static class EventUtils
     {
+
+        #region EventHandler
+        
         private static VRC_EventHandler _eventHandler;
 
         public static VRC_EventHandler GetEventHandler()
@@ -48,9 +51,17 @@ namespace ChristmasLib.Utils
             _eventHandler.TriggerEvent(@event, broadcastType);
             
         }
+        #endregion
 
-
-
+        #region NetworkingRPC
+        
+        public static void SendRPC(GameObject gameObject, string methodName, Il2CppSystem.Object[] array, RPC.Destination target = RPC.Destination.All)
+        {
+            Networking.RPC(target, gameObject, methodName, array);
+        }
+        #endregion
+        
+        #region Utils
         public static Il2CppSystem.Object[] StringListToObject(List<string> str)
         {
             
@@ -68,7 +79,10 @@ namespace ChristmasLib.Utils
             }
             return array;
         }
+
+        #endregion
         
+        #region Instantiate
         
         //no position overload
         public static GameObject Instantiate(string obj)
@@ -87,11 +101,9 @@ namespace ChristmasLib.Utils
             return Networking.Instantiate(VRC_EventHandler.VrcBroadcastType.Always, obj, pos,rot);
 
         }
-
-        public static void SendRPC(GameObject gameObject, string methodName, Il2CppSystem.Object[] array, RPC.Destination target = RPC.Destination.All)
-        {
-            Networking.RPC(target, gameObject, methodName, array);
-        }
+        #endregion
+        
+    
     }
 }
 
