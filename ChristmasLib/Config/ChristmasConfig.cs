@@ -12,7 +12,7 @@ namespace ChristmasLib.Config
         public Type ObjectType;
         public Action OnUpdate;
         
-        public ChristmasConfig(string name,object configObject,Action onUpdate=null)
+        public ChristmasConfig(string name,object configObject,Action onUpdate)
         {
             Name = name;
             if (onUpdate != null)
@@ -21,10 +21,7 @@ namespace ChristmasLib.Config
             }
             else
             {
-                OnUpdate = () =>
-                {
-                    Load(configObject);
-                };
+               ConsoleUtils.Warning(name + " has no onUpdate action.");
             }
             
         }
@@ -48,8 +45,7 @@ namespace ChristmasLib.Config
             
             return file;
         }
-
-
+  
         public void Init(System.Object o)
         {
             if (!ConfigUtils.Configs.Contains(this))
@@ -66,6 +62,39 @@ namespace ChristmasLib.Config
           
         }
 
+        
+        //static version needs a complete rewrite 
+        public static T Load<T>( T fileObject, string name)
+        {
+            string path = _configPath + name;
+         
+            Init(fileObject,name);
+            T file;
+            try
+            {
+                string fstring = File.ReadAllText(path);
+                file = JsonConvert.DeserializeObject<T>(fstring);
+            }
+            catch
+            {
+                ConsoleUtils.Error("Failed to load config");
+                file = default(T);
+            }
+            
+            return file;
+        }
+        public static void Init(System.Object o,string name)
+        {
+            
+            Directory.CreateDirectory(_configPath);
+            string path = _configPath + name;
+            if (!File.Exists(path))
+            {
+                string config = JsonConvert.SerializeObject(o, Formatting.Indented);
+                File.WriteAllText(path, config);
+            }
+          
+        }
 
 
     }

@@ -22,7 +22,13 @@ namespace ChristmasLib.Internal
         public static void InitSettings(){
         
             PluginCfg = new PluginConfig();
-            ChristmasConfig cfg = new ChristmasConfig(ConfigName,PluginCfg);
+            //ugly needs rewrite
+            ChristmasConfig cfg = new ChristmasConfig(ConfigName,PluginCfg,
+                () =>
+                {
+                    PluginCfg = ChristmasConfig.Load(PluginCfg, ConfigName);
+                    
+                });
             PluginCfg = cfg.Load(PluginCfg);
             ConfigUtils.FileSystemWatcher();            
         }

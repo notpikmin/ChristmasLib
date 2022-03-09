@@ -14,7 +14,7 @@ namespace ChristmasLib.Utils
 
         public static void LogHeapSize()
         {
-            ConsoleUtils.Write(Profiler.GetMonoUsedSizeLong());
+            ConsoleUtils.Write(Profiler.GetMonoUsedSizeLong() + "bytes in managed heap");
         }
         
         public static void TriggerGC()
