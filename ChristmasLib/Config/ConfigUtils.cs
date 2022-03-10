@@ -62,7 +62,7 @@ namespace ChristmasLib.Config
         {
             return (KeyCode) Enum.Parse(typeof(KeyCode), key);
         }
-
+        
         public static ChristmasKey ParseKey(string input)
         {
             string[] inputs = input.Split('|');
@@ -74,7 +74,7 @@ namespace ChristmasLib.Config
                 ctrl = inputs[1].ToLower().Contains("ctrl");
             }
 
-            ChristmasKey cKey = new ChristmasKey(keyCode, ctrl);
+            ChristmasKey cKey = new ChristmasKey(keyCode.ToString(), ctrl);
             return cKey;
         }
         #endregion
