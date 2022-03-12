@@ -31,6 +31,9 @@ namespace ChristmasLib.UI
 
         public const string CameraPageButton = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Camera";
 
+        public const string ToggleButtonPath =
+            "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo";
+        
         public const string EmojiQmButton =
             "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Emojis";
         
@@ -48,7 +51,7 @@ namespace ChristmasLib.UI
 
         public static Sprite Icon,InfoIcon;
         public static MenuStateController MenuState;
-        public static GameObject EmojiButton,CameraButton;
+        public static GameObject EmojiButton,CameraButton,QmToggleButton;
         
         #endregion
         
@@ -75,6 +78,7 @@ namespace ChristmasLib.UI
             InfoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
             CameraButton = GameObject.Find(CameraPageButton);
             EmojiButton = GameObject.Find(EmojiQmButton);
+            QmToggleButton = GameObject.Find(ToggleButtonPath);
             TabButton christmasTabButton = new TabButton("ChristmasPageButton", "Christmas","ChristmasPage", ChristmasUI.Icon,CameraButton.transform.parent,CameraButton);
             MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton,ChristmasUI.InfoIcon,"ChristmasGang");
             MenuPages.Add("ChristmasPage",MainPage);
@@ -83,6 +87,12 @@ namespace ChristmasLib.UI
            {
                ConsoleUtils.Write("Button clicked");
            });
+           move.AddButton(ButtonType.ToggleButton,"Toggle",null, (bool state) =>
+           {
+               ConsoleUtils.Write("Toggle = " + state);
+           });
+           
+           
 
         }
 
@@ -175,7 +185,7 @@ namespace ChristmasLib.UI
         }
 
 
-        public void AddButton(ButtonType type,string name, Action onClick=null)
+        public void AddButton(ButtonType type,string name, Action onClick=null,Action<bool> onToggle = null)
         {
             switch (type)
             {
@@ -183,8 +193,7 @@ namespace ChristmasLib.UI
                     SingleButton button = new SingleButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.EmojiButton,onClick);
                     break;
                 case ButtonType.ToggleButton:
-                    ConsoleUtils.Error("Toggle button isn't implemented yet, got: " + type);
-
+                    ToggleButton toggle = new ToggleButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.QmToggleButton,onToggle);
                     break;
                 default:
                     ConsoleUtils.Error("Invalid button type enum, please only use Single Button and Toggle Button, got: " + type);
@@ -255,7 +264,13 @@ namespace ChristmasLib.UI
         
         public void SetIcon(Sprite icon)
         {
-            ThisButton.transform.FindChild("Icon").GetComponent<Image>().overrideSprite = icon;
+            Transform iconTransform = ThisButton.transform.FindChild("Icon");
+            if (!iconTransform)
+            {
+                iconTransform = ThisButton.transform.FindChild("Icon_On");
+            }
+        iconTransform.GetComponent<Image>().overrideSprite = icon;
+
         }
         
         public void SetTooltip(string text)
@@ -296,7 +311,7 @@ namespace ChristmasLib.UI
     public class ToggleButton : BaseButton
     {
         public ToggleButton(string name, string tooltip, string text, Sprite icon, Transform parent,
-            GameObject buttonToClone, Action onClick = null)
+            GameObject buttonToClone, Action<bool> onToggle = null)
         {
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
             
@@ -304,9 +319,20 @@ namespace ChristmasLib.UI
             //MTab = ThisButton.GetComponent<MenuTab>();
             SetIcon(icon);
             SetTooltip(tooltip);
-            SetOnclick(onClick);
+            SetOnToggle(onToggle);
             SetText(text);
         }
+        
+        public void SetOnToggle(Action<bool> onToggle)
+        {
+            Toggle toggle = ThisButton.GetComponent<Toggle>();
+            ConsoleUtils.Debug(toggle);
+
+            toggle.onValueChanged.AddListener(onToggle);
+        }
+
+      
+        
     }
     public class QMButton : BaseButton
     {
