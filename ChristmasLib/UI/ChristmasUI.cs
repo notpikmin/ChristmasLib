@@ -53,6 +53,8 @@ namespace ChristmasLib.UI
         public static MenuStateController MenuState;
         public static GameObject EmojiButton,CameraButton,QmToggleButton;
         
+        public static List<Action> OnUiInitActions = new List<Action>();
+        
         #endregion
         
         #region InitUI
@@ -74,26 +76,44 @@ namespace ChristmasLib.UI
         private static void InitUI()
         {
             AssetHandler.LoadAssetBundle(BundlePath);
-            Icon = AssetHandler.LoadSprite(BundlePath,"BabaIcon");
-            InfoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
-            CameraButton = GameObject.Find(CameraPageButton);
-            EmojiButton = GameObject.Find(EmojiQmButton);
-            QmToggleButton = GameObject.Find(ToggleButtonPath);
-            TabButton christmasTabButton = new TabButton("ChristmasPageButton", "Christmas","ChristmasPage", ChristmasUI.Icon,CameraButton.transform.parent,CameraButton);
-            MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton,ChristmasUI.InfoIcon,"ChristmasGang");
-            MenuPages.Add("ChristmasPage",MainPage);
-            ChristmasUIPage move = AddPageByName("Movement");
-           move.AddButton(ButtonType.SingleButton,"fart", () =>
-           {
-               ConsoleUtils.Write("Button clicked");
-           });
-           move.AddButton(ButtonType.ToggleButton,"Toggle",null, (bool state) =>
-           {
-               ConsoleUtils.Write("Toggle = " + state);
-           });
+          Icon = AssetHandler.LoadSprite(BundlePath,"BabaIcon"); 
+          InfoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
+          CameraButton = GameObject.Find(CameraPageButton);
+          EmojiButton = GameObject.Find(EmojiQmButton);
+          QmToggleButton = GameObject.Find(ToggleButtonPath);
+          TabButton christmasTabButton = new TabButton("ChristmasPageButton", "Christmas","ChristmasPage", Icon,CameraButton.transform.parent,CameraButton);
+          MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton,InfoIcon,"ChristmasGang");
+          MenuPages.Add("ChristmasPage",MainPage);
+          
+          OnUiInitActions.Add(CreateButtons);
            
+          foreach(Action uiAction in OnUiInitActions){
+              try
+              {
+                  uiAction.Invoke();
+              }
+              catch (Exception e)
+              {
+                  ConsoleUtils.Error("Error invoking UIInitAction: " + e.Message);
+              }
+          }
+        
            
 
+        }
+
+        private static void CreateButtons()
+        {
+            ChristmasUIPage move = AddPageByName("Movement");
+            move.AddButton(ButtonType.SingleButton,"fart", () =>
+            { 
+                ConsoleUtils.Write("Button clicked");
+            });
+            move.AddButton(ButtonType.ToggleButton,"Toggle",null, (state) =>
+            {
+                ConsoleUtils.Write("Toggle = " + state);
+            });
+            
         }
 
         #endregion
@@ -185,21 +205,23 @@ namespace ChristmasLib.UI
         }
 
 
-        public void AddButton(ButtonType type,string name, Action onClick=null,Action<bool> onToggle = null)
+        public BaseButton AddButton(ButtonType type,string name, Action onClick=null,Action<bool> onToggle = null)
         {
             switch (type)
             {
                 case ButtonType.SingleButton:
                     SingleButton button = new SingleButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.EmojiButton,onClick);
-                    break;
+                    return button;
+                    
                 case ButtonType.ToggleButton:
                     ToggleButton toggle = new ToggleButton("Christmas"+name+"Button", "Christmas",name ,ChristmasUI.Icon,ButtonTransform,ChristmasUI.QmToggleButton,onToggle);
-                    break;
+                    return toggle;
                 default:
                     ConsoleUtils.Error("Invalid button type enum, please only use Single Button and Toggle Button, got: " + type);
                     break;
             }
-            
+
+            return null;
         }   
         
         public void SetHeader(string text)
@@ -326,7 +348,6 @@ namespace ChristmasLib.UI
         public void SetOnToggle(Action<bool> onToggle)
         {
             Toggle toggle = ThisButton.GetComponent<Toggle>();
-            ConsoleUtils.Debug(toggle);
 
             toggle.onValueChanged.AddListener(onToggle);
         }
