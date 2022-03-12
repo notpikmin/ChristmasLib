@@ -289,7 +289,7 @@ namespace ChristmasLib.UI
             SetIcon(icon);
             SetTooltip(tooltip);
             SetOnclick(onClick);
-            SetText(text);
+            SetText(text);  
         }
     }
     
