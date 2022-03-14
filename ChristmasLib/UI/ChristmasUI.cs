@@ -79,7 +79,7 @@ namespace ChristmasLib.UI
 
 
         private static void InitUI()
-        {
+        {   
             AssetHandler.LoadAssetBundle(BundlePath);
             Icon = AssetHandler.LoadSprite(BundlePath, "BabaIcon");
             InfoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
@@ -88,19 +88,15 @@ namespace ChristmasLib.UI
             QmToggleButton = GameObject.Find(ToggleButtonPath);
             SelectUserButtonParent = GameObject.Find(UserPagePath);
 
-            var christmasTabButton = new TabButton("ChristmasPageButton", "Christmas", "ChristmasPage", Icon,
+            var christmasTabButton = new TabButton("ChristmasPageButton", "Christmas", "ChristmasPage", Icon, 
                 CameraButton.transform.parent, CameraButton);
             MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton, InfoIcon, "ChristmasGang");
             MenuPages.Add("ChristmasPage", MainPage);
-            /*
-            var christmasSelectButton = new TabButton("ChristmasUserPageButton", "Christmas", "ChristmasUserPage", Icon,
-                SelectUserButtonParent.transform, CameraButton);
-            //UserPage = new ChristmasUIPage("ChristmasPage", christmasTabButton, InfoIcon, "ChristmasGang");
-
-            */
-            UserPage = AddPageByName("UserPage",SelectUserButtonParent.transform);
-            
-            OnUiInitActions.Add(CreateButtons);
+           
+            UserPage = AddPageByName("User POOP",SelectUserButtonParent.transform);
+                
+            //test code
+            //OnUiInitActions.Add(CreateButtons);
 
             foreach (var uiAction in OnUiInitActions)
                 try
@@ -112,15 +108,16 @@ namespace ChristmasLib.UI
                     ConsoleUtils.Error("Error invoking UIInitAction: " + e.Message);
                 }
         }
-
+        //testing menu code
+        /*
         private static void CreateButtons()
         {
-            var move = AddPageByName("Movement");
-            move.AddButton(ButtonType.SingleButton, "fart", () => { ConsoleUtils.Write("Button clicked"); });
-            move.AddButton(ButtonType.ToggleButton, "Toggle", null,
+            var test = AddPageByName("Test");
+            test.AddButton(ButtonType.SingleButton, "test", () => { ConsoleUtils.Write("Button clicked"); });
+            test.AddButton(ButtonType.ToggleButton, "Toggle", null,
                 (state) => { ConsoleUtils.Write("Toggle = " + state); });
         }
-
+        */
         #endregion
 
         #region PageUtils

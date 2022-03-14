@@ -2,7 +2,7 @@ using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.3", "Pikk and Toboyo not Tope though", "https://www.goorlandostore.com")]
+[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.3a", "Pikk and Toboyo not Tope though", "https://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
 
 namespace ChristmasLib
