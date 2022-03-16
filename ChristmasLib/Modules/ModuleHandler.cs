@@ -42,18 +42,34 @@ namespace ChristmasLib.Modules
             }
             EnabledMods.Clear();
         }
+        
+        
 
-        public  void UpdateAll()
+        public void UpdateAll()
         {
             foreach(ChristmasModule m in EnabledMods)
             {
                 m.Update();
             }
         }
+        
+        public void CallOnLeave()
+        {
+            foreach(ChristmasModule m in EnabledMods)
+            {
+                m.OnLeaveWorld();
+            }
+        }
 
+        public void CallOnJoin()
+        {
+            foreach(ChristmasModule m in EnabledMods)
+            {
+                m.OnJoinWorld();
+            }
+        }
 
-
-        public  List<string> GetEnabledNames()
+        public List<string> GetEnabledNames()
         {
             List<string> names = new List<string>();
             foreach (ChristmasModule m in EnabledMods)

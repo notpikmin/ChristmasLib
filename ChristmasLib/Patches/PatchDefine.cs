@@ -26,16 +26,21 @@ namespace ChristmasLib.Patches
         #endregion
         
         #region Event
-        public static MethodInfo InternalTrigger = typeof(VRC_EventHandler).GetMethod("InternalTriggerEvent");
+        public static MethodInfo InternalTrigger = typeof(VRC_EventHandler).GetMethod(nameof(VRC_EventHandler.InternalTriggerEvent));
 
 
         public static MethodInfo EmojiEvent = typeof(VRC_EventDispatcherRFC).GetMethod("Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0");
 
-        public static MethodInfo Emoji = typeof(VRCPlayer).GetMethod("SpawnEmojiRPC");
+        public static MethodInfo Emoji = typeof(VRCPlayer).GetMethod(nameof(VRCPlayer.SpawnEmojiRPC));
 
         #endregion
 
         #region JoinAndLeave
+        
+        public static MethodInfo LocalLeave = typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom));
+        public static MethodInfo LocalJoin = typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom));
+
+        
         //from Chromatic api 
         //JoinAndLeave[0] = join
         //JoinAndLeave[1] = leave

@@ -24,6 +24,16 @@ namespace ChristmasLib.Modules
 
         }
 
+        public virtual void OnLeaveWorld()
+        {
+            
+        }
+
+        public virtual void OnJoinWorld()
+        {
+            
+        }
+        
         public virtual void UiInit()
         {
 

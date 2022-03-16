@@ -9,7 +9,7 @@ namespace ChristmasLib.Internal
         public static void InitPatches()
         {
             PatchUtils.DoPatch("MenuPatch", PatchDefine.MenuOpen, null, PatchUtils.GetMethod(typeof(PatchManager), "OnMenu"));
-            
+
         }
 
         private static void OnMenu(MenuStateController __instance)
@@ -20,6 +20,6 @@ namespace ChristmasLib.Internal
             }
         }
         
-        
+    
     }
 }
