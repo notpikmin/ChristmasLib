@@ -6,9 +6,7 @@ namespace ChristmasLib.Xref
 {
     public static class XrefUtils
     {
-            
-
-        private static bool XRefScanForMethod(this MethodBase methodBase, string methodName = null, string reflectedType = null)
+        public static bool XRefScanForMethod(this MethodBase methodBase, string methodName = null, string reflectedType = null)
         {
             foreach (XrefInstance instance in XrefScanner.XrefScan(methodBase))
             {
