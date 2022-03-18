@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using ChristmasLib.Utils;
 using UnhollowerRuntimeLib.XrefScans;
 
 namespace ChristmasLib.Xref
@@ -18,7 +19,7 @@ namespace ChristmasLib.Xref
 
                 if (!string.IsNullOrEmpty(methodName))
                     found = !string.IsNullOrEmpty(resolved.Name) && resolved.Name.IndexOf(methodName, StringComparison.OrdinalIgnoreCase) >= 0;
-
+                
                 if (!string.IsNullOrEmpty(reflectedType))
                     found = !string.IsNullOrEmpty(resolved.ReflectedType?.Name) && resolved.ReflectedType.Name.IndexOf(
                                 reflectedType,

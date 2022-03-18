@@ -23,7 +23,7 @@ namespace ChristmasLib.Modules
         {
 
         }
-
+    
         public virtual void OnLeaveWorld()
         {
             
@@ -38,35 +38,6 @@ namespace ChristmasLib.Modules
         {
 
         }
-        public virtual void OnSceneWasInitialized()
-        {
-
-        }
-        public virtual void OnSceneWasLoaded()
-        {
-
-        }
-        public virtual void OnLateUpdate()
-        {
-
-        }
-        public virtual void OnFixedUpdate()
-        {
-
-        }
-
-        public virtual void OnGUI()
-        {
-
-        }
-
-        public virtual void OnPreferencesLoaded()
-        {
-
-        }
-        public virtual void OnPreferencesSaved()
-        {
-
-        }
+      
     }
 }

@@ -6,26 +6,23 @@ namespace ChristmasLib.Modules
     {
         public List<ChristmasModule> EnabledMods = new List<ChristmasModule>();
 
-        public bool AddMod(ChristmasModule mod)
+        public void AddMod(ChristmasModule mod)
         {
-            if (CheckIfMod(mod))
-            {
+            
+            //if (CheckIfMod(mod))
+            //{
                 EnabledMods.Add(mod);
                 mod.OnEnable();
-                return true;
-            }
-            return false;
+           // }
         }
 
-        public bool RemoveMod(ChristmasModule mod)
+        public void RemoveMod(ChristmasModule mod)
         {
-            if (CheckIfMod(mod))
-            {
+            //if (CheckIfMod(mod))
+            //{
                 mod.OnDisable();
                 EnabledMods.Remove(mod);
-                return true;
-            }
-            return false;
+            //}
         }
 
         public bool CheckIfMod(ChristmasModule mod)
