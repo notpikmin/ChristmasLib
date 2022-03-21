@@ -33,6 +33,11 @@ namespace ChristmasLib.Modules
         {
             
         }
+
+        public virtual void OnSettingsLoad()
+        {
+            
+        }
         
         public virtual void UiInit()
         {

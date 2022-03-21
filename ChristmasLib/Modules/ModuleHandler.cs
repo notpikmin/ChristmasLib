@@ -50,6 +50,15 @@ namespace ChristmasLib.Modules
             }
         }
         
+        
+        public void LoadAllSettings()
+        {
+            foreach(ChristmasModule m in EnabledMods)
+            {
+                m.OnSettingsLoad();
+            }
+        }
+        
         public void CallOnLeave()
         {
             foreach(ChristmasModule m in EnabledMods)
