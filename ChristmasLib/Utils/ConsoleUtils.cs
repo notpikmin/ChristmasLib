@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using ChristmasLib.Internal;
 
 namespace ChristmasLib.Utils
@@ -61,6 +62,34 @@ namespace ChristmasLib.Utils
 
             }
         }
+        
+        //adapted from https://stackoverflow.com/a/60492990
+        //input a string with [] surrounding colored elements with non surrounding elements being the alt color
+        public static void WriteColor(string message ,ConsoleColor color,ConsoleColor altColor)
+        {
+            var pieces = Regex.Split(message, @"(\[[^\]]*\])");
+
+            foreach (var t in pieces)
+            {
+                string piece = t;
+        
+                if (piece.StartsWith("[") && piece.EndsWith("]"))
+                {
+                    Console.ForegroundColor = color;
+                    piece = piece.Substring(1,piece.Length-2);          
+                }
+                else
+                {
+                    Console.ForegroundColor = altColor;
+                }
+
+                Console.Write(piece);
+                Console.ResetColor();
+            }
+    
+            Console.WriteLine();
+        }
+        
         #endregion
         
         public static void Clear()

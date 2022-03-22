@@ -93,10 +93,11 @@ namespace ChristmasLib.UI
             MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton, InfoIcon, "ChristmasGang");
             MenuPages.Add("ChristmasPage", MainPage);
            
-            UserPage = AddPageByName("User POOP",SelectUserButtonParent.transform);
+            UserPage = AddPageByName("Christmas User",SelectUserButtonParent.transform);
                 
             //test code
-            //OnUiInitActions.Add(CreateButtons);
+            //
+            
 
             foreach (var uiAction in OnUiInitActions)
                 try
