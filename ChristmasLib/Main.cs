@@ -2,8 +2,15 @@ using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.5", "Pikk", "https://www.goorlandostore.com")]
+[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", MelonBuildInfo.Version, MelonBuildInfo.Author, "https://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
+
+public static class MelonBuildInfo
+{
+    public const string Version = "1.0.5";
+    public const string Author = "Pikk";
+}
+
 
 namespace ChristmasLib
 {
