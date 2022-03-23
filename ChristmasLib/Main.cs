@@ -2,7 +2,7 @@ using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.4", "Pikk", "https://www.goorlandostore.com")]
+[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", "1.0.4a", "Pikk", "https://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
 
 namespace ChristmasLib
@@ -25,7 +25,7 @@ namespace ChristmasLib
         {
             //UI.ChristmasUI.InitUI();
 
-        }
+        }   
 
         public override void OnApplicationLateStart()
         { 

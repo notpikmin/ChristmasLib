@@ -9,7 +9,7 @@ namespace ChristmasLib.StartMenu
     {
         public static void Start()
         {
-            string path = Path.Combine(MelonUtils.UserDataDirectory, "MelonStartScreen");
+            string path = Path.Combine(MelonUtils.UserDataDirectory, "MelonStartScreen/Themes/Default");
             if (!File.Exists(Path.Combine(path,"Logo.png")))
             {
                 DownloadHandler.DownloadFileSync("https://files.catbox.moe/pav8tr.png",Path.Combine(path,"Logo.png"));
