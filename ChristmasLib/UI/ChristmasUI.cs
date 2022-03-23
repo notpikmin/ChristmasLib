@@ -343,9 +343,17 @@ namespace ChristmasLib.UI
 
         public void SetOnToggle(Action<bool> onToggle)
         {
-            var toggle = ThisButton.GetComponent<Toggle>();
+            GetToggle().onValueChanged.AddListener(onToggle);
+        }
 
-            toggle.onValueChanged.AddListener(onToggle);
+        public void SetToggleState(bool toggle)
+        {
+            GetToggle().isOn = toggle;
+        }
+        
+        public Toggle GetToggle()
+        {
+            return ThisButton.GetComponent<Toggle>();
         }
     }
 

@@ -38,11 +38,11 @@ namespace ChristmasLib.Utils
             p.transform.rotation = r;
         }
 
-        public static void RotateTowards(Transform target, Transform obj)
+        public static void RotateTowards(Transform target, Transform obj, float speed = 2.0f)
         {
             Vector3 targetDirection = target.position - obj.position;
 
-            float singleStep = 2.0f * Time.deltaTime;
+            float singleStep = speed * Time.deltaTime;
 
             Vector3 newDirection = Vector3.RotateTowards(obj.forward, targetDirection, singleStep, 0.0f);
 
@@ -50,9 +50,9 @@ namespace ChristmasLib.Utils
             obj.rotation = Quaternion.LookRotation(newDirection);
         }
 
-        public static void RotateTowards(GameObject target, GameObject obj)
+        public static void RotateTowards(GameObject target, GameObject obj, float speed = 2.0f)
         {
-            RotateTowards(target.transform, obj.transform);
+            RotateTowards(target.transform, obj.transform, speed);
         }
 
         #endregion

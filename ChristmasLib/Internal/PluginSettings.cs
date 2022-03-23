@@ -11,7 +11,7 @@ namespace ChristmasLib.Internal
         public bool ChristmasUI = true;
     }
     
-    internal static class PluginSettings
+    public static class PluginSettings
     {
         private static readonly string ConfigName = "ChristmasLibConfig.json";
 
