@@ -53,7 +53,8 @@ namespace ChristmasLib.Utils
         {
             return UnityEngine.Object.FindObjectOfType<ObjectInstantiator>();
         }
-
+        
+        //might cause crash
         public static List<string> GetInstantiableObjects()
         {
             ObjectInstantiator objI = GetObjectInstantiator();

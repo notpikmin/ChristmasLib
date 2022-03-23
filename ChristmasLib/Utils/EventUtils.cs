@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using ChristmasLib.Wrappers;
+using Il2CppSystem;
 using UnityEngine;
 using VRC.SDKBase;
+using Object = UnityEngine.Object;
 
 namespace ChristmasLib.Utils
 {
@@ -70,11 +73,10 @@ namespace ChristmasLib.Utils
             foreach(string s in str)
             {
                 //I dont know if this is needed but I've seen it done in most places.
-                Il2CppSystem.String il2S;
-                il2S = s;
+                String il2S = s;
                 //array[c] = s; maybe
                 array[c] = il2S;
-                //seems retarded    
+                //seems dumb    
                 c++;
             }
             return array;
@@ -103,6 +105,28 @@ namespace ChristmasLib.Utils
         }
         #endregion
         
+        #region Ownership
+        
+        public static void SetOwnership(GameObject gObj){
+            Networking.SetOwner(PlayerWrappers.GetLocalPlayerApi(), gObj);
+        }
+
+        public static VRCPlayerApi GetOwner(GameObject gObj)
+        {
+            return Networking.GetOwner(gObj);
+        }
+
+        public static void SetOwnerIfNot(GameObject gObj)
+        {
+            if (GetOwner(gObj) != PlayerWrappers.GetLocalPlayerApi())
+            {
+                SetOwnership(gObj);
+            }
+            
+        }
+        
+        
+        #endregion
     
     }
 }

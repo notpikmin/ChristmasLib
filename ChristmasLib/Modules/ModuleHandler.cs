@@ -4,8 +4,11 @@ namespace ChristmasLib.Modules
 {
     public class ModuleHandler
     {
+        
+        //TODO Convert to Dictionary<string,ChristmasModule> will break old modules unless make an overload method for adding mods
         public List<ChristmasModule> EnabledMods = new List<ChristmasModule>();
 
+        //TODO Fix CheckIfMod always returning true
         public void AddMod(ChristmasModule mod)
         {
             
