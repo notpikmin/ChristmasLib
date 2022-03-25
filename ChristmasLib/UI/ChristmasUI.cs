@@ -18,9 +18,7 @@ namespace ChristmasLib.UI
     public enum ButtonType
     {
         SingleButton,
-        ToggleButton,
-        TabButton,
-        QMButton
+        ToggleButton
     }
 
     public static class ChristmasUI
@@ -41,7 +39,7 @@ namespace ChristmasLib.UI
 
         public const string UserPagePath =
             "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions";
-        
+
         //private const string AssetBundleUrl = "https://i.uguu.se/ZtHWLzdV";
         private const string AssetBundleUrl = "https://files.catbox.moe/7nhh2n";
 
@@ -50,7 +48,7 @@ namespace ChristmasLib.UI
         public static string Status = "Farting";
         public static string[] Statuses;
 
-        public static ChristmasUIPage MainPage,UserPage;
+        public static ChristmasUIPage MainPage, UserPage;
 
         //public static ChristmasUIPage MovementPage;
         public static Dictionary<string, ChristmasUIPage> MenuPages = new Dictionary<string, ChristmasUIPage>();
@@ -79,7 +77,7 @@ namespace ChristmasLib.UI
 
 
         private static void InitUI()
-        {   
+        {
             AssetHandler.LoadAssetBundle(BundlePath);
             Icon = AssetHandler.LoadSprite(BundlePath, "BabaIcon");
             InfoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
@@ -88,16 +86,12 @@ namespace ChristmasLib.UI
             QmToggleButton = GameObject.Find(ToggleButtonPath);
             SelectUserButtonParent = GameObject.Find(UserPagePath);
 
-            var christmasTabButton = new TabButton("ChristmasPageButton", "Christmas", "ChristmasPage", Icon, 
+            var christmasTabButton = new TabButton("ChristmasPageButton", "Christmas", "ChristmasPage", Icon,
                 CameraButton.transform.parent, CameraButton);
-            MainPage = new ChristmasUIPage("ChristmasPage", christmasTabButton, InfoIcon, "ChristmasGang");
+            MainPage = new ChristmasUIPage("ChristmasPage", InfoIcon, "ChristmasGang");
             MenuPages.Add("ChristmasPage", MainPage);
-           
-            UserPage = AddPageByName("Christmas User",SelectUserButtonParent.transform);
-                
-            //test code
-            //
-            
+
+            UserPage = AddPageByName("Christmas User", SelectUserButtonParent.transform);
 
             foreach (var uiAction in OnUiInitActions)
                 try
@@ -109,16 +103,7 @@ namespace ChristmasLib.UI
                     ConsoleUtils.Error("Error invoking UIInitAction: " + e.Message);
                 }
         }
-        //testing menu code
-        /*
-        private static void CreateButtons()
-        {
-            var test = AddPageByName("Test");
-            test.AddButton(ButtonType.SingleButton, "test", () => { ConsoleUtils.Write("Button clicked"); });
-            test.AddButton(ButtonType.ToggleButton, "Toggle", null,
-                (state) => { ConsoleUtils.Write("Toggle = " + state); });
-        }
-        */
+
         #endregion
 
         #region PageUtils
@@ -141,24 +126,36 @@ namespace ChristmasLib.UI
 
         public static ChristmasUIPage AddPageByName(string key, Transform buttonParent = null)
         {
-            Transform parent = buttonParent;
+            var parent = buttonParent;
 
             if (!MenuPages.ContainsKey(key))
             {
-                if (buttonParent == null)
-                {
-                    parent = MainPage.ButtonTransform;
-                    
-                }
+                if (buttonParent == null) parent = MainPage.ButtonTransform;
 
                 var button = new QMButton("Christmas" + key + "Button", "Christmas", key, Icon,
                     parent, EmojiButton, () => SetPage("Christmas" + key + "Page"));
-                var page = new ChristmasUIPage("Christmas" + key + "Page", button, InfoIcon, key);
+                var page = new ChristmasUIPage("Christmas" + key + "Page", InfoIcon, key);
                 MenuPages.Add(key, page);
                 MenuButtons.Add(key, button);
             }
 
             return MenuPages[key];
+        }
+
+        public static void DestroyPageByName(string key)
+        {
+            var christmasKey = "Christmas" + key + "Page";
+
+            var page = GetPageByName(christmasKey);
+            if (page != null)
+            {
+                MenuPages.Remove(christmasKey);
+                Object.Destroy(page.ThisPage);
+            }
+            else
+            {
+                ConsoleUtils.Error("Failed to remove page: " + christmasKey);
+            }
         }
 
 
@@ -187,7 +184,7 @@ namespace ChristmasLib.UI
         public UIPage ChristmasUiPage;
         public Transform ButtonTransform;
 
-        public ChristmasUIPage(string name, BaseButton button, Sprite infoIcon, string header)
+        public ChristmasUIPage(string name, Sprite infoIcon, string header)
         {
             var foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
             ThisPage = Object.Instantiate(foundPage, foundPage.transform.parent, true);
@@ -200,7 +197,7 @@ namespace ChristmasLib.UI
             ChristmasUiPage.field_Protected_MenuStateController_0 = ChristmasUI.GetMenuState();
             ChristmasUiPage.field_Private_List_1_UIPage_0.Add(ChristmasUiPage);
             ChristmasUiPage.field_Public_Boolean_0 = true;
-            AddToDictionary(button, name);
+            AddToDictionary(name);
             ChangePanelInfo(ChristmasUI.Status, infoIcon);
             SetHeader(header);
             RemoveButtons();
@@ -241,7 +238,7 @@ namespace ChristmasLib.UI
             }
         }
 
-        public void AddToDictionary(BaseButton tabButton, string pageName)
+        public void AddToDictionary(string pageName)
         {
             var menuStateController = ChristmasUI.GetMenuState();
             menuStateController.field_Private_Dictionary_2_String_UIPage_0.Add(pageName, ChristmasUiPage);
@@ -249,19 +246,13 @@ namespace ChristmasLib.UI
                 .Append(ChristmasUiPage).ToArray();
         }
 
-        //not working
         public void RemoveButtons()
         {
-            //  Transform buttonParent = GameObject.Find().transform;
-            //Transform parent = thisPage.transform.Find(ChristmasUI.MenuCameraPageButtonsParent);
             Button[] buttons = ThisPage.GetComponentsInChildren<Button>(true);
-            foreach (var b in buttons)
-                Object.Destroy(b.gameObject);
-            //b.gameObject.SetActive(false);
+            foreach (var b in buttons) Object.Destroy(b.gameObject);
+
             Toggle[] toggles = ThisPage.GetComponentsInChildren<Toggle>(true);
-            foreach (var t in toggles)
-                Object.Destroy(t.gameObject);
-            //t.gameObject.SetActive(false);
+            foreach (var t in toggles) Object.Destroy(t.gameObject);
         }
 
         public void ChangePanelInfo(string text, Sprite sprite = null)
@@ -318,7 +309,6 @@ namespace ChristmasLib.UI
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
 
             ThisButton.name = name;
-            //MTab = ThisButton.GetComponent<MenuTab>();
             SetIcon(icon);
             SetTooltip(tooltip);
             SetOnclick(onClick);
@@ -334,7 +324,6 @@ namespace ChristmasLib.UI
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
 
             ThisButton.name = name;
-            //MTab = ThisButton.GetComponent<MenuTab>();
             SetIcon(icon);
             SetTooltip(tooltip);
             SetOnToggle(onToggle);
@@ -350,7 +339,7 @@ namespace ChristmasLib.UI
         {
             GetToggle().isOn = toggle;
         }
-        
+
         public Toggle GetToggle()
         {
             return ThisButton.GetComponent<Toggle>();
@@ -390,6 +379,6 @@ namespace ChristmasLib.UI
             SetTooltip(tooltip);
         }
     }
-    
+
     #endregion
 }

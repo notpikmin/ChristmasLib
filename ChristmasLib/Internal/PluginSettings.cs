@@ -21,7 +21,7 @@ namespace ChristmasLib.Internal
         
             PluginCfg = new PluginConfig();
             //ugly needs rewrite
-            ChristmasConfig cfg = new ChristmasConfig(ConfigName,PluginCfg,
+            ChristmasConfig cfg = new ChristmasConfig(ConfigName,
                 () =>
                 {
                     PluginCfg = ChristmasConfig.Load(PluginCfg, ConfigName);

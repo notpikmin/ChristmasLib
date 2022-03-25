@@ -12,6 +12,7 @@ namespace ChristmasLib.Internal
 
         }
 
+        // ReSharper disable once InconsistentNaming stupid harmony 
         private static void OnMenu(MenuStateController __instance)
         {
             if (__instance.name.Contains("Canvas"))

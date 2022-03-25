@@ -12,7 +12,7 @@ namespace ChristmasLib.Config
         public Type ObjectType;
         public Action OnUpdate;
         
-        public ChristmasConfig(string name,object configObject,Action onUpdate)
+        public ChristmasConfig(string name,Action onUpdate)
         {
             Name = name;
             if (onUpdate != null)
