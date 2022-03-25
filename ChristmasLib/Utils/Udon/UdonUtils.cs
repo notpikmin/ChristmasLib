@@ -33,7 +33,7 @@ namespace ChristmasLib.Utils.Udon
 
             foreach (Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> e in ub._eventTable)
             {
-                if (e.key.StartsWith("_"))
+                if (!e.key.StartsWith("_"))
                 {
                     events.Add(e.key);
                 }

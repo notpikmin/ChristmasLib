@@ -390,6 +390,6 @@ namespace ChristmasLib.UI
             SetTooltip(tooltip);
         }
     }
-
+    
     #endregion
 }
