@@ -108,6 +108,10 @@ namespace ChristmasLib.UI
 
         #region PageUtils
 
+        /// <summary>
+        /// Updates the info panel of every MenuPage with a new status
+        /// </summary>
+        //could optimize by making it a non static method inside each page and trigger it on page access instead of every page every time the menu is opened
         public static void UpdateStatus()
         {
             foreach (var p in MenuPages)
@@ -117,6 +121,13 @@ namespace ChristmasLib.UI
             }
         }
 
+        /// <summary>
+        /// Get ChristmasUIPage from the MenuPages Dictionary.
+        /// Keep in mind that they are in the dictionary in the format:"Christmas" + key + "Page"
+        /// so you will need to prefix the key with "Christmas" and suffix it with "Page"
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>Returns the Value or null if it isnt found</returns>
         public static ChristmasUIPage GetPageByName(string key)
         {
             if (MenuPages.ContainsKey(key)) return MenuPages[key];
@@ -206,6 +217,11 @@ namespace ChristmasLib.UI
         }
 
 
+        /// <summary>
+        /// Add a button to the parent page
+        /// Button Type being SingleButton or ToggleButton
+        /// </summary>
+        /// <returns>Will return null if their is an error</returns>
         public BaseButton AddButton(ButtonType type, string name, Action onClick = null, Action<bool> onToggle = null)
         {
             switch (type)
