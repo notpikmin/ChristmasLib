@@ -65,8 +65,15 @@ namespace ChristmasLib.Utils
         
         //adapted from https://stackoverflow.com/a/60492990
         //input a string with [] surrounding colored elements with non surrounding elements being the alt color
-        public static void WriteColor(string message ,ConsoleColor color,ConsoleColor altColor)
+        public static void WriteColor(string message, ConsoleColor color, ConsoleColor altColor, string mod = "Christmas")
         {
+            
+            Console.ResetColor();
+            string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(time);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" [" + mod + "]: ");
             var pieces = Regex.Split(message, @"(\[[^\]]*\])");
 
             foreach (var t in pieces)
