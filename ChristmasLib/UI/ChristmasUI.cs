@@ -127,7 +127,7 @@ namespace ChristmasLib.UI
         /// so you will need to prefix the key with "Christmas" and suffix it with "Page"
         /// </summary>
         /// <param name="key"></param>
-        /// <returns>Returns the Value or null if it isnt found</returns>
+        /// <returns>Returns the Value or null if it isn't found</returns>
         public static ChristmasUIPage GetPageByName(string key)
         {
             if (MenuPages.ContainsKey(key)) return MenuPages[key];
