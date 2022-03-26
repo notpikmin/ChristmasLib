@@ -135,17 +135,23 @@ namespace ChristmasLib.UI
             return null;
         }
 
-        public static ChristmasUIPage AddPageByName(string key, Transform buttonParent = null)
+        public static ChristmasUIPage AddPageByName(string key, Transform buttonParent = null,
+            Action qmButtonAction = null)
         {
             var parent = buttonParent;
 
             if (!MenuPages.ContainsKey(key))
             {
                 if (buttonParent == null) parent = MainPage.ButtonTransform;
+                QMButton button = new QMButton("Christmas" + key + "Button", "Christmas", key, Icon,
+                    parent, EmojiButton, () =>
+                    {
+                        SetPage("Christmas" + key + "Page");
+                        qmButtonAction?.Invoke();
+                    });
 
-                var button = new QMButton("Christmas" + key + "Button", "Christmas", key, Icon,
-                    parent, EmojiButton, () => SetPage("Christmas" + key + "Page"));
-                var page = new ChristmasUIPage("Christmas" + key + "Page", InfoIcon, key);
+
+                var page = new ChristmasUIPage("Christmas" + key + "Page", InfoIcon, key, button);
                 MenuPages.Add(key, page);
                 MenuButtons.Add(key, button);
             }
@@ -194,12 +200,13 @@ namespace ChristmasLib.UI
         public GameObject ThisPage;
         public UIPage ChristmasUiPage;
         public Transform ButtonTransform;
+        public QMButton QMButton;
 
-        public ChristmasUIPage(string name, Sprite infoIcon, string header)
+        public ChristmasUIPage(string name, Sprite infoIcon, string header, QMButton qmButton = null)
         {
             var foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
             ThisPage = Object.Instantiate(foundPage, foundPage.transform.parent, true);
-
+            QMButton = qmButton;
             ThisPage.name = name;
 
             Object.Destroy(ThisPage.GetComponent<VRCUiPage>());

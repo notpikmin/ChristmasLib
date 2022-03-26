@@ -10,8 +10,7 @@ namespace ChristmasLib.Patches
 
         public static Patch DoPatch(string id, MethodInfo target, HarmonyMethod prefix = null, HarmonyMethod postfix = null)
         {
-            Patch p = new Patch(id, target, prefix, postfix);
-            return p;
+            return new Patch(id, target, prefix, postfix);;
         }
 
         public static HarmonyMethod GetMethod(Type classType, string method, BindingFlags bfStatic = BindingFlags.Static, BindingFlags bfPublic = BindingFlags.NonPublic)
