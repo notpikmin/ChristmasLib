@@ -123,8 +123,6 @@ namespace ChristmasLib.UI
 
         /// <summary>
         /// Get ChristmasUIPage from the MenuPages Dictionary.
-        /// Keep in mind that they are in the dictionary in the format:"Christmas" + key + "Page"
-        /// so you will need to prefix the key with "Christmas" and suffix it with "Page"
         /// </summary>
         /// <param name="key"></param>
         /// <returns>Returns the Value or null if it isn't found</returns>
@@ -143,6 +141,7 @@ namespace ChristmasLib.UI
             if (!MenuPages.ContainsKey(key))
             {
                 if (buttonParent == null) parent = MainPage.ButtonTransform;
+                
                 QMButton button = new QMButton("Christmas" + key + "Button", "Christmas", key, Icon,
                     parent, EmojiButton, () =>
                     {
@@ -161,7 +160,7 @@ namespace ChristmasLib.UI
 
         public static void DestroyPageByName(string key)
         {
-            var christmasKey = "Christmas" + key + "Page";
+            var christmasKey = key;
 
             var page = GetPageByName(christmasKey);
             if (page != null)
