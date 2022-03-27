@@ -27,24 +27,28 @@ namespace ChristmasLib.StartMenu
 
         public static void Start()
         {
-            string path = Path.Combine(MelonUtils.UserDataDirectory, "MelonStartScreen/Themes/Default");
-            if (!File.Exists(Path.Combine(path, "Logo.png")))
+            try
             {
-                DownloadHandler.DownloadFileSync("https://files.catbox.moe/pav8tr.png", Path.Combine(path, "Logo.png"));
-                
-                /*DownloadHandler.DownloadFileSync("https://files.catbox.moe/7aguwz.cfg",
-                    Path.Combine(path, "VersionText.cfg"));
-                    */
-            }
+                string path = Path.Combine(MelonUtils.UserDataDirectory, "MelonStartScreen/Themes/Default");
+                if (!File.Exists(Path.Combine(path, "Logo.png")))
+                {
+                    DownloadHandler.DownloadFileSync("https://files.catbox.moe/pav8tr.png",
+                        Path.Combine(path, "Logo.png"));
+                }
 
-            
-            if (!File.ReadLines(Path.Combine(path, "VersionText.cfg")).Any(line => line.Contains(MelonBuildInfo.Version)))
+
+                if (!File.ReadLines(Path.Combine(path, "VersionText.cfg"))
+                        .Any(line => line.Contains(MelonBuildInfo.Version)))
+                {
+                    ConsoleUtils.Debug("Setting custom VersionText.cfg");
+                    File.WriteAllText(Path.Combine(path, "VersionText.cfg"), _fileString);
+
+                }
+            }
+            catch (Exception e)
             {
-                ConsoleUtils.Debug("Setting custom VersionText.cfg");
-                File.WriteAllText(Path.Combine(path, "VersionText.cfg"), _fileString);
-
+                ConsoleUtils.Error("Error customizing start screen: " + e.Message);
             }
-          
         }
     }
 }
