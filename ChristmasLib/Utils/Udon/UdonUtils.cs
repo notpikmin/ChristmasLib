@@ -61,12 +61,19 @@ namespace ChristmasLib.Utils.Udon
                     events = GetEventNames(u);
 
                 }
-                eventGameObjects.Add(u, events);
+
+                //dont add the behaviour if it contains no events
+                if (events.Count > 0)
+                {
+                    eventGameObjects.Add(u, events);
+                }
 
             }
 
             return eventGameObjects;
         }
+        
+        
 
         #endregion
         
