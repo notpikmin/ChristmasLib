@@ -68,7 +68,7 @@ namespace ChristmasLib.UI
         {
             //Download asset bundle
             DownloadHandler.DownloadFileSync(AssetBundleUrl, BundlePath);
-            MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang"));
+            MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang/raw"));
 
             //Wait for QuickMenu to be instantiated
             while (GameObject.Find(CameraPageButton) == null) yield return null;

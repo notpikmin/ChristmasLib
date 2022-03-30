@@ -28,8 +28,7 @@ namespace ChristmasLib.Asset
                     ConsoleUtils.Write("Downloading: " + url);
                 }
 
-                string statusString = www.downloadHandler.text.Split('☃')[1];
-                string[] status = statusString.Split(',');
+                string[] status = www.downloadHandler.text.Split(',');
                 ChristmasUI.Statuses = status;
             }
         }
