@@ -42,8 +42,9 @@ namespace ChristmasLib.Patches
 
         
         //from Chromatic api 
-        //JoinAndLeave[0] = join
-        //JoinAndLeave[1] = leave
+        //JoinAndLeave[1] = join
+        //JoinAndLeave[0] = leave
+        //changes often :/
         public static MethodInfo[] JoinAndLeave = typeof(NetworkManager).GetMethods().Where(m =>
          m.Name.Contains("Method_Public_Void_Player_") &&
          !m.Name.Contains("PDM")
