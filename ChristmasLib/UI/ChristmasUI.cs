@@ -250,7 +250,7 @@ namespace ChristmasLib.UI
             return null;
         }
 
-        public void SetHeader(string text)
+        public ChristmasUIPage SetHeader(string text)
         {
             var header = ThisPage.transform.FindChild("Header_Camera").gameObject;
             if (header != null)
@@ -258,6 +258,8 @@ namespace ChristmasLib.UI
                 var textMesh = header.GetComponentInChildren<TextMeshProUGUI>();
                 textMesh.text = text;
             }
+
+            return this;
         }
 
         public void AddToDictionary(string pageName)
@@ -268,16 +270,17 @@ namespace ChristmasLib.UI
                 .Append(ChristmasUiPage).ToArray();
         }
 
-        public void RemoveButtons()
+        public ChristmasUIPage RemoveButtons()
         {
             Button[] buttons = ThisPage.GetComponentsInChildren<Button>(true);
             foreach (var b in buttons) Object.Destroy(b.gameObject);
 
             Toggle[] toggles = ThisPage.GetComponentsInChildren<Toggle>(true);
             foreach (var t in toggles) Object.Destroy(t.gameObject);
+            return this;
         }
 
-        public void ChangePanelInfo(string text, Sprite sprite = null)
+        public ChristmasUIPage ChangePanelInfo(string text, Sprite sprite = null)
         {
             var panelInfo = ThisPage.transform.FindChild("Panel_Info").gameObject;
             var textMesh = panelInfo.GetComponentInChildren<TextMeshProUGUI>();
@@ -287,6 +290,15 @@ namespace ChristmasLib.UI
                 var rawImage = panelInfo.GetComponentInChildren<RawImage>();
                 rawImage.m_Texture = sprite.texture;
             }
+
+            return this;
+        }
+        
+        public ChristmasUIPage SetPanelInfoState(bool state)
+        {
+            var panelInfo = ThisPage.transform.FindChild("Panel_Info").gameObject;
+            panelInfo.SetActive(state);
+            return this;
         }
     }
 
