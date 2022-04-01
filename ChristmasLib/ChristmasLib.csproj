@@ -531,10 +531,12 @@
     <Compile Include="Wrappers\PlayerWrappers.cs" />
     <Compile Include="Wrappers\UiWrappers.cs" />
     <Compile Include="Wrappers\WorldWrappers.cs" />
-    <Compile Include="Xref\XrefUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Xref" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
