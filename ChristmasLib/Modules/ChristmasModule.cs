@@ -2,13 +2,13 @@
 {
     public class ChristmasModule
     {
-        private static string ModuleName = "Base Module";
+        public string ModuleName = "Base Module";
 
-        public virtual string GetName()
+        ChristmasModule(string name = "Base Module")
         {
-            return ModuleName;
+            ModuleName = name;
         }
-
+        
         public virtual void OnEnable()
         {
         }

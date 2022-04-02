@@ -7,7 +7,7 @@ using MelonLoader;
 
 public static class MelonBuildInfo
 {
-    public const string Version = "1.0.7";
+    public const string Version = "1.0.8";
     public const string Author = "Christmas Gang";
 }
 

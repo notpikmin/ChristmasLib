@@ -10,25 +10,25 @@ namespace ChristmasLib.Modules
         //TODO Fix CheckIfMod always returning true
         public void AddMod(ChristmasModule mod)
         {
-            //if (CheckIfMod(mod))
-            //{
-            EnabledMods.Add(mod);
-            mod.OnEnable();
-            // }
+            if (!CheckIfMod(mod))
+            {
+                EnabledMods.Add(mod);
+                mod.OnEnable();
+            }
         }
 
         public void RemoveMod(ChristmasModule mod)
         {
-            //if (CheckIfMod(mod))
-            //{
-            mod.OnDisable();
-            EnabledMods.Remove(mod);
-            //}
+            if (CheckIfMod(mod))
+            {
+                mod.OnDisable();
+                EnabledMods.Remove(mod);
+            }
         }
 
         public bool CheckIfMod(ChristmasModule mod)
         {
-            return EnabledMods.Contains(mod);
+            return GetEnabledNames().Contains(mod.ModuleName);
         }
 
         public void ClearMods()
@@ -80,7 +80,7 @@ namespace ChristmasLib.Modules
             List<string> names = new List<string>();
             foreach (ChristmasModule m in EnabledMods)
             {
-                names.Add(m.GetName());
+                names.Add(m.ModuleName);
             }
 
             return names;
