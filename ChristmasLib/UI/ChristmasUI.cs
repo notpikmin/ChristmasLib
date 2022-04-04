@@ -96,7 +96,7 @@ namespace ChristmasLib.UI
             foreach (var uiAction in OnUiInitActions)
                 try
                 {
-                    uiAction.Invoke();
+                    uiAction?.Invoke();
                 }
                 catch (Exception e)
                 {

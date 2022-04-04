@@ -14,7 +14,7 @@ namespace ChristmasLib.Utils
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(time);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(" [" + mod + "]: ");
+            Console.Write(" [" + mod + "] ");
             Console.ResetColor();
             Console.Write(input + "\n");
         }
@@ -26,7 +26,7 @@ namespace ChristmasLib.Utils
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(time);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(" [" + mod + "]: ");
+            Console.Write(" [" + mod + "] ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(input + "\n");
             Console.ResetColor();
@@ -39,7 +39,7 @@ namespace ChristmasLib.Utils
             string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(time);
-            Console.Write(" [" + mod + "]: ");
+            Console.Write(" [" + mod + "] ");
             Console.Write(input + "\n");
             Console.ResetColor();
 
@@ -54,7 +54,7 @@ namespace ChristmasLib.Utils
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write(time);
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(" [" + mod + "]: ");
+                Console.Write(" [" + mod + "] ");
                 Console.ForegroundColor = ConsoleColor.Cyan;
 
                 Console.Write(input + "\n");
@@ -73,7 +73,7 @@ namespace ChristmasLib.Utils
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(time);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(" [" + mod + "]: ");
+            Console.Write(" [" + mod + "] ");
             var pieces = Regex.Split(message, @"(\[[^\]]*\])");
 
             foreach (var t in pieces)

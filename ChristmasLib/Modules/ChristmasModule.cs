@@ -2,9 +2,9 @@
 {
     public class ChristmasModule
     {
-        public string ModuleName = "Base Module";
+        public string ModuleName;
 
-        ChristmasModule(string name = "Base Module")
+        public ChristmasModule(string name = "Base Module")
         {
             ModuleName = name;
         }
