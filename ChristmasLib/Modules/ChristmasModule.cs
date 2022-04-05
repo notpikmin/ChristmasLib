@@ -36,5 +36,9 @@
         public virtual void UiInit()
         {
         }
+
+        public virtual void OnGUI()
+        {
+        }
     }
 }

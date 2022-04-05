@@ -75,13 +75,13 @@ namespace ChristmasLib.Extensions
 
         #region Player
 
+        public static ApiAvatar GetAPIAvatar(this Player player){ return player.prop_ApiAvatar_0;}
         public static APIUser GetAPIUser(this Player player) { return player.prop_APIUser_0; }
         public static VRCPlayer GetVrcPlayer(this Player player) { return player.prop_VRCPlayer_0; }
         public static VRCPlayerApi GetVrcPlayerApi(this Player player) { return player.prop_VRCPlayerApi_0; }
 
         public static PlayerNet GetPlayerNet(this Player player) { return player.prop_PlayerNet_0; }
-
-
+        
         public static Photon.Realtime.Player GetPhotonPlayer(this Player player) { return player.prop_Player_1; }
 
         public static bool IsQuest(this Player player) { return player.GetAPIUser().IsOnMobile; }
