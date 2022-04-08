@@ -86,12 +86,12 @@ namespace ChristmasLib.UI
             QmToggleButton = GameObject.Find(ToggleButtonPath);
             SelectUserButtonParent = GameObject.Find(UserPagePath);
 
-            var christmasTabButton = new TabButton("ChristmasPageButton", "Christmas", "ChristmasPage", Icon,
+            var christmasTabButton = new TabButton("ChristmasPageButton", "Christmas Client Menu", "ChristmasPage", Icon,
                 CameraButton.transform.parent, CameraButton);
             MainPage = new ChristmasUIPage("ChristmasPage", InfoIcon, "ChristmasGang");
             MenuPages.Add("ChristmasPage", MainPage);
 
-            UserPage = AddPageByName("Christmas User", SelectUserButtonParent.transform);
+            UserPage = AddPageByName("Christmas User","Targeted User menu" ,SelectUserButtonParent.transform);
 
             foreach (var uiAction in OnUiInitActions)
                 try
@@ -133,7 +133,7 @@ namespace ChristmasLib.UI
             return null;
         }
 
-        public static ChristmasUIPage AddPageByName(string key, Transform buttonParent = null,
+        public static ChristmasUIPage AddPageByName(string key, string tooltip = "Christmas", Transform buttonParent = null,
             Action qmButtonAction = null)
         {
             var parent = buttonParent;
@@ -142,7 +142,7 @@ namespace ChristmasLib.UI
             {
                 if (buttonParent == null) parent = MainPage.ButtonTransform;
                 
-                QMButton button = new QMButton("Christmas" + key + "Button", "Christmas", key, Icon,
+                QMButton button = new QMButton("Christmas" + key + "Button", tooltip, key, Icon,
                     parent, EmojiButton, () =>
                     {
                         SetPage("Christmas" + key + "Page");
@@ -228,17 +228,17 @@ namespace ChristmasLib.UI
         /// Button Type being SingleButton or ToggleButton
         /// </summary>
         /// <returns>Will return null if their is an error</returns>
-        public BaseButton AddButton(ButtonType type, string name, Action onClick = null, Action<bool> onToggle = null)
+        public BaseButton AddButton(ButtonType type, string name, string tooltip = "Christmas", Action onClick = null, Action<bool> onToggle = null)
         {
             switch (type)
             {
                 case ButtonType.SingleButton:
-                    var button = new SingleButton("Christmas" + name + "Button", "Christmas", name, ChristmasUI.Icon,
+                    var button = new SingleButton("Christmas" + name + "Button", tooltip, name, ChristmasUI.Icon,
                         ButtonTransform, ChristmasUI.EmojiButton, onClick);
                     return button;
 
                 case ButtonType.ToggleButton:
-                    var toggle = new ToggleButton("Christmas" + name + "Button", "Christmas", name, ChristmasUI.Icon,
+                    var toggle = new ToggleButton("Christmas" + name + "Button", tooltip, name, ChristmasUI.Icon,
                         ButtonTransform, ChristmasUI.QmToggleButton, onToggle);
                     return toggle;
                 default:
