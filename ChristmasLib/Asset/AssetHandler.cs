@@ -1,5 +1,6 @@
 ﻿using ChristmasLib.Utils;
 using System.IO;
+using Il2CppSystem.Collections.Generic;
 using UnityEngine;
 
 namespace ChristmasLib.Asset
@@ -7,33 +8,64 @@ namespace ChristmasLib.Asset
     public static class AssetHandler
     {
 
-        public static AssetBundle ChristmasPresent;
+        public static List<AssetBundle> ChristmasPresent = new List<AssetBundle>();
 
-        #region Texture
-        public static Sprite LoadSprite(string path, string assetName)
+        
+
+        public static T LoadAnything<T>(string path, string assetName) where T : Object
         {
             if (ChristmasPresent == null) 
             {
                 LoadAssetBundle(path);
             }
-            
-           
-            Sprite abr = ChristmasPresent.LoadAsset<Sprite>(assetName);
-            Object.DontDestroyOnLoad(abr);
-            return abr;
+
+            foreach (var a in ChristmasPresent)
+            {
+                T abr = a.LoadAsset<T>(assetName);
+                if (abr != null)
+                {
+                    Object.DontDestroyOnLoad(abr);
+                    return abr;
+                }
+            }
+            return null;
+        }
+
+        #region Texture
+        public static Sprite LoadSprite(string path, string assetName)
+        {
+           if (ChristmasPresent == null) 
+           {
+               LoadAssetBundle(path);
+           }
+           foreach (var a in ChristmasPresent)
+           {
+               Sprite abr = a.LoadAsset<Sprite>(assetName);
+               if (abr != null)
+               {
+                   Object.DontDestroyOnLoad(abr);
+                   return abr;
+               }
+           }
+           return null;
         }
 
         public static Texture2D LoadTexture(string path, string assetName)
         {
             if (ChristmasPresent == null) 
             {
-                 LoadAssetBundle(path);
+                LoadAssetBundle(path);
             }
-            
-           
-            Texture2D abr = ChristmasPresent.LoadAsset<Texture2D>(assetName);
-            Object.DontDestroyOnLoad(abr);
-            return abr;
+            foreach (var a in ChristmasPresent)
+            {
+                Texture2D abr = a.LoadAsset<Texture2D>(assetName);
+                if (abr != null)
+                {
+                    Object.DontDestroyOnLoad(abr);
+                    return abr;
+                }
+            }
+            return null;
         }
         #endregion
         
@@ -46,11 +78,11 @@ namespace ChristmasLib.Asset
 
                 AssetBundle ab = assetBundleCreateRequest.assetBundle;
 
-                ChristmasPresent = ab;
+                ChristmasPresent.Add(ab);
             }
             else
             {
-                ConsoleUtils.Error("Couldnt find asset at: " + path);
+                ConsoleUtils.Error("Couldn't find asset at: " + path);
             }
         }
         #endregion
