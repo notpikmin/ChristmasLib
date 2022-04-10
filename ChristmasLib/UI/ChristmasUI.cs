@@ -82,7 +82,7 @@ namespace ChristmasLib.UI
             Icon = AssetHandler.LoadSprite(BundlePath, "BabaIcon");
             InfoIcon = AssetHandler.LoadSprite(BundlePath, "Baba");
             CameraButton = GameObject.Find(CameraPageButton);
-            EmojiButton = GameObject.Find(EmojiQmButton);
+            EmojiButton = GameObject.Find(EmojiQmButton);   
             QmToggleButton = GameObject.Find(ToggleButtonPath);
             SelectUserButtonParent = GameObject.Find(UserPagePath);
 

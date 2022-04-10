@@ -27,7 +27,7 @@ namespace ChristmasLib.Internal
                     PluginCfg = ChristmasConfig.Load(PluginCfg, ConfigName);
                     
                 });
-            PluginCfg = cfg.Load(PluginCfg);
+            PluginCfg = ChristmasConfig.Load(PluginCfg, ConfigName,true);
             ConfigUtils.FileSystemWatcher();            
         }
                 

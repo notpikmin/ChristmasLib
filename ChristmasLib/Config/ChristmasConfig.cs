@@ -28,7 +28,7 @@ namespace ChristmasLib.Config
 
         #region Loading
 
-        public T Load<T>( T fileObject)
+        public T Load<T>( T fileObject, bool writeFiles = false)
         {
             string path = _configPath + Name;
             ObjectType = fileObject.GetType();
@@ -38,6 +38,11 @@ namespace ChristmasLib.Config
             {
                 string fileString = File.ReadAllText(path);
                 file = JsonConvert.DeserializeObject<T>(fileString);
+                if (writeFiles)
+                {
+                    string config = JsonConvert.SerializeObject(file, Formatting.Indented);
+                    File.WriteAllText(path, config);
+                }
             }
             catch
             {
@@ -59,14 +64,14 @@ namespace ChristmasLib.Config
             if (!File.Exists(path))
             {
                 string config = JsonConvert.SerializeObject(o, Formatting.Indented);
-                File.WriteAllText(path, config);
+                File.WriteAllText(path, config); 
             }
           
         }
 
         
         //static version needs a complete rewrite 
-        public static T Load<T>( T fileObject, string name)
+        public static T Load<T>( T fileObject, string name, bool writeFiles = false)
         {
             string path = _configPath + name;
          
@@ -76,6 +81,11 @@ namespace ChristmasLib.Config
             {
                 string fileString = File.ReadAllText(path);
                 file = JsonConvert.DeserializeObject<T>(fileString);
+                if (writeFiles)
+                {
+                    string config = JsonConvert.SerializeObject(file, Formatting.Indented);
+                    File.WriteAllText(path, config);
+                }
             }
             catch
             {
