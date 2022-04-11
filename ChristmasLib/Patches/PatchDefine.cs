@@ -56,7 +56,8 @@ namespace ChristmasLib.Patches
         //May break in future
         public static MethodInfo[] CalculatePerformance = typeof(AvatarPerformance).GetMethods().Where(m =>
         m.Name.Contains("_AvatarPerformanceStats_") &&
-        m.Name.StartsWith("Method")
+        m.Name.StartsWith("Method") && 
+        m.Name.Contains("String")
        ).ToArray();
 
 

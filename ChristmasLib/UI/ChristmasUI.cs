@@ -228,7 +228,7 @@ namespace ChristmasLib.UI
         /// Button Type being SingleButton or ToggleButton
         /// </summary>
         /// <returns>Will return null if their is an error</returns>
-        public BaseButton AddButton(ButtonType type, string name, string tooltip = "Christmas", Action onClick = null, Action<bool> onToggle = null)
+        public BaseButton AddButton(ButtonType type, string name, string tooltip = "Christmas", Action onClick = null, Action<bool> onToggle = null, bool defaultState = false)
         {
             switch (type)
             {
@@ -239,7 +239,7 @@ namespace ChristmasLib.UI
 
                 case ButtonType.ToggleButton:
                     var toggle = new ToggleButton("Christmas" + name + "Button", tooltip, name, ChristmasUI.Icon,
-                        ButtonTransform, ChristmasUI.QmToggleButton, onToggle);
+                        ButtonTransform, ChristmasUI.QmToggleButton, onToggle, defaultState);
                     return toggle;
                 default:
                     ConsoleUtils.Error(
@@ -353,7 +353,7 @@ namespace ChristmasLib.UI
     public class ToggleButton : BaseButton
     {
         public ToggleButton(string name, string tooltip, string text, Sprite icon, Transform parent,
-            GameObject buttonToClone, Action<bool> onToggle = null)
+            GameObject buttonToClone, Action<bool> onToggle = null, bool defaultState = false)
         {
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
 
@@ -362,6 +362,19 @@ namespace ChristmasLib.UI
             SetTooltip(tooltip);
             SetOnToggle(onToggle);
             SetText(text);
+            if (defaultState)
+            {
+                MelonCoroutines.Start(DelayToggleState());
+            }
+        }
+
+        private IEnumerator DelayToggleState()
+        {
+
+            yield return new WaitForSeconds(3);
+            
+            SetToggleState(true);
+
         }
 
         public void SetOnToggle(Action<bool> onToggle)
@@ -372,6 +385,8 @@ namespace ChristmasLib.UI
         public void SetToggleState(bool toggle)
         {
             GetToggle().isOn = toggle;
+            GetToggle().Set(toggle,true);
+            
         }
 
         public Toggle GetToggle()
