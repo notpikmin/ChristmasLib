@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 
 namespace ChristmasLib.Utils
 {
@@ -14,7 +15,11 @@ namespace ChristmasLib.Utils
         {
             GUIUtility.systemCopyBuffer = str;
         }
-
+        
+        public static void OpenExternal(string path)
+        {
+            Process.Start(path);
+        }
 
     }
 }
