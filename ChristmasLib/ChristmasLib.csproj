@@ -522,6 +522,7 @@
     <Compile Include="Utils\GarbageUtils.cs" />
     <Compile Include="Utils\MovementUtils.cs" />
     <Compile Include="Utils\EventUtils.cs" />
+    <Compile Include="Utils\Photon\PhotonUtils.cs" />
     <Compile Include="Utils\PickupUtils.cs" />
     <Compile Include="Utils\SDK2\SDK2VideoUtils.cs" />
     <Compile Include="Utils\SerializationUtils.cs" />

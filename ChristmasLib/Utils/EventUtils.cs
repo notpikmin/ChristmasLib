@@ -51,7 +51,7 @@ namespace ChristmasLib.Utils
             {
                 _eventHandler = GetEventHandler();
             }
-            _eventHandler.TriggerEvent(@event, broadcastType);
+            _eventHandler.TriggerEvent(@event, broadcastType,Networking.LocalPlayer.playerId,0f);
             
         }
         #endregion
