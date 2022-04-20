@@ -11,8 +11,7 @@ namespace ChristmasLib.Config
     {
 
         public static List<ChristmasConfig> Configs = new List<ChristmasConfig>();
-        //TODO have a static const somewhere so it isn't defined in ChristmasConfig.cs and here
-        private const string ConfigPath = "Christmas/";
+        public const string ConfigPath = "Christmas/";
 
         #region Updating
         public static void UpdateConfigs()

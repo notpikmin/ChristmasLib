@@ -46,9 +46,7 @@ namespace ChristmasLib.UI
         private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
 
         
-        // TODO Move status stuff out of this class
-        public static string Status = "Farting";
-        public static string[] Statuses;
+
 
         
         // TODO move non api util things out into its own class
@@ -72,7 +70,7 @@ namespace ChristmasLib.UI
         {
             //Download asset bundle
             DownloadHandler.DownloadFileSync(AssetBundleUrl, BundlePath);
-            MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang/raw"));
+            MelonCoroutines.Start(StatusHandler.DownloadStatus());
             //TODO optimize to a patch maybe?
             //Wait for QuickMenu to be instantiated
             while (GameObject.Find(CameraPageButton) == null) yield return null;
@@ -104,8 +102,7 @@ namespace ChristmasLib.UI
                 }
                 catch (Exception e)
                 {
-                    // TODO Add more logging info
-                    ConsoleUtils.Error("Error invoking UIInitAction: " + e.Message);
+                    ConsoleUtils.Error("Error invoking UIInitAction: " + e);
                 }
         }
 
@@ -121,8 +118,8 @@ namespace ChristmasLib.UI
         {
             foreach (var p in MenuPages)
             {
-                var r = Random.RandomRangeInt(0, Statuses.Length - 1);
-                p.Value.ChangePanelInfo(Statuses[r]);
+                var r = Random.RandomRangeInt(0, StatusHandler.Statuses.Length - 1);
+                p.Value.ChangePanelInfo(StatusHandler.Statuses[r]);
             }
         }
 
@@ -199,19 +196,19 @@ namespace ChristmasLib.UI
 
     #region Pages
 
-    //TODO Implement scrolling
     public class ChristmasUIPage
     {
         public GameObject ThisPage;
         public UIPage ChristmasUiPage;
         public Transform ButtonTransform;
         public QMButton QMButton;
-        //TODO add page-key property
+        public string Name;
         public ChristmasUIPage(string name, Sprite infoIcon, string header, QMButton qmButton = null)
         {
             var foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
             ThisPage = Object.Instantiate(foundPage, foundPage.transform.parent, true);
             QMButton = qmButton;
+            Name = name;
             ThisPage.name = name;
 
             Object.Destroy(ThisPage.GetComponent<VRCUiPage>());
@@ -221,7 +218,7 @@ namespace ChristmasLib.UI
             ChristmasUiPage.field_Private_List_1_UIPage_0.Add(ChristmasUiPage);
             ChristmasUiPage.field_Public_Boolean_0 = true;
             AddToDictionary(name);
-            ChangePanelInfo(ChristmasUI.Status, infoIcon);
+            ChangePanelInfo(StatusHandler.Status, infoIcon);
             SetHeader(header);
             RemoveButtons();
             ButtonTransform = ThisPage
@@ -230,7 +227,6 @@ namespace ChristmasLib.UI
 
 
         
-        //TODO add overrides for other button types
         /// <summary>
         /// Add a button to the parent page
         /// Button Type being SingleButton or ToggleButton

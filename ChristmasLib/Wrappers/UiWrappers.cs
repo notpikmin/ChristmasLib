@@ -38,7 +38,22 @@ namespace ChristmasLib.Wrappers
 
         public static UIManagerImpl GetUIManagerImpl() { return UIManagerImpl.prop_UIManagerImpl_0; }
 
+        #endregion
+        #region Select
 
+        public static GameObject GetSelectedPlayerUSpeakerGameObject()
+        {
+            var player = GetSelectedVrcPlayer();
+            var o = player.GetVRC_Player()._USpeaker.gameObject;
+            return o;
+        }
+
+        public static GameObject GetSelectedPlayerGameObject()
+        {
+            var player = GetSelectedVrcPlayer();
+            var o = player.GetVRC_Player().gameObject;
+            return o;
+        }
 
    
         public static MenuController GetMenuController()

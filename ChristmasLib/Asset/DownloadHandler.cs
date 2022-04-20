@@ -11,28 +11,7 @@ namespace ChristmasLib.Asset
 {
     public static class DownloadHandler
     {
-        #region Status
-        public static IEnumerator DownloadStatus(string url)
-        {
-            UnityWebRequest www = UnityWebRequest.Get(url);
-
-            yield return www.Send();
-            if (www.isNetworkError || www.isHttpError)
-            {
-                ConsoleUtils.Error(www.error);
-            }
-            else
-            {
-                if (PluginSettings.PluginCfg.LogDownloads)
-                {
-                    ConsoleUtils.Write("Downloading: " + url);
-                }
-
-                string[] status = www.downloadHandler.text.Split(',');
-                ChristmasUI.Statuses = status;
-            }
-        }
-        #endregion
+    
         
         #region Downloading
         public static IEnumerator DownloadFile(string url, string downloadPath)

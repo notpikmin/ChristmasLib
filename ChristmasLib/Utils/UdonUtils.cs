@@ -2,7 +2,7 @@
 using System.Collections;
 using VRC.Udon;
 using UnityEngine;
-namespace ChristmasLib.Utils.Udon
+namespace ChristmasLib.Utils
 {
     public static class UdonUtils
     {
@@ -10,7 +10,7 @@ namespace ChristmasLib.Utils.Udon
         #region Getting
         public static UdonBehaviour[] GetUdonBehaviours()
         {
-            return Object.FindObjectsOfType<UdonBehaviour>();
+            return Resources.FindObjectsOfTypeAll<UdonBehaviour>();
             
         }
 
