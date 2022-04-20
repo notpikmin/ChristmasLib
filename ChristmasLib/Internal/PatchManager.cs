@@ -1,6 +1,6 @@
 using ChristmasLib.Patches;
 using ChristmasLib.UI;
-using VRC.UI.Elements;
+using UnityEngine;
 
 namespace ChristmasLib.Internal
 {
@@ -13,7 +13,7 @@ namespace ChristmasLib.Internal
         }
 
         // ReSharper disable once InconsistentNaming stupid harmony 
-        private static void OnMenu(MenuStateController __instance)
+        private static void OnMenu(Object __instance)
         {
             if (__instance.name.Contains("Canvas"))
             {

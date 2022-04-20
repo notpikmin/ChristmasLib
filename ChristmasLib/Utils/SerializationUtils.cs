@@ -28,7 +28,7 @@ namespace ChristmasLib.Utils
         }
         public static T FromByteArray<T>(byte[] data)
         {
-            if (data == null){return default(T);}
+            if (data == null){return default;}
             BinaryFormatter binFormatter = new BinaryFormatter();
             using (MemoryStream memStream = new MemoryStream(data))
             {

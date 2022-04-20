@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ChristmasLib.Modules
 {
@@ -10,20 +11,16 @@ namespace ChristmasLib.Modules
         //TODO Fix CheckIfMod always returning true
         public void AddMod(ChristmasModule mod)
         {
-            if (!CheckIfMod(mod))
-            {
-                EnabledMods.Add(mod);
-                mod.OnEnable();
-            }
+            if (CheckIfMod(mod)) return;
+            EnabledMods.Add(mod);
+            mod.OnEnable();
         }
 
         public void RemoveMod(ChristmasModule mod)
         {
-            if (CheckIfMod(mod))
-            {
-                mod.OnDisable();
-                EnabledMods.Remove(mod);
-            }
+            if (!CheckIfMod(mod)) return;
+            mod.OnDisable();
+            EnabledMods.Remove(mod);
         }
 
         public bool CheckIfMod(ChristmasModule mod)
@@ -84,13 +81,8 @@ namespace ChristmasLib.Modules
 
         public List<string> GetEnabledNames()
         {
-            List<string> names = new List<string>();
-            foreach (ChristmasModule m in EnabledMods)
-            {
-                names.Add(m.ModuleName);
-            }
-
-            return names;
+            //put every modules name to a list
+            return EnabledMods.Select(m => m.ModuleName).ToList();
         }
     }
 }

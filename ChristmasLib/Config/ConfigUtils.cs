@@ -11,7 +11,8 @@ namespace ChristmasLib.Config
     {
 
         public static List<ChristmasConfig> Configs = new List<ChristmasConfig>();
-        private static string _configPath = "Christmas/";
+        //TODO have a static const somewhere so it isn't defined in ChristmasConfig.cs and here
+        private const string ConfigPath = "Christmas/";
 
         #region Updating
         public static void UpdateConfigs()
@@ -27,7 +28,7 @@ namespace ChristmasLib.Config
         #region FileWatcher
         public static void FileSystemWatcher()
         {
-             var watcher = new FileSystemWatcher(_configPath);
+             var watcher = new FileSystemWatcher(ConfigPath);
              watcher.NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size;
              watcher.Changed += (sender, e) =>
              {

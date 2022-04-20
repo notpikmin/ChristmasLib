@@ -1,4 +1,6 @@
 using ChristmasLib.Config;
+// ReSharper disable ConvertToConstant.Global
+// ReSharper disable FieldCanBeMadeReadOnly.Global
 
 namespace ChristmasLib.Internal
 {
@@ -13,7 +15,7 @@ namespace ChristmasLib.Internal
     
     public static class PluginSettings
     {
-        private static readonly string ConfigName = "ChristmasLibConfig.json";
+        private const string ConfigName = "ChristmasLibConfig.json";
 
         public static PluginConfig PluginCfg;
         //public static bool Debug,CustomStartScreen,LogDownloads,ChristmasUI;

@@ -66,23 +66,21 @@ namespace ChristmasLib.Patches
         {
             get
             {
-                if (Switchavamethod == null)
+                if (Switchavamethod != null) return Switchavamethod;
+                MethodInfo[] methods = typeof(VRCPlayer).GetMethods(BindingFlags.Instance | BindingFlags.Public);
+                foreach (MethodInfo methodInfo in methods)
                 {
-                    MethodInfo[] methods = typeof(VRCPlayer).GetMethods(BindingFlags.Instance | BindingFlags.Public);
-                    foreach (MethodInfo methodInfo in methods)
-                    {
-                        if (methodInfo.Name.Contains("Private") && methodInfo.ReturnType == typeof(void) && methodInfo.GetParameters().Length == 1 && methodInfo.GetParameters()[0].ParameterType == typeof(bool) && methodInfo.GetParameters()[0].HasDefaultValue)
-                        {
-                            Switchavamethod = methodInfo;
-                            return Switchavamethod;
-                        }
-                    }
+                    //only continue if the method is private, returns void, the parameter length is 1 and its bool with a default value
+                    if (!methodInfo.Name.Contains("Private") || methodInfo.ReturnType != typeof(void) || methodInfo.GetParameters().Length != 1 ||
+                        methodInfo.GetParameters()[0].ParameterType != typeof(bool) || !methodInfo.GetParameters()[0].HasDefaultValue) continue;
+                    Switchavamethod = methodInfo;
+                    return Switchavamethod;
                 }
                 return Switchavamethod;
             }
         }
 
-        internal static MethodInfo Switchavamethod;
+        public static MethodInfo Switchavamethod;
         
         #endregion
 

@@ -47,20 +47,17 @@ namespace ChristmasLib.Utils
 
         public static void Debug<T>(T input, string mod = "Christmas")
         {
-            if (PluginSettings.PluginCfg.Debug)
-            {
-                Console.ResetColor();
-                string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write(time);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(" [" + mod + "] ");
-                Console.ForegroundColor = ConsoleColor.Cyan;
+            if (!PluginSettings.PluginCfg.Debug) return;
+            Console.ResetColor();
+            string time = "[" + DateTime.Now.ToString("HH:mm:ss") + "]";
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(time);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(" [" + mod + "] ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
 
-                Console.Write(input + "\n");
-                Console.ResetColor();
-
-            }
+            Console.Write(input + "\n");
+            Console.ResetColor();
         }
         
         //adapted from https://stackoverflow.com/a/60492990

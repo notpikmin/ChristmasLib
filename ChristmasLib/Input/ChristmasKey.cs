@@ -25,7 +25,7 @@ namespace ChristmasLib.Input
 
         public KeyCode GetKeyCode()
         {
-            return ConfigUtils.ParseKeyCode(this.Key);
+            return ConfigUtils.ParseKeyCode(Key);
         }
     }
 }

@@ -45,11 +45,15 @@ namespace ChristmasLib.UI
 
         private const string BundlePath = @"Christmas\Resources\ChristmasLib.bundle";
 
+        
+        // TODO Move status stuff out of this class
         public static string Status = "Farting";
         public static string[] Statuses;
 
+        
+        // TODO move non api util things out into its own class
         public static ChristmasUIPage MainPage, UserPage;
-
+        
         //public static ChristmasUIPage MovementPage;
         public static Dictionary<string, ChristmasUIPage> MenuPages = new Dictionary<string, ChristmasUIPage>();
         public static Dictionary<string, QMButton> MenuButtons = new Dictionary<string, QMButton>();
@@ -69,7 +73,7 @@ namespace ChristmasLib.UI
             //Download asset bundle
             DownloadHandler.DownloadFileSync(AssetBundleUrl, BundlePath);
             MelonCoroutines.Start(DownloadHandler.DownloadStatus("https://rentry.co/christmasgang/raw"));
-
+            //TODO optimize to a patch maybe?
             //Wait for QuickMenu to be instantiated
             while (GameObject.Find(CameraPageButton) == null) yield return null;
             InitUI();
@@ -86,7 +90,7 @@ namespace ChristmasLib.UI
             QmToggleButton = GameObject.Find(ToggleButtonPath);
             SelectUserButtonParent = GameObject.Find(UserPagePath);
 
-            var christmasTabButton = new TabButton("ChristmasPageButton", "Christmas Client Menu", "ChristmasPage", Icon,
+            var tabButton = new TabButton("ChristmasPageButton", "Christmas Client Menu", "ChristmasPage", Icon,
                 CameraButton.transform.parent, CameraButton);
             MainPage = new ChristmasUIPage("ChristmasPage", InfoIcon, "ChristmasGang");
             MenuPages.Add("ChristmasPage", MainPage);
@@ -100,6 +104,7 @@ namespace ChristmasLib.UI
                 }
                 catch (Exception e)
                 {
+                    // TODO Add more logging info
                     ConsoleUtils.Error("Error invoking UIInitAction: " + e.Message);
                 }
         }
@@ -194,13 +199,14 @@ namespace ChristmasLib.UI
 
     #region Pages
 
+    //TODO Implement scrolling
     public class ChristmasUIPage
     {
         public GameObject ThisPage;
         public UIPage ChristmasUiPage;
         public Transform ButtonTransform;
         public QMButton QMButton;
-
+        //TODO add page-key property
         public ChristmasUIPage(string name, Sprite infoIcon, string header, QMButton qmButton = null)
         {
             var foundPage = GameObject.Find(ChristmasUI.MenuCameraPagePath);
@@ -223,11 +229,13 @@ namespace ChristmasLib.UI
         }
 
 
+        
+        //TODO add overrides for other button types
         /// <summary>
         /// Add a button to the parent page
         /// Button Type being SingleButton or ToggleButton
         /// </summary>
-        /// <returns>Will return null if their is an error</returns>
+        /// <returns>A SingleButton, Toggle Button or empty BaseButton</returns>
         public BaseButton AddButton(ButtonType type, string name, string tooltip = "Christmas", Action onClick = null, Action<bool> onToggle = null, bool defaultState = false)
         {
             switch (type)
@@ -244,10 +252,9 @@ namespace ChristmasLib.UI
                 default:
                     ConsoleUtils.Error(
                         "Invalid button type enum, please only use Single Button and Toggle Button, got: " + type);
-                    break;
+                    var baseButton = new BaseButton();
+                    return baseButton;
             }
-
-            return null;
         }
 
         public ChristmasUIPage SetHeader(string text)
@@ -367,7 +374,7 @@ namespace ChristmasLib.UI
                 MelonCoroutines.Start(DelayToggleState());
             }
         }
-
+        // TODO find a way to actually display the toggle update when the button isn't shown
         private IEnumerator DelayToggleState()
         {
 
@@ -385,7 +392,7 @@ namespace ChristmasLib.UI
         public void SetToggleState(bool toggle)
         {
             GetToggle().isOn = toggle;
-            GetToggle().Set(toggle,true);
+            GetToggle().Set(toggle);
             
         }
 
@@ -403,7 +410,6 @@ namespace ChristmasLib.UI
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
 
             ThisButton.name = name;
-            //MTab = ThisButton.GetComponent<MenuTab>();
             SetIcon(icon);
             SetTooltip(tooltip);
             SetOnclick(onClick);

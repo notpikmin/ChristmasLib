@@ -23,11 +23,11 @@ namespace ChristmasLib.Input
             {
                 keyHeld = () => { };
             }
-            this.Key = key;
-            this.KeyDown= keyDown;
-            this.KeyUp = keyUp;
-            this.KeyHeld = keyHeld;
-            this.UseCtrl = useCtrl;
+            Key = key;
+            KeyDown= keyDown;
+            KeyUp = keyUp;
+            KeyHeld = keyHeld;
+            UseCtrl = useCtrl;
         }
 
     }

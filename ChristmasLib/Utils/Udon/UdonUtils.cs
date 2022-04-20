@@ -46,21 +46,12 @@ namespace ChristmasLib.Utils.Udon
         public static Dictionary<UdonBehaviour, List<string>> FillDict(bool globalTriggerOnly = false)
         {
 
-            UdonBehaviour[] udonBehavs = GetUdonBehaviours();
+            UdonBehaviour[] udonBehaviours = GetUdonBehaviours();
             Dictionary<UdonBehaviour, List<string>> eventGameObjects = new Dictionary<UdonBehaviour, List<string>>();
-            foreach(UdonBehaviour u in udonBehavs)
+            foreach(UdonBehaviour u in udonBehaviours)
             {
-                List<string> events;
-                if (globalTriggerOnly)
-                {
-                    events = GetGlobalEvents(u);
-
-                }
-                else
-                {
-                    events = GetEventNames(u);
-
-                }
+                
+                var events = globalTriggerOnly ? GetGlobalEvents(u) : GetEventNames(u);
 
                 //dont add the behaviour if it contains no events
                 if (events.Count > 0)

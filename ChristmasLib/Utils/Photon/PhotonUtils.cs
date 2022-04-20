@@ -1,13 +1,9 @@
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ChristmasLib.Utils.Photon
 {
@@ -16,7 +12,7 @@ namespace ChristmasLib.Utils.Photon
         
         public static T IL2CPPFromByteArray<T>(byte[] data)
         {
-            if (data == null) return default(T);
+            if (data == null) return default;
             var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             var ms = new Il2CppSystem.IO.MemoryStream(data);
             object obj = bf.Deserialize(ms);
@@ -62,8 +58,8 @@ namespace ChristmasLib.Utils.Photon
 
         public static void OpRaiseEvent(byte code, object customObject, RaiseEventOptions raiseEventOptions, SendOptions sendOptions)
         {
-            Il2CppSystem.Object Object = FromManagedToIL2CPP<Il2CppSystem.Object>(customObject);
-            OpRaiseEvent(code, Object, raiseEventOptions, sendOptions);
+            Il2CppSystem.Object obj = FromManagedToIL2CPP<Il2CppSystem.Object>(customObject);
+            OpRaiseEvent(code, obj, raiseEventOptions, sendOptions);
         }
 
         public static void OpRaiseEvent(byte code, Il2CppSystem.Object customObject, RaiseEventOptions raiseEventOptions, SendOptions sendOptions)

@@ -7,7 +7,7 @@ using MelonLoader;
 
 namespace ChristmasLib.StartMenu
 {
-    static internal class StartScreen
+    internal static class StartScreen
     {
         private static string _fileString = string.Join(Environment.NewLine
             , "[VersionText]"
@@ -36,14 +36,13 @@ namespace ChristmasLib.StartMenu
                         Path.Combine(path, "Logo.png"));
                 }
 
-
-                if (!File.ReadLines(Path.Combine(path, "VersionText.cfg"))
-                        .Any(line => line.Contains(MelonBuildInfo.Version)))
-                {
-                    ConsoleUtils.Debug("Setting custom VersionText.cfg");
-                    File.WriteAllText(Path.Combine(path, "VersionText.cfg"), _fileString);
-
-                }
+                //if any lines of the VersionText contain the current build return 
+                //not the best method of checking
+                if (File.ReadLines(Path.Combine(path, "VersionText.cfg"))
+                    .Any(line => line.Contains(MelonBuildInfo.Version))) return;
+                
+                ConsoleUtils.Debug("Setting custom VersionText.cfg");
+                File.WriteAllText(Path.Combine(path, "VersionText.cfg"), _fileString);
             }
             catch (Exception e)
             {

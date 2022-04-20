@@ -1,6 +1,7 @@
 ﻿using ChristmasLib.Wrappers;
 using Il2CppSystem.Collections;
 using System;
+using System.Linq;
 using UnityEngine;
 using VRC;
 using VRC.Core;
@@ -17,41 +18,23 @@ namespace ChristmasLib.Extensions
         public static Player GetPlayer(this PlayerManager instance, string userID)
         {
             var players = instance.GetAllPlayers();
-            foreach (var player in players)
-            {
-                if (player.GetAPIUser().id == userID)
-                {
-                    return player;
-                }
-            }
-            return null;
+            //get the first player in all players that's id matches the parameters id
+            //not sure of the return value if its default?
+            return players.FirstOrDefault(player => player.GetAPIUser().id == userID);
         }
 
         public static Player GetPlayerByName(this PlayerManager instance, string name)
         {
             var players = instance.GetAllPlayers();
-            foreach (var player in players)
-            {
-                if (player.GetAPIUser().displayName.ToLower().Contains(name.ToLower()))
-                {
-                    return player;
-                }
-            }
-            return null;
+            //get the first player in all players that's display name matches the parameters name
+            return players.FirstOrDefault(player => player.GetAPIUser().displayName.ToLower().Contains(name.ToLower()));
         }
 
-        public static Player GetPlayer(this PlayerManager instance, int index)
+        public static Player GetPlayerByPlayerID(this PlayerManager instance, int index)
         {
             var players = instance.GetAllPlayers();
-            for (int i = 0; i < players.Length; i++)
-            {
-                var player = players[i];
-                if (player.GetVrcPlayerApi().playerId == index)
-                {
-                    return player;
-                }
-            }
-            return null;
+            //get the first player in all players that's playerIDS matches the parameters ID
+            return players.FirstOrDefault(player => player.GetVrcPlayerApi().playerId == index);
         }
 
         public static Player GetPlayer(this PlayerManager instance, VRCPlayerApi api)
@@ -115,7 +98,7 @@ namespace ChristmasLib.Extensions
         public static bool IsVR(this Photon.Realtime.Player player){return player.GetPhotonHashTable()["inVRMode"].Unbox<bool>();}
 
         public static bool IsHidingTrust(this Photon.Realtime.Player player) { return player.GetPhotonHashTable()["showSocialRank"].Unbox<bool>(); }
-        public static Int32 GetAvatarEyeHeight(this Photon.Realtime.Player player) { return player.GetPhotonHashTable()["avatarEyeHeight"].Unbox<Int32>(); }
+        public static int GetAvatarEyeHeight(this Photon.Realtime.Player player) { return player.GetPhotonHashTable()["avatarEyeHeight"].Unbox<int>(); }
 
         
         #endregion
@@ -131,7 +114,7 @@ namespace ChristmasLib.Extensions
         public static Player GetPlayerByRayCast(this RaycastHit rayCast)
         {
             var gameObject = rayCast.transform.gameObject;
-            return GetPlayer(PlayerWrappers.GetPlayerManager(), VRCPlayerApi.GetPlayerByGameObject(gameObject).playerId);
+            return GetPlayerByPlayerID(PlayerWrappers.GetPlayerManager(), VRCPlayerApi.GetPlayerByGameObject(gameObject).playerId);
         }
         #endregion
 

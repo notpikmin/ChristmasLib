@@ -70,7 +70,7 @@ namespace ChristmasLib.Utils
             
             Il2CppSystem.Object[] array = new Il2CppSystem.Object[str.Count];
             int c = 0;
-            foreach(string s in str)
+            foreach(var s in str)
             {
                 //I dont know if this is needed but I've seen it done in most places.
                 String il2S = s;

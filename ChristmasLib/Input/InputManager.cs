@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ChristmasLib.Input
@@ -10,24 +11,23 @@ namespace ChristmasLib.Input
         {
             if (Binds != null)
             {
-                foreach (Bind b in Binds)
+                //foreach bind where useCtrl is false or left control is down
+                //only executes if use ctrl is off or left control is down
+                foreach (var b in Binds.Where(b => !b.UseCtrl || UnityEngine.Input.GetKey(KeyCode.LeftControl)))
                 {
-                    if (!b.UseCtrl || UnityEngine.Input.GetKey(KeyCode.LeftControl))
+                    if (UnityEngine.Input.GetKeyDown(b.Key))
                     {
-                        if (UnityEngine.Input.GetKeyDown(b.Key))
-                        {
-                            b.KeyDown();
-                        }
+                        b.KeyDown();
+                    }
 
-                        if (UnityEngine.Input.GetKeyUp(b.Key))
-                        {
-                            b.KeyUp();
-                        }
+                    if (UnityEngine.Input.GetKeyUp(b.Key))
+                    {
+                        b.KeyUp();
+                    }
 
-                        if (UnityEngine.Input.GetKey(b.Key))
-                        {
-                            b.KeyHeld();
-                        }
+                    if (UnityEngine.Input.GetKey(b.Key))
+                    {
+                        b.KeyHeld();
                     }
                 }
             }

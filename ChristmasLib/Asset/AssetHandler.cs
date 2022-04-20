@@ -38,14 +38,13 @@ namespace ChristmasLib.Asset
            {
                LoadAssetBundle(path);
            }
+           if (ChristmasPresent == null) return null;
            foreach (var a in ChristmasPresent)
            {
                Sprite abr = a.LoadAsset<Sprite>(assetName);
-               if (abr != null)
-               {
-                   Object.DontDestroyOnLoad(abr);
-                   return abr;
-               }
+               if (abr == null) continue;
+               Object.DontDestroyOnLoad(abr);
+               return abr;
            }
            return null;
         }
@@ -56,6 +55,7 @@ namespace ChristmasLib.Asset
             {
                 LoadAssetBundle(path);
             }
+            if (ChristmasPresent == null) return null;
             foreach (var a in ChristmasPresent)
             {
                 Texture2D abr = a.LoadAsset<Texture2D>(assetName);
