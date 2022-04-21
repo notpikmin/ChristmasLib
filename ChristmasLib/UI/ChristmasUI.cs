@@ -349,6 +349,7 @@ namespace ChristmasLib.UI
             SetIcon(icon);
             SetTooltip(tooltip);
             SetOnclick(onClick);
+            ThisButton.SetActive(true);
             SetText(text);
         }
     }
@@ -365,6 +366,7 @@ namespace ChristmasLib.UI
             SetTooltip(tooltip);
             SetOnToggle(onToggle);
             SetText(text);
+            ThisButton.SetActive(true);
             if (defaultState)
             {
                 MelonCoroutines.Start(DelayToggleState());
@@ -406,6 +408,7 @@ namespace ChristmasLib.UI
             ThisButton = Object.Instantiate(buttonToClone, parent, true);
 
             ThisButton.name = name;
+            ThisButton.SetActive(true);
             SetIcon(icon);
             SetTooltip(tooltip);
             SetOnclick(onClick);
@@ -415,6 +418,7 @@ namespace ChristmasLib.UI
 
     public class TabButton : BaseButton
     {
+        //menu tab
         public MenuTab MTab;
 
         public TabButton(string name, string tooltip, string pageName, Sprite icon, Transform parent,

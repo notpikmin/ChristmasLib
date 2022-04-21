@@ -3,9 +3,9 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Linq;
 using System.Reflection;
+using VRC.SDKBase.Validation.Performance;
 using VRC.UI.Elements;
 using VRCSDK2;
-using VRCSDK2.Validation.Performance;
 
 namespace ChristmasLib.Patches
 {

@@ -1,15 +1,18 @@
 using UnityEngine;
 
+
 namespace ChristmasLib.UI
 {
     public static class NameplateUtils
     {
+        //nameplate
         public static PlayerNameplate GetNamePlate(this VRCPlayer p)
         {
             return p.field_Public_PlayerNameplate_0;
         }
 
-        public static GameObject GetInspector(this PlayerNameplate pn)
+        public static GameObject GetInspector(this PlayerNameplate 
+            pn)
         {
             return pn.transform.FindChild("Contents/Inspector").gameObject;
         }
