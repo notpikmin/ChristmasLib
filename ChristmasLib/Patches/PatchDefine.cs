@@ -132,7 +132,15 @@ namespace ChristmasLib.Patches
         /// void MenuOpen()
         /// </summary>
         public static readonly MethodInfo MenuOpen = typeof(MenuStateController).GetMethod(nameof(MenuStateController.Method_Private_Void_0));
-        
+        /// <summary>
+        /// void MenuEnable()
+        /// </summary>
+        public static readonly MethodInfo MenuEnable = typeof(VRC.UI.Elements.QuickMenu).GetMethod(nameof(VRC.UI.Elements.QuickMenu.OnEnable)); 
+        /// <summary>
+        /// void MenuDisable()
+        /// </summary>
+        public static readonly MethodInfo MenuDisable = typeof(VRC.UI.Elements.QuickMenu).GetMethod(nameof(VRC.UI.Elements.QuickMenu.OnDisable)); 
+
         #endregion
         
         #region Roommanager
@@ -143,5 +151,6 @@ namespace ChristmasLib.Patches
         public static readonly MethodInfo OnWorldChange = typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0));
         
         #endregion
+        
     }
 }

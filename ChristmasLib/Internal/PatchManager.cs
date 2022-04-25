@@ -8,7 +8,7 @@ namespace ChristmasLib.Internal
     {
         public static void InitPatches()
         {
-            PatchUtils.DoPatch("MenuPatch", PatchDefine.MenuOpen, null, PatchUtils.GetMethod(typeof(PatchManager), "OnMenu"));
+            PatchUtils.DoPatch("MenuPatch", PatchDefine.MenuEnable, null, PatchUtils.GetMethod(typeof(PatchManager), "OnMenu"));
 
         }
 
