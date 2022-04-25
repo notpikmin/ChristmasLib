@@ -73,7 +73,6 @@ namespace ChristmasLib.Patches
         public static readonly MethodInfo LocalJoin = typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom));
 
         
-        //from Chromatic api 
         //JoinAndLeave[0] = join
         //JoinAndLeave[1] = leave
         //changes often :/
