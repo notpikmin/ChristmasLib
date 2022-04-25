@@ -4,7 +4,7 @@ using MelonLoader;
 
 [assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", MelonBuildInfo.Version, MelonBuildInfo.Author, "https://www.goorlandostore.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
-
+    
 public static class MelonBuildInfo
 {
     public const string Version = "1.1.0a";

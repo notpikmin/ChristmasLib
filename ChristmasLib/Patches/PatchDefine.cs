@@ -62,7 +62,7 @@ namespace ChristmasLib.Patches
 
         #endregion
 
-        #region JoinAndLeave
+        #region NetworkManager
         /// <summary>
         /// void OnLeftRoom()
         /// </summary>
@@ -74,8 +74,8 @@ namespace ChristmasLib.Patches
 
         
         //from Chromatic api 
-        //JoinAndLeave[1] = join
-        //JoinAndLeave[0] = leave
+        //JoinAndLeave[0] = join
+        //JoinAndLeave[1] = leave
         //changes often :/
         public static readonly MethodInfo[] JoinAndLeave = typeof(NetworkManager).GetMethods().Where(m =>
          m.Name.Contains("Method_Public_Void_Player_") &&
@@ -132,6 +132,15 @@ namespace ChristmasLib.Patches
         /// void MenuOpen()
         /// </summary>
         public static readonly MethodInfo MenuOpen = typeof(MenuStateController).GetMethod(nameof(MenuStateController.Method_Private_Void_0));
+        
+        #endregion
+        
+        #region Roommanager
+        
+        /// <summary>
+        /// bool OnWorldChange(ApiWorld apiWorld, ApiWorldInstance apiWorldInstance, string garbageString, int usuallyOne)
+        /// </summary>
+        public static readonly MethodInfo OnWorldChange = typeof(RoomManager).GetMethod(nameof(RoomManager.Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_0));
         
         #endregion
     }

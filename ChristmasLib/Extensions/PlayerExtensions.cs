@@ -89,6 +89,15 @@ namespace ChristmasLib.Extensions
 
         }
 
+        public static void ToggleBlock(this Player player)
+        {
+            PageUserInfo pageUserInfo = player.GetPageUserInfo();
+            if (!player.IsLocalPlayer())
+            {
+                pageUserInfo.ToggleBlock();
+            }
+
+        }
         public static bool IsLocalPlayer(this Player player){ return player.GetAPIUser().id == APIUser.CurrentUser.id;}
         #endregion
 

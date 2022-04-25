@@ -102,7 +102,7 @@ namespace ChristmasLib.UI
                 }
                 catch (Exception e)
                 {
-                    ConsoleUtils.Error("Error invoking UIInitAction: " + e);
+                    ConsoleUtils.Error("Error invoking UIInitAction: " + uiAction.Method.Name + " " +  e );
                 }
         }
 
