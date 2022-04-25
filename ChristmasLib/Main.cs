@@ -2,13 +2,15 @@ using ChristmasLib.Internal;
 using ChristmasLib.UI;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", MelonBuildInfo.Version, MelonBuildInfo.Author, "https://www.goorlandostore.com")]
+[assembly: MelonInfo(typeof(ChristmasLib.Main), "ChristmasLib", MelonBuildInfo.Version, MelonBuildInfo.Author, "https://www.Christmas.com")]
 [assembly: MelonGame("VRChat", "VRChat")]
     
 public static class MelonBuildInfo
 {
     public const string Version = "1.1.1";
     public const string Author = "Christmas Gang";
+    public const string ReleaseVersion = "Public";
+
 }
 
 

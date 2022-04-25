@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using ChristmasLib.Asset;
 using ChristmasLib.Utils;
 using MelonLoader;
@@ -9,7 +10,8 @@ namespace ChristmasLib.StartMenu
 {
     internal static class StartScreen
     {
-        private static string _fileString = string.Join(Environment.NewLine
+        /*
+        private static string _fileString1 = string.Join(Environment.NewLine
             , "[VersionText]"
             , "Style = \"Bold\""
             , "RichText = true"
@@ -17,14 +19,28 @@ namespace ChristmasLib.StartMenu
             , "Scale = 1.0"
             , "LineSpacing = 1.0"
             , "TextColor = [ 255.0, 255.0, 255.0, 255.0, ]"
-            , "Text = \" ChristmasLib v"+ MelonBuildInfo.Version+" Closed Beta\""
+            , "Text = \" ChristmasLib v"+ MelonBuildInfo.Version+" Public\""
             , "Enabled = true"
             , "Position = [ 0, 16, ]"
             , "Size = [ 0, 0, ]"
             , "Anchor = \"MiddleCenter\""
             , "ScreenAnchor = \"MiddleCenter\"");
-
-
+        */
+        private static string _fileString = new StringBuilder(
+            "[VersionText] \n"
+            + "Style = \"Bold\" \n"
+            + "RichText = true \n"
+            + "TextSize = 24 \n"
+            + "Scale = 1.0 \n"
+            + "LineSpacing = 1.0 \n"
+            + "TextColor = [ 255.0, 255.0, 255.0, 255.0, ] \n"
+            + "Text = \" ChristmasLib v" + MelonBuildInfo.Version + MelonBuildInfo.ReleaseVersion + " \" \n"
+            + "Enabled = true \n"
+            + "Position = [ 0, 16, ] \n"
+            + "Size = [ 0, 0, ] \n"
+            + "Anchor = \"MiddleCenter\" \n"
+            + "ScreenAnchor = \"MiddleCenter\"").ToString();      
+        
         public static void Start()
         {
             try
