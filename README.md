@@ -8,7 +8,7 @@ To use the Library in your code simply reference it.
 
 ## Examples
 
-###Adding a basic button
+### Using The Button Api
 ```cs
 public override void OnApplicationStart()
 {
