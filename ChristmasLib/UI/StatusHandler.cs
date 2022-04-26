@@ -10,7 +10,7 @@ namespace ChristmasLib.UI
     {
         public static string Status = "Farting";
         public static string[] Statuses;
-        private const string StatusLink ="https://rentry.co/christmasgang/raw";
+        private const string StatusLink ="https://rentry.org/christmasgang/raw";
         
         public static IEnumerator DownloadStatus()
         {
