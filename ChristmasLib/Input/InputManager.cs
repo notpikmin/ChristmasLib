@@ -29,7 +29,7 @@ namespace ChristmasLib.Input
                 {
                     b.KeyHeld();
                 }
-            }C
+            }
         }
     }
 }
