@@ -18,15 +18,15 @@ namespace ChristmasLib.Asset
             {
                 LoadAssetBundle(path);
             }
-
+            if (ChristmasPresent == null) return null;
             foreach (var a in ChristmasPresent)
             {
                 T abr = a.LoadAsset<T>(assetName);
-                if (abr != null)
+                if (abr == null)
                 {
-                    Object.DontDestroyOnLoad(abr);
                     return abr;
                 }
+                Object.DontDestroyOnLoad(abr);
             }
             return null;
         }

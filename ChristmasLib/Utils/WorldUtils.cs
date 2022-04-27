@@ -58,8 +58,8 @@ namespace ChristmasLib.Utils
         public static List<string> GetInstantiableObjects()
         {
             ObjectInstantiator objI = GetObjectInstantiator();
-            List<string> objs = new List<string>();
-            foreach(string s in objI.field_Private_Dictionary_2_String_PrefabInfo_0.keys)
+            var objs = new List<string>();
+            foreach(var s in objI.field_Private_Dictionary_2_String_PrefabInfo_0.keys)
             {
                 objs.Add(s);
             }

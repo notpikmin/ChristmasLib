@@ -12,14 +12,12 @@ namespace ChristmasLib.Input
         {
             Key = key.ToString();
             UseCtrl = useCtrl;
-            //Keycode = ConfigUtils.ParseKeyCode(key);
         }
 
         public ChristmasKey(string key, bool useCtrl)
         {
             Key = key;
             UseCtrl = useCtrl;
-            //Keycode = ConfigUtils.ParseKeyCode(key);
         }
      
 

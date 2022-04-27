@@ -11,7 +11,6 @@ namespace ChristmasLib.Utils
         public static UdonBehaviour[] GetUdonBehaviours()
         {
             return Resources.FindObjectsOfTypeAll<UdonBehaviour>();
-            
         }
 
         
@@ -19,7 +18,7 @@ namespace ChristmasLib.Utils
         {
             List<string> events = new List<string>();
 
-            foreach (Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> e in ub._eventTable)
+            foreach (var e in ub._eventTable)
             {
                 events.Add(e.key);
             }
@@ -29,9 +28,9 @@ namespace ChristmasLib.Utils
 
         public static List<string> GetGlobalEvents(UdonBehaviour ub)
         {
-            List<string> events = new List<string>();
+            var events = new List<string>();
 
-            foreach (Il2CppSystem.Collections.Generic.KeyValuePair<string, Il2CppSystem.Collections.Generic.List<uint>> e in ub._eventTable)
+            foreach (var e in ub._eventTable)
             {
                 if (!e.key.StartsWith("_"))
                 {
@@ -47,13 +46,14 @@ namespace ChristmasLib.Utils
         {
 
             UdonBehaviour[] udonBehaviours = GetUdonBehaviours();
-            Dictionary<UdonBehaviour, List<string>> eventGameObjects = new Dictionary<UdonBehaviour, List<string>>();
-            foreach(UdonBehaviour u in udonBehaviours)
+            var eventGameObjects = new Dictionary<UdonBehaviour, List<string>>();
+            foreach(var u in udonBehaviours)
             {
                 
                 var events = globalTriggerOnly ? GetGlobalEvents(u) : GetEventNames(u);
 
                 //dont add the behaviour if it contains no events
+                
                 if (events.Count > 0)
                 {
                     eventGameObjects.Add(u, events);
@@ -69,28 +69,25 @@ namespace ChristmasLib.Utils
         #endregion
         
         #region Trigger
-        //should work
-        public static IEnumerator TriggerAll(Dictionary<UdonBehaviour, List<string>> udons, float delay = 0.1f)
+        public static IEnumerator TriggerAll(Dictionary<UdonBehaviour, List<string>> udons, float delay = 0.05f)
         {
-            foreach (UdonBehaviour u in udons.Keys)
+            
+            foreach (var u in udons.Keys)
             {
-
                 List<string> et;
                 udons.TryGetValue(u, out et);
+                if (et == null) { continue; }
 
-                if (et != null)
+                foreach (var e in et)
                 {
-                    foreach (string e in et)
-                    {
-                        yield return null;
-
-                        u.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, e);
-                    }
-
-                    yield return new WaitForSeconds(delay);
-
+                    yield return null;
+                    u.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, e);
                 }
+
+                yield return new WaitForSeconds(delay);
+
             }
+            
 
             yield return null;
         }
