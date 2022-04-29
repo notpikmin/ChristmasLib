@@ -34,7 +34,7 @@ namespace ChristmasLib.StartMenu
             + "Scale = 1.0 \n"
             + "LineSpacing = 1.0 \n"
             + "TextColor = [ 255.0, 255.0, 255.0, 255.0, ] \n"
-            + "Text = \" ChristmasLib v" + MelonBuildInfo.Version + MelonBuildInfo.ReleaseVersion + " \" \n"
+            + "Text = \" ChristmasLib v" + MelonBuildInfo.Version + " " +MelonBuildInfo.ReleaseVersion + " \" \n"
             + "Enabled = true \n"
             + "Position = [ 0, 16, ] \n"
             + "Size = [ 0, 0, ] \n"

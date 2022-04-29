@@ -102,7 +102,7 @@ namespace ChristmasLib.UI
                 }
                 catch (Exception e)
                 {
-                    ConsoleUtils.Error("Error invoking UIInitAction: " + uiAction.Method.Name + " " +  e );
+                    ConsoleUtils.Error("Error invoking UIInitAction: " + uiAction?.Method.Name + " " +  e );
                 }
         }
 
@@ -191,6 +191,11 @@ namespace ChristmasLib.UI
             GetMenuState().Method_Public_Void_String_UIContext_Boolean_0(pageName);
         }
 
+        public static void GoBack(UIPage uiPage)
+        {
+            GetMenuState().Method_Public_Void_UIPage_0(uiPage);
+        }
+        
         #endregion
     }
 
@@ -223,8 +228,28 @@ namespace ChristmasLib.UI
             RemoveButtons();
             ButtonTransform = ThisPage
                 .GetComponentInChildren<GridLayoutGroup>(true).transform;
+            
+            AddBackButton();
+
         }
 
+        private int _backButtonCounter =0;
+        private void AddBackButton()
+        {
+            var header = ThisPage.transform.FindChild("Header_Camera/LeftItemContainer");
+            if (header == null) return;
+            _backButtonCounter++;
+            var singleButton = new SingleButton("Christmas" + "back"+ _backButtonCounter + "Button", "Go back", "back", ChristmasUI.Icon,
+                header, ChristmasUI.EmojiButton, ()=> ChristmasUI.GoBack(ChristmasUiPage));
+            singleButton.ThisButton.transform.FindChild("Background").GetComponent<Transform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            var icon = singleButton.ThisButton.transform.FindChild("Icon").GetComponent<Transform>();
+            icon.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            icon.localPosition = new Vector3(0f, 0f, 0f);
+
+            singleButton.ThisButton.transform.FindChild("Text_H4").GetComponent<Transform>().localPosition =  new Vector3(0f, 0f, 0f);
+
+            
+        }
 
         
         /// <summary>
