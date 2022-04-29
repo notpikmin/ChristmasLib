@@ -300,8 +300,13 @@ namespace ChristmasLib.UI
 
         public ChristmasUIPage RemoveButtons()
         {
+            
             Button[] buttons = ThisPage.GetComponentsInChildren<Button>(true);
-            foreach (var b in buttons) Object.Destroy(b.gameObject);
+            foreach (var b in buttons)
+            {
+                if(b.gameObject.name.StartsWith("Christmas" + "back")) { continue; }
+                Object.Destroy(b.gameObject);
+            }
 
             Toggle[] toggles = ThisPage.GetComponentsInChildren<Toggle>(true);
             foreach (var t in toggles) Object.Destroy(t.gameObject);
