@@ -52,8 +52,8 @@ namespace ChristmasLib.Patches
         /// <summary>
         /// void EmojiEvent(Player playerSending, VrcEvent event, VrcBroadcastType broadcastType, int instigatorId, float fastForward)
         /// </summary>
-        public static readonly MethodInfo EmojiEvent = typeof(VRC_EventDispatcherRFC).GetMethod(
-            nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0));
+        public static readonly MethodInfo RPCEvent = typeof(VRC_EventDispatcherRFC).GetMethod(
+            nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_1));
 
         /// <summary>
         /// void SpawnEmojiRPC(int __0, Player __1)
