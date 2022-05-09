@@ -50,7 +50,7 @@ namespace ChristmasLib.Patches
         public static readonly MethodInfo InternalTrigger = typeof(VRC_EventHandler).GetMethod(nameof(VRC_EventHandler.InternalTriggerEvent));
 
         /// <summary>
-        /// void EmojiEvent(Player playerSending, VrcEvent event, VrcBroadcastType broadcastType, int instigatorId, float fastForward)
+        /// void RPCEvent(Player playerSending, VrcEvent event, VrcBroadcastType broadcastType, int instigatorId, float fastForward)
         /// </summary>
         public static readonly MethodInfo RPCEvent = typeof(VRC_EventDispatcherRFC).GetMethod(
             nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_1));
